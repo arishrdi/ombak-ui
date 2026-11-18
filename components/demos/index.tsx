@@ -22,6 +22,17 @@ import { GlowCard } from "@/registry/ombak/glow-card/glow-card";
 import { RippleButton } from "@/registry/ombak/ripple-button/ripple-button";
 import { HoverPreview } from "@/registry/ombak/hover-preview/hover-preview";
 import { CustomCursor } from "@/registry/ombak/custom-cursor/custom-cursor";
+import { Caustics } from "@/registry/ombak/caustics/caustics";
+import { CurrentLines } from "@/registry/ombak/current-lines/current-lines";
+import { SplitFlap } from "@/registry/ombak/split-flap/split-flap";
+import { Odometer } from "@/registry/ombak/odometer/odometer";
+import { GradientText } from "@/registry/ombak/gradient-text/gradient-text";
+import { ShimmerText } from "@/registry/ombak/shimmer-text/shimmer-text";
+import { MagnifyDock } from "@/registry/ombak/magnify-dock/magnify-dock";
+import { TorchReveal } from "@/registry/ombak/torch-reveal/torch-reveal";
+import { SwipeStack } from "@/registry/ombak/swipe-stack/swipe-stack";
+import { SplashButton } from "@/registry/ombak/splash-button/splash-button";
+import { useEffect, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
 
@@ -342,6 +353,153 @@ export function CustomCursorDemo() {
           <img src={`/demo/0${i + 2}.svg`} alt="" className="size-full object-cover" />
         </div>
       ))}
+    </div>
+  );
+}
+
+export function CausticsDemo() {
+  return (
+    <Caustics className="flex h-[440px] w-full items-center justify-center rounded-xl">
+      <div className="pointer-events-none text-center text-white">
+        <p className="font-display text-5xl font-bold tracking-tight drop-shadow md:text-6xl">Under the surface.</p>
+        <p className="mt-3 text-sm text-white/75">A tiny WebGL shader, no libraries.</p>
+      </div>
+    </Caustics>
+  );
+}
+
+export function CurrentLinesDemo() {
+  return (
+    <CurrentLines className="flex h-[440px] w-full items-center justify-center rounded-xl bg-[#06121f]">
+      <p className="pointer-events-none font-display text-5xl font-bold tracking-tight text-white md:text-6xl">Go with the flow.</p>
+    </CurrentLines>
+  );
+}
+
+export function SplitFlapDemo() {
+  const cities = ["JAKARTA", "BALI", "TOKYO", "BERLIN", "LIMA"];
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setI((n) => (n + 1) % cities.length), 3800);
+    return () => window.clearInterval(id);
+  }, [cities.length]);
+  return (
+    <div className="space-y-3 text-center">
+      <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Now boarding</p>
+      <SplitFlap text={cities[i]} length={8} className="text-4xl md:text-5xl" />
+      <div>
+        <SplitFlap text="GATE 12" className="text-xl" cellClassName="bg-amber-400 text-zinc-900" />
+      </div>
+    </div>
+  );
+}
+
+export function OdometerDemo() {
+  const [v, setV] = useState(12480);
+  return (
+    <div className="space-y-8 text-center">
+      <Odometer value={v} className="font-display text-7xl font-bold tracking-tight" />
+      <div className="flex justify-center gap-3">
+        <button className="rounded-full border px-4 py-2 text-sm hover:bg-muted" onClick={() => setV((n) => n + Math.floor(Math.random() * 900 + 100))}>
+          + Add
+        </button>
+        <button className="rounded-full border px-4 py-2 text-sm hover:bg-muted" onClick={() => setV(Math.floor(Math.random() * 99999))}>
+          Random
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export function GradientTextDemo() {
+  return (
+    <div className="space-y-6 text-center">
+      <GradientText className="font-display text-6xl font-bold tracking-tight md:text-7xl">Deep blue sea</GradientText>
+      <p className="text-xl text-muted-foreground">
+        Use it for a <GradientText colors={["#f97362", "#fbbf24", "#f472b6"]} className="font-semibold">single word</GradientText> too.
+      </p>
+    </div>
+  );
+}
+
+export function ShimmerTextDemo() {
+  return (
+    <div className="space-y-6 text-center">
+      <ShimmerText className="font-display text-5xl font-bold tracking-tight md:text-6xl">Thinking about waves…</ShimmerText>
+      <p>
+        <ShimmerText className="text-sm font-medium">Generating your component</ShimmerText>
+      </p>
+    </div>
+  );
+}
+
+const icon = (d: string) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>
+);
+const DOCK = [
+  { label: "Home", icon: icon("M3 11l9-8 9 8M5 10v10h14V10") },
+  { label: "Search", icon: icon("M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4") },
+  { label: "Music", icon: icon("M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM21 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z") },
+  { label: "Photos", icon: icon("M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4") },
+  { label: "Mail", icon: icon("M3 6h18v12H3zM3 7l9 6 9-6") },
+  { label: "Settings", icon: icon("M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1") },
+];
+export function MagnifyDockDemo() {
+  return (
+    <div className="flex h-56 items-end">
+      <MagnifyDock items={DOCK} />
+    </div>
+  );
+}
+
+export function TorchRevealDemo() {
+  return (
+    <TorchReveal
+      className="h-[400px] w-full max-w-3xl rounded-xl"
+      reveal={
+        <div className="relative size-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/demo/04.svg" alt="" className="size-full object-cover" />
+          <p className="absolute inset-0 grid place-items-center font-display text-5xl font-bold tracking-tight text-[#06121f]">You found it.</p>
+        </div>
+      }
+    >
+      <div className="grid size-full place-items-center bg-[#020a12] text-center">
+        <div>
+          <p className="font-display text-4xl font-bold tracking-tight text-white/90">It&apos;s dark down here.</p>
+          <p className="mt-2 text-sm text-white/50">Move your torch around.</p>
+        </div>
+      </div>
+    </TorchReveal>
+  );
+}
+
+export function SwipeStackDemo() {
+  const cards = [
+    ["#2dd4bf", "Reef", "Drag me, or use ← →"],
+    ["#38bdf8", "Swell", "Swiped cards go to the back"],
+    ["#f97362", "Coral", "So the deck never ends"],
+    ["#f4f1ea", "Foam", "Works with touch, too"],
+  ];
+  return (
+    <SwipeStack className="w-72">
+      {cards.map(([bg, t, d]) => (
+        <div key={t} className="flex h-80 flex-col justify-between rounded-2xl p-6 text-[#06121f] shadow-xl" style={{ background: bg }}>
+          <span className="font-display text-4xl font-bold tracking-tight">{t}</span>
+          <span className="text-sm font-medium opacity-80">{d}</span>
+        </div>
+      ))}
+    </SwipeStack>
+  );
+}
+
+export function SplashButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-6">
+      <SplashButton>Make a splash</SplashButton>
+      <SplashButton className="bg-surf text-[#06121f]" colors={["#f97362", "#fbbf24", "#f472b6"]}>
+        Subscribe
+      </SplashButton>
     </div>
   );
 }

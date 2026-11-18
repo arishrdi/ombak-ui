@@ -216,4 +216,85 @@ import { CustomCursor } from "@/components/custom-cursor";
 // anywhere: show a label inside the cursor
 <a href="/case" data-cursor-label="View">…</a>`,
   },
+  caustics: {
+    Demo: D.CausticsDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { Caustics } from "@/components/caustics";
+
+<Caustics className="h-[480px]" color="#7df9ff" deep="#03243a">
+  <h1>Under the surface.</h1>
+</Caustics>`,
+  },
+  "current-lines": {
+    Demo: D.CurrentLinesDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { CurrentLines } from "@/components/current-lines";
+
+<CurrentLines className="h-[480px] bg-slate-950 text-sky-300/80">
+  <h1>Go with the flow.</h1>
+</CurrentLines>`,
+  },
+  "split-flap": {
+    Demo: D.SplitFlapDemo,
+    usage: `import { SplitFlap } from "@/components/split-flap";
+
+// change \`text\` and the board flips to it
+<SplitFlap text={city} length={8} className="text-5xl" />
+<SplitFlap text="GATE 12" cellClassName="bg-amber-400 text-zinc-900" />`,
+  },
+  odometer: {
+    Demo: D.OdometerDemo,
+    usage: `import { Odometer } from "@/components/odometer";
+
+<Odometer value={followers} className="text-7xl font-bold" />
+<Odometer value={99.5} decimals={1} suffix="%" />`,
+  },
+  "gradient-text": {
+    Demo: D.GradientTextDemo,
+    usage: `import { GradientText } from "@/components/gradient-text";
+
+<GradientText className="text-7xl font-bold">Deep blue sea</GradientText>
+<GradientText colors={["#f97362", "#fbbf24", "#f472b6"]}>single word</GradientText>`,
+  },
+  "shimmer-text": {
+    Demo: D.ShimmerTextDemo,
+    usage: `import { ShimmerText } from "@/components/shimmer-text";
+
+<ShimmerText>Generating your component</ShimmerText>`,
+  },
+  "magnify-dock": {
+    Demo: D.MagnifyDockDemo,
+    usage: `import { MagnifyDock } from "@/components/magnify-dock";
+
+<MagnifyDock
+  items={[
+    { label: "Home", icon: <HomeIcon />, href: "/" },
+    { label: "Search", icon: <SearchIcon />, onClick: openSearch },
+  ]}
+/>`,
+  },
+  "torch-reveal": {
+    Demo: D.TorchRevealDemo,
+    usage: `import { TorchReveal } from "@/components/torch-reveal";
+
+<TorchReveal className="h-96" reveal={<img src="/secret.jpg" alt="" />}>
+  <div className="size-full bg-black">It's dark down here.</div>
+</TorchReveal>`,
+  },
+  "swipe-stack": {
+    Demo: D.SwipeStackDemo,
+    usage: `import { SwipeStack } from "@/components/swipe-stack";
+
+<SwipeStack className="w-72" onSwipe={(i, dir) => console.log(i, dir)}>
+  <Card title="Reef" />
+  <Card title="Swell" />
+  <Card title="Coral" />
+</SwipeStack>`,
+  },
+  "splash-button": {
+    Demo: D.SplashButtonDemo,
+    usage: `import { SplashButton } from "@/components/splash-button";
+
+<SplashButton onClick={subscribe}>Subscribe</SplashButton>`,
+  },
 };

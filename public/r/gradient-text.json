@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-text",
+  "title": "Gradient Text",
+  "description": "Text filled with a gradient that slowly flows through it.",
+  "files": [
+    {
+      "path": "registry/ombak/gradient-text/gradient-text.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ElementType, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type GradientTextProps = {\n  children: ReactNode;\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** Gradient colors. The first one is repeated at the end for a seamless loop. Default ocean blues */\n  colors?: string[];\n  /** Milliseconds for one full loop. Default 6000 */\n  duration?: number;\n  /** Gradient angle in degrees. Default 90 */\n  angle?: number;\n  className?: string;\n};\n\n/**\n * Text filled with a gradient that slowly flows through it, like light moving through water.\n * Uses the Web Animations API; holds still for reduced-motion users.\n */\nexport function GradientText({\n  children,\n  as: Tag = \"span\",\n  colors = [\"#2dd4bf\", \"#38bdf8\", \"#818cf8\", \"#5ef0c8\"],\n  duration = 6000,\n  angle = 90,\n  className,\n}: GradientTextProps) {\n  const ref = useRef<HTMLElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const a = el.animate([{ backgroundPosition: \"0% 50%\" }, { backgroundPosition: \"200% 50%\" }], {\n      duration,\n      iterations: Infinity,\n    });\n    return () => a.cancel();\n  }, [duration]);\n\n  return (\n    <Tag\n      ref={ref}\n      className={cn(\"inline-block bg-clip-text text-transparent [-webkit-background-clip:text]\", className)}\n      style={{\n        backgroundImage: `linear-gradient(${angle}deg, ${[...colors, colors[0]].join(\", \")})`,\n        backgroundSize: \"200% 100%\",\n      }}\n    >\n      {children}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

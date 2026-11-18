@@ -16,6 +16,13 @@ import { WaveText } from "@/registry/ombak/wave-text/wave-text";
 import { Typewriter } from "@/registry/ombak/typewriter/typewriter";
 import { HighlightText } from "@/registry/ombak/highlight-text/highlight-text";
 import { GlowCard } from "@/registry/ombak/glow-card/glow-card";
+import { Caustics } from "@/registry/ombak/caustics/caustics";
+import { CurrentLines } from "@/registry/ombak/current-lines/current-lines";
+import { SplitFlap } from "@/registry/ombak/split-flap/split-flap";
+import { Odometer } from "@/registry/ombak/odometer/odometer";
+import { GradientText } from "@/registry/ombak/gradient-text/gradient-text";
+import { ShimmerText } from "@/registry/ombak/shimmer-text/shimmer-text";
+import { TorchReveal } from "@/registry/ombak/torch-reveal/torch-reveal";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -244,6 +251,84 @@ function CustomCursorThumb() {
   );
 }
 
+function CausticsThumb() {
+  return <Caustics className="size-full" interactive={false} />;
+}
+function CurrentLinesThumb() {
+  return <CurrentLines className="size-full bg-[#06121f]" density={1.8} />;
+}
+function SplitFlapThumb() {
+  return <SplitFlap text="OMBAK" className="text-3xl" />;
+}
+function OdometerThumb() {
+  return <Odometer value={48210} className="font-display text-5xl font-bold tracking-tight" />;
+}
+function GradientTextThumb() {
+  return <GradientText className="font-display text-4xl font-bold tracking-tight">Deep blue</GradientText>;
+}
+function ShimmerTextThumb() {
+  return <ShimmerText className="font-display text-3xl font-bold tracking-tight">Thinking…</ShimmerText>;
+}
+function MagnifyDockThumb() {
+  // static mini dock (the real one is made of links/buttons, which can't sit inside the card link)
+  const sizes = [26, 32, 44, 32, 26];
+  return (
+    <div className="flex items-end gap-1.5 rounded-xl border bg-card/80 px-2 pt-2 pb-1.5 shadow-lg">
+      {sizes.map((s, i) => (
+        <span
+          key={i}
+          className="rounded-[28%]"
+          style={{ width: s, height: s, background: ["#2dd4bf", "#38bdf8", "#5ef0c8", "#818cf8", "#f97362"][i] }}
+        />
+      ))}
+    </div>
+  );
+}
+function TorchRevealThumb() {
+  return (
+    <TorchReveal
+      radius={70}
+      className="h-32 w-48 rounded-xl"
+      reveal={
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src="/demo/04.svg" alt="" className="size-full object-cover" />
+      }
+    >
+      <div className="grid size-full place-items-center bg-[#020a12] text-xs text-white/60">Hover to explore</div>
+    </TorchReveal>
+  );
+}
+function SwipeStackThumb() {
+  return (
+    <div className="relative h-32 w-28">
+      {["#f4f1ea", "#38bdf8", "#2dd4bf"].map((c, i) => (
+        <span
+          key={c}
+          className="absolute inset-0 rounded-xl shadow-lg transition-transform duration-500"
+          style={{ background: c, transform: `translateY(${(2 - i) * 8}px) scale(${0.9 + i * 0.05})`, zIndex: i }}
+        />
+      ))}
+      <span className="absolute inset-0 z-10 rounded-xl bg-[#f97362] shadow-xl transition-transform duration-500 group-hover:translate-x-10 group-hover:rotate-12" />
+    </div>
+  );
+}
+function SplashButtonThumb() {
+  // droplets burst out of the button while the card is hovered
+  const drops = [[-38, -30], [-14, -44], [12, -42], [38, -28], [-52, -8], [54, -6], [-26, -52], [28, -50]];
+  return (
+    <span className="relative inline-flex">
+      <span className="relative z-10 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground">Subscribe</span>
+      {drops.map(([x, y], i) => (
+        <span
+          key={i}
+          className="absolute top-1/2 left-1/2 size-2 -translate-1/2 rounded-full opacity-0 transition-all duration-700 ease-out group-hover:translate-x-[var(--x)] group-hover:translate-y-[var(--y)] group-hover:opacity-100"
+          style={{ ["--x" as string]: `${x}px`, ["--y" as string]: `${y}px`, background: ["#5ef0c8", "#38bdf8", "#2dd4bf"][i % 3] }}
+        />
+      ))}
+    </span>
+  );
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -267,4 +352,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "ripple-button": { Thumb: RippleButtonThumb },
   "hover-preview": { Thumb: HoverPreviewThumb },
   "custom-cursor": { Thumb: CustomCursorThumb },
+  caustics: { Thumb: CausticsThumb, bleed: true },
+  "current-lines": { Thumb: CurrentLinesThumb, bleed: true },
+  "split-flap": { Thumb: SplitFlapThumb },
+  odometer: { Thumb: OdometerThumb },
+  "gradient-text": { Thumb: GradientTextThumb },
+  "shimmer-text": { Thumb: ShimmerTextThumb },
+  "magnify-dock": { Thumb: MagnifyDockThumb },
+  "torch-reveal": { Thumb: TorchRevealThumb },
+  "swipe-stack": { Thumb: SwipeStackThumb },
+  "splash-button": { Thumb: SplashButtonThumb },
 };

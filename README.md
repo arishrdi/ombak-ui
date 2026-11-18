@@ -6,13 +6,15 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (22)
+## Components (32)
 
 | Component | Category | Dependencies |
 |---|---|---|
 | Wave Background | Backgrounds | none |
 | Ripple Grid | Backgrounds | none |
 | Bubbles | Backgrounds | none |
+| Caustics | Backgrounds | none |
+| Current Lines | Backgrounds | none |
 | Text Reveal | Text | gsap, @gsap/react |
 | Scramble Text | Text | gsap |
 | Rolling Text | Text | none |
@@ -20,6 +22,10 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Wave Text | Text | none |
 | Typewriter | Text | none |
 | Highlight Text | Text | gsap, @gsap/react |
+| Split Flap | Text | none |
+| Odometer | Text | none |
+| Gradient Text | Text | none |
+| Shimmer Text | Text | none |
 | Marquee | Scroll | gsap |
 | Stack Cards | Scroll | gsap, @gsap/react |
 | Image Reveal | Scroll | gsap, @gsap/react |
@@ -32,6 +38,10 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Ripple Button | Interaction | none |
 | Hover Preview | Interaction | gsap |
 | Custom Cursor | Interaction | gsap |
+| Magnify Dock | Interaction | none |
+| Torch Reveal | Interaction | none |
+| Swipe Stack | Interaction | none |
+| Splash Button | Interaction | none |
 
 ## Project structure
 

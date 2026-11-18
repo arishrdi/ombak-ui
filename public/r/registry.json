@@ -49,6 +49,36 @@
       ]
     },
     {
+      "name": "caustics",
+      "type": "registry:component",
+      "title": "Caustics",
+      "description": "Shimmering underwater light, like sunlight dancing on a sea floor. A tiny WebGL shader.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/caustics/caustics.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "current-lines",
+      "type": "registry:component",
+      "title": "Current Lines",
+      "description": "Thousands of fine lines drifting along an ocean current. The cursor stirs a whirlpool.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/current-lines/current-lines.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "text-reveal",
       "type": "registry:component",
       "title": "Text Reveal",
@@ -163,6 +193,66 @@
       "files": [
         {
           "path": "registry/ombak/highlight-text/highlight-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "split-flap",
+      "type": "registry:component",
+      "title": "Split Flap",
+      "description": "An airport departures board: every letter rattles through the alphabet to land.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/split-flap/split-flap.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "odometer",
+      "type": "registry:component",
+      "title": "Odometer",
+      "description": "A mechanical counter where every digit rolls on its own wheel.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/odometer/odometer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:component",
+      "title": "Gradient Text",
+      "description": "Text filled with a gradient that slowly flows through it.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/gradient-text/gradient-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "shimmer-text",
+      "type": "registry:component",
+      "title": "Shimmer Text",
+      "description": "A light sheen that glides across text, for loading states and quiet CTAs.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/shimmer-text/shimmer-text.tsx",
           "type": "registry:component"
         }
       ]
@@ -377,6 +467,66 @@
       "files": [
         {
           "path": "registry/ombak/custom-cursor/custom-cursor.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "magnify-dock",
+      "type": "registry:component",
+      "title": "Magnify Dock",
+      "description": "A dock whose icons swell as the cursor glides over them.",
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/magnify-dock/magnify-dock.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "torch-reveal",
+      "type": "registry:component",
+      "title": "Torch Reveal",
+      "description": "A torch that uncovers a hidden layer wherever the cursor points.",
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/torch-reveal/torch-reveal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "swipe-stack",
+      "type": "registry:component",
+      "title": "Swipe Stack",
+      "description": "A deck of cards you can drag and fling away, with keyboard support.",
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/swipe-stack/swipe-stack.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "splash-button",
+      "type": "registry:component",
+      "title": "Splash Button",
+      "description": "A button that bursts into droplets that arc out and fall with gravity.",
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/splash-button/splash-button.tsx",
           "type": "registry:component"
         }
       ]
