@@ -55,6 +55,16 @@ import { StatusDot } from "@/registry/ombak/status-dot/status-dot";
 import { LiquidLoader } from "@/registry/ombak/liquid-loader/liquid-loader";
 import { Steps } from "@/registry/ombak/steps/steps";
 import { Countdown } from "@/registry/ombak/countdown/countdown";
+import { AnimatedTabs } from "@/registry/ombak/animated-tabs/animated-tabs";
+import { FloatingNav } from "@/registry/ombak/floating-nav/floating-nav";
+import { MorphMenu } from "@/registry/ombak/morph-menu/morph-menu";
+import { SegmentedControl } from "@/registry/ombak/segmented-control/segmented-control";
+import { ScrollSpy } from "@/registry/ombak/scroll-spy/scroll-spy";
+import { HoverNav } from "@/registry/ombak/hover-nav/hover-nav";
+import { BottomBar } from "@/registry/ombak/bottom-bar/bottom-bar";
+import { Accordion } from "@/registry/ombak/accordion/accordion";
+import { Pagination } from "@/registry/ombak/pagination/pagination";
+import { DropdownMenu } from "@/registry/ombak/dropdown-menu/dropdown-menu";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -501,6 +511,76 @@ function CountdownThumb() {
   return <Countdown to={to} tileClassName="text-xl px-2 py-1.5" labels={["d", "h", "m", "s"]} />;
 }
 
+const ti = (d: string) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={d} /></svg>
+);
+function TabsThumb() {
+  return (
+    <AnimatedTabs
+      className="w-auto"
+      tabs={[{ label: "Overview", content: null }, { label: "Activity", content: null }, { label: "Settings", content: null }]}
+    />
+  );
+}
+function FloatingNavThumb() {
+  // illustration: a pill nav floating over a page
+  return (
+    <div className="relative h-36 w-56 overflow-hidden rounded-xl border bg-background">
+      <div className="absolute inset-x-3 top-3 flex items-center justify-between rounded-full border bg-background/80 px-3 py-1.5 text-[10px] shadow-md backdrop-blur transition-transform duration-500 group-hover:-translate-y-12">
+        <b>ombak</b>
+        <span className="text-muted-foreground">Work · About</span>
+      </div>
+      <div className="space-y-2 px-3 pt-14">
+        <div className="h-3 w-3/4 rounded bg-muted" />
+        <div className="h-3 w-1/2 rounded bg-muted" />
+        <div className="h-10 rounded bg-muted/60" />
+      </div>
+    </div>
+  );
+}
+function MorphThumb() {
+  return <MorphMenu links={[{ label: "Work", href: "#" }, { label: "Contact", href: "#" }]} />;
+}
+function SegmentedThumb() {
+  return <SegmentedControl label="Billing" options={["Monthly", "Yearly"]} />;
+}
+function ScrollSpyThumb() {
+  return (
+    <div className="w-40 border-l text-xs">
+      {["Introduction", "Installation", "Usage", "Props"].map((t, i) => (
+        <p key={t} className={`relative py-1 pl-3 ${i === 1 ? "font-medium text-foreground" : "text-muted-foreground"}`}>
+          {i === 1 && <span className="absolute inset-y-0 -left-px w-0.5 bg-primary" />}
+          {t}
+        </p>
+      ))}
+    </div>
+  );
+}
+function HoverNavThumb() {
+  return <HoverNav current="/work" links={[{ label: "Home", href: "/" }, { label: "Work", href: "/work" }, { label: "About", href: "/about" }]} />;
+}
+function BottomBarThumb() {
+  return (
+    <BottomBar
+      className="max-w-60"
+      items={[
+        { label: "Home", icon: ti("M3 11l9-8 9 8M5 10v10h14V10") },
+        { label: "Search", icon: ti("M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4") },
+        { label: "Profile", icon: ti("M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0") },
+      ]}
+    />
+  );
+}
+function AccordionThumb() {
+  return <Accordion className="w-60 text-sm" items={[{ title: "Is it free?", content: "Yes." }, { title: "Is it typed?", content: "Yes." }]} />;
+}
+function PaginationThumb() {
+  return <Pagination total={9} defaultPage={3} />;
+}
+function DropdownThumb() {
+  return <DropdownMenu trigger="Options" items={[{ label: "Edit" }, { label: "Share" }, { label: "Delete", danger: true }]} />;
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -564,4 +644,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "liquid-loader": { Thumb: LiquidThumb },
   steps: { Thumb: StepsThumb },
   countdown: { Thumb: CountdownThumb },
+  "animated-tabs": { Thumb: TabsThumb },
+  "floating-nav": { Thumb: FloatingNavThumb },
+  "morph-menu": { Thumb: MorphThumb },
+  "segmented-control": { Thumb: SegmentedThumb },
+  "scroll-spy": { Thumb: ScrollSpyThumb },
+  "hover-nav": { Thumb: HoverNavThumb },
+  "bottom-bar": { Thumb: BottomBarThumb },
+  accordion: { Thumb: AccordionThumb },
+  pagination: { Thumb: PaginationThumb },
+  "dropdown-menu": { Thumb: DropdownThumb },
 };

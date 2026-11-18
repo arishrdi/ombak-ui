@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "floating-nav",
+  "title": "Floating Nav",
+  "description": "A top bar that shrinks into a floating pill and slips away while you read down.",
+  "files": [
+    {
+      "path": "registry/ombak/floating-nav/floating-nav.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useState, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type FloatingNavProps = {\n  /** Nav content: logo, links, a button… */\n  children: ReactNode;\n  /** Pixels scrolled before the bar turns into a floating pill. Default 40 */\n  threshold?: number;\n  /** Hide when scrolling down, show again when scrolling up. Default true */\n  hideOnScroll?: boolean;\n  /** Use a scrollable element instead of the window, e.g. for demos. */\n  scrollContainer?: React.RefObject<HTMLElement | null>;\n  className?: string;\n};\n\n/**\n * A top bar that sits flat at the top of the page, then shrinks into a floating glass pill as you\n * scroll, slipping away while you read down and coming back as soon as you scroll up.\n */\nexport function FloatingNav({ children, threshold = 40, hideOnScroll = true, scrollContainer, className }: FloatingNavProps) {\n  const [floating, setFloating] = useState(false);\n  const [hidden, setHidden] = useState(false);\n\n  useEffect(() => {\n    const el: HTMLElement | Window = scrollContainer?.current ?? window;\n    const getY = () => (el instanceof Window ? el.scrollY : el.scrollTop);\n    let last = getY();\n    const onScroll = () => {\n      const y = getY();\n      setFloating(y > threshold);\n      if (hideOnScroll) setHidden(y > threshold * 3 && y > last + 2 ? true : y < last - 2 ? false : (h) => h);\n      last = y;\n    };\n    onScroll();\n    el.addEventListener(\"scroll\", onScroll, { passive: true });\n    return () => el.removeEventListener(\"scroll\", onScroll);\n  }, [threshold, hideOnScroll, scrollContainer]);\n\n  return (\n    <div\n      className={cn(\n        \"sticky top-0 z-50 flex justify-center px-4 transition-transform duration-500 ease-[cubic-bezier(.3,.7,.2,1)] motion-reduce:transition-none\",\n        hidden ? \"-translate-y-[120%]\" : \"translate-y-0\",\n        className,\n      )}\n      // keep it reachable for keyboard users even while \"hidden\"\n      onFocusCapture={() => setHidden(false)}\n    >\n      <nav\n        className={cn(\n          \"flex w-full items-center justify-between gap-6 transition-all duration-500 ease-[cubic-bezier(.3,.7,.2,1)] motion-reduce:transition-none\",\n          floating\n            ? \"mt-3 max-w-2xl rounded-full border bg-background/75 px-5 py-2.5 shadow-lg backdrop-blur-xl\"\n            : \"mt-0 max-w-6xl rounded-none border border-transparent px-2 py-4\",\n        )}\n      >\n        {children}\n      </nav>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:component"
+}

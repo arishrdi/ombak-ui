@@ -62,7 +62,17 @@ import { StatusDot } from "@/registry/ombak/status-dot/status-dot";
 import { LiquidLoader } from "@/registry/ombak/liquid-loader/liquid-loader";
 import { Steps } from "@/registry/ombak/steps/steps";
 import { Countdown } from "@/registry/ombak/countdown/countdown";
-import { useEffect, useState } from "react";
+import { AnimatedTabs } from "@/registry/ombak/animated-tabs/animated-tabs";
+import { FloatingNav } from "@/registry/ombak/floating-nav/floating-nav";
+import { MorphMenu } from "@/registry/ombak/morph-menu/morph-menu";
+import { SegmentedControl } from "@/registry/ombak/segmented-control/segmented-control";
+import { ScrollSpy } from "@/registry/ombak/scroll-spy/scroll-spy";
+import { HoverNav } from "@/registry/ombak/hover-nav/hover-nav";
+import { BottomBar } from "@/registry/ombak/bottom-bar/bottom-bar";
+import { Accordion } from "@/registry/ombak/accordion/accordion";
+import { Pagination } from "@/registry/ombak/pagination/pagination";
+import { DropdownMenu } from "@/registry/ombak/dropdown-menu/dropdown-menu";
+import { useEffect, useRef, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
 
@@ -952,4 +962,177 @@ export function CountdownDemo() {
   // a target that's always ~3 days away, so the demo never runs out
   const [to] = useState(() => Date.now() + 3 * 86400000 + 4 * 3600000 + 12 * 60000);
   return <Countdown to={to} />;
+}
+
+const navIcon = (d: string) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d={d} /></svg>
+);
+
+export function AnimatedTabsDemo() {
+  const panel = (t: string, d: string) => (
+    <div className="rounded-xl border bg-card p-5">
+      <p className="font-semibold">{t}</p>
+      <p className="mt-1 text-sm text-muted-foreground">{d}</p>
+    </div>
+  );
+  return (
+    <div className="w-full max-w-md space-y-10 px-6">
+      <AnimatedTabs
+        tabs={[
+          { label: "Overview", content: panel("Overview", "Everything at a glance.") },
+          { label: "Activity", content: panel("Activity", "What happened this week.") },
+          { label: "Settings", content: panel("Settings", "Make it yours.") },
+        ]}
+      />
+      <AnimatedTabs
+        variant="underline"
+        tabs={[
+          { label: "Preview", content: panel("Preview", "Underline variant.") },
+          { label: "Code", content: panel("Code", "Use ← → to switch tabs.") },
+          { label: "Props", content: panel("Props", "Home and End work too.") },
+        ]}
+      />
+    </div>
+  );
+}
+
+export function FloatingNavDemo() {
+  const ref = useRef<HTMLDivElement>(null);
+  return (
+    <div ref={ref} className="relative h-[420px] w-full overflow-y-auto rounded-xl border bg-background">
+      <FloatingNav scrollContainer={ref} threshold={30}>
+        <span className="font-display font-bold">ombak</span>
+        <span className="flex gap-4 text-sm text-muted-foreground">
+          <a href="#" onClick={(e) => e.preventDefault()}>Work</a>
+          <a href="#" onClick={(e) => e.preventDefault()}>About</a>
+          <a href="#" onClick={(e) => e.preventDefault()}>Contact</a>
+        </span>
+      </FloatingNav>
+      <div className="space-y-4 px-6 pt-10 pb-[600px]">
+        <p className="font-display text-3xl font-bold">Scroll inside this box ↓</p>
+        <p className="text-muted-foreground">The bar becomes a floating pill, hides while you scroll down, and comes back when you scroll up.</p>
+        {Array.from({ length: 6 }, (_, i) => (
+          <div key={i} className="h-24 rounded-xl bg-muted/60" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function MorphMenuDemo() {
+  return (
+    <div className="flex h-72 w-full max-w-md items-start justify-between rounded-xl border bg-card p-4">
+      <span className="font-display text-lg font-bold">ombak</span>
+      <MorphMenu
+        links={[
+          { label: "Work", href: "#work" },
+          { label: "Studio", href: "#studio" },
+          { label: "Journal", href: "#journal" },
+          { label: "Contact", href: "#contact" },
+        ]}
+      />
+    </div>
+  );
+}
+
+export function SegmentedControlDemo() {
+  const [v, setV] = useState("Monthly");
+  return (
+    <div className="space-y-6 text-center">
+      <SegmentedControl label="Billing period" options={["Monthly", "Yearly"]} value={v} onChange={setV} />
+      <p className="font-display text-5xl font-bold">{v === "Monthly" ? "$12" : "$120"}<span className="text-base font-normal text-muted-foreground">/{v === "Monthly" ? "mo" : "yr"}</span></p>
+      <SegmentedControl label="View" options={["List", "Grid", "Board"]} />
+    </div>
+  );
+}
+
+export function ScrollSpyDemo() {
+  const ref = useRef<HTMLDivElement>(null);
+  const items = [
+    { id: "spy-intro", label: "Introduction" },
+    { id: "spy-install", label: "Installation" },
+    { id: "spy-usage", label: "Usage" },
+    { id: "spy-props", label: "Props" },
+  ];
+  return (
+    <div className="grid h-[420px] w-full max-w-2xl grid-cols-[1fr_160px] gap-6 rounded-xl border bg-card p-4">
+      <div ref={ref} className="overflow-y-auto pr-2">
+        {items.map((it) => (
+          <section key={it.id} id={it.id} className="mb-6 min-h-[260px] rounded-lg bg-muted/50 p-4">
+            <h4 className="font-display text-xl font-bold">{it.label}</h4>
+            <p className="mt-2 text-sm text-muted-foreground">Scroll this column; the marker on the right follows.</p>
+          </section>
+        ))}
+      </div>
+      <ScrollSpy items={items} scrollContainer={ref} />
+    </div>
+  );
+}
+
+export function HoverNavDemo() {
+  return (
+    <HoverNav
+      current="/work"
+      links={[
+        { label: "Home", href: "/" },
+        { label: "Work", href: "/work" },
+        { label: "Studio", href: "/studio" },
+        { label: "Journal", href: "/journal" },
+        { label: "Contact", href: "/contact" },
+      ]}
+    />
+  );
+}
+
+export function BottomBarDemo() {
+  return (
+    <BottomBar
+      items={[
+        { label: "Home", icon: navIcon("M3 11l9-8 9 8M5 10v10h14V10") },
+        { label: "Search", icon: navIcon("M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4") },
+        { label: "Saved", icon: navIcon("M6 3h12v18l-6-4-6 4z") },
+        { label: "Profile", icon: navIcon("M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0") },
+      ]}
+    />
+  );
+}
+
+export function AccordionDemo() {
+  return (
+    <Accordion
+      className="max-w-xl"
+      defaultOpen={[0]}
+      items={[
+        { title: "Is Ombak UI free?", content: "Yes. Every component here is free and MIT licensed, for personal and commercial projects." },
+        { title: "Do I need to install a package?", content: "No. The shadcn CLI copies each component into your project, so you own the code." },
+        { title: "Does it work with my theme?", content: "Components use shadcn theme tokens like bg-primary and text-muted-foreground, so they follow your theme." },
+        { title: "What about reduced motion?", content: "Every animated component respects prefers-reduced-motion." },
+      ]}
+    />
+  );
+}
+
+export function PaginationDemo() {
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <Pagination total={12} defaultPage={4} />
+      <Pagination total={5} />
+    </div>
+  );
+}
+
+export function DropdownMenuDemo() {
+  return (
+    <div className="flex h-72 items-start gap-6 pt-6">
+      <DropdownMenu
+        trigger="Options"
+        items={[
+          { label: "Edit", icon: navIcon("M4 20h4L19 9l-4-4L4 16z"), shortcut: "E" },
+          { label: "Duplicate", icon: navIcon("M8 8h12v12H8zM4 16V4h12"), shortcut: "D" },
+          { label: "Share", icon: navIcon("M4 12v7h16v-7M12 3v12M8 7l4-4 4 4") },
+          { label: "Delete", icon: navIcon("M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"), danger: true },
+        ]}
+      />
+    </div>
+  );
 }

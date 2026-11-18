@@ -868,6 +868,156 @@
       ]
     },
     {
+      "name": "animated-tabs",
+      "type": "registry:component",
+      "title": "Animated Tabs",
+      "description": "Tabs with an indicator that glides to the active tab. Full keyboard support.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/animated-tabs/animated-tabs.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "floating-nav",
+      "type": "registry:component",
+      "title": "Floating Nav",
+      "description": "A top bar that shrinks into a floating pill and slips away while you read down.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/floating-nav/floating-nav.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "morph-menu",
+      "type": "registry:component",
+      "title": "Morph Menu",
+      "description": "A hamburger that morphs into a cross, opening a panel of rising links.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/morph-menu/morph-menu.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:component",
+      "title": "Segmented Control",
+      "description": "An iOS-style switcher with a sliding thumb. A real radio group.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/segmented-control/segmented-control.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scroll-spy",
+      "type": "registry:component",
+      "title": "Scroll Spy",
+      "description": "A table of contents whose marker glides to the section you're reading.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/scroll-spy/scroll-spy.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hover-nav",
+      "type": "registry:component",
+      "title": "Hover Nav",
+      "description": "A soft highlight that glides between links as the cursor moves.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/hover-nav/hover-nav.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bottom-bar",
+      "type": "registry:component",
+      "title": "Bottom Bar",
+      "description": "A mobile tab bar where the active icon hops into a bubble.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/bottom-bar/bottom-bar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:component",
+      "title": "Accordion",
+      "description": "Panels that open with a smooth height animation and a turning plus sign.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/accordion/accordion.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:component",
+      "title": "Pagination",
+      "description": "Page numbers with a gliding bubble and smart ellipses.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/pagination/pagination.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:component",
+      "title": "Dropdown Menu",
+      "description": "A menu whose items cascade in, with the full ARIA keyboard pattern.",
+      "categories": [
+        "navigation"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/dropdown-menu/dropdown-menu.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "tilt-card",
       "type": "registry:component",
       "title": "Tilt Card",

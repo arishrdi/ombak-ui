@@ -21,6 +21,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   buttons: "Buttons",
   cards: "Cards",
   loaders: "Loaders",
+  navigation: "Navigation",
 };
 
 export const items = registry.items as RegistryItem[];

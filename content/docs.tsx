@@ -517,4 +517,85 @@ import { CustomCursor } from "@/components/custom-cursor";
 
 <Countdown to="2026-12-31T23:59:59" onComplete={() => setLive(true)} />`,
   },
+  "animated-tabs": {
+    Demo: D.AnimatedTabsDemo,
+    usage: `import { AnimatedTabs } from "@/components/animated-tabs";
+
+<AnimatedTabs
+  tabs={[
+    { label: "Overview", content: <Overview /> },
+    { label: "Activity", content: <Activity /> },
+  ]}
+/>`,
+  },
+  "floating-nav": {
+    Demo: D.FloatingNavDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { FloatingNav } from "@/components/floating-nav";
+
+// at the top of your layout
+<FloatingNav>
+  <Logo />
+  <nav>…links…</nav>
+</FloatingNav>`,
+  },
+  "morph-menu": {
+    Demo: D.MorphMenuDemo,
+    usage: `import { MorphMenu } from "@/components/morph-menu";
+
+<MorphMenu links={[{ label: "Work", href: "/work" }, { label: "Contact", href: "/contact" }]} />`,
+  },
+  "segmented-control": {
+    Demo: D.SegmentedControlDemo,
+    usage: `import { SegmentedControl } from "@/components/segmented-control";
+
+<SegmentedControl label="Billing period" options={["Monthly", "Yearly"]} value={period} onChange={setPeriod} />`,
+  },
+  "scroll-spy": {
+    Demo: D.ScrollSpyDemo,
+    usage: `import { ScrollSpy } from "@/components/scroll-spy";
+
+<aside className="sticky top-24">
+  <ScrollSpy items={[{ id: "intro", label: "Introduction" }, { id: "usage", label: "Usage" }]} />
+</aside>`,
+  },
+  "hover-nav": {
+    Demo: D.HoverNavDemo,
+    usage: `import { HoverNav } from "@/components/hover-nav";
+
+<HoverNav current={pathname} links={[{ label: "Home", href: "/" }, { label: "Work", href: "/work" }]} />`,
+  },
+  "bottom-bar": {
+    Demo: D.BottomBarDemo,
+    usage: `import { BottomBar } from "@/components/bottom-bar";
+
+<div className="fixed inset-x-4 bottom-4 md:hidden">
+  <BottomBar items={[{ label: "Home", icon: <HomeIcon /> }, { label: "Search", icon: <SearchIcon /> }]} onChange={go} />
+</div>`,
+  },
+  accordion: {
+    Demo: D.AccordionDemo,
+    usage: `import { Accordion } from "@/components/accordion";
+
+<Accordion items={[{ title: "Is it free?", content: "Yes, MIT licensed." }]} />`,
+  },
+  pagination: {
+    Demo: D.PaginationDemo,
+    usage: `import { Pagination } from "@/components/pagination";
+
+<Pagination total={12} page={page} onChange={setPage} />`,
+  },
+  "dropdown-menu": {
+    Demo: D.DropdownMenuDemo,
+    stage: "items-start",
+    usage: `import { DropdownMenu } from "@/components/dropdown-menu";
+
+<DropdownMenu
+  trigger="Options"
+  items={[
+    { label: "Edit", onSelect: edit },
+    { label: "Delete", onSelect: remove, danger: true },
+  ]}
+/>`,
+  },
 };
