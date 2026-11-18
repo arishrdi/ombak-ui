@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/site/header";
+import { themeScript } from "@/components/site/theme-toggle";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark ${sans.variable} ${mono.variable} ${display.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`dark ${sans.variable} ${mono.variable} ${display.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-screen font-sans">
         <Header />
         {children}
