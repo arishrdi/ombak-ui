@@ -718,6 +718,156 @@
       ]
     },
     {
+      "name": "wave-loader",
+      "type": "registry:component",
+      "title": "Wave Loader",
+      "description": "Bars that rise and fall in turn, like a wave passing through.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/wave-loader/wave-loader.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:component",
+      "title": "Skeleton",
+      "description": "Loading placeholders with a soft sweep of light: blocks, avatars and text lines.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/skeleton/skeleton.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:component",
+      "title": "Progress Ring",
+      "description": "A circular progress indicator that animates to its value, or spins.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/progress-ring/progress-ring.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "typing-dots",
+      "type": "registry:component",
+      "title": "Typing Dots",
+      "description": "The chat 'someone is typing' indicator: three dots hopping in a bubble.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/typing-dots/typing-dots.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tide-progress",
+      "type": "registry:component",
+      "title": "Tide Progress",
+      "description": "A progress bar filled with water, its front edge rolling like a wave.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/tide-progress/tide-progress.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "orbit-spinner",
+      "type": "registry:component",
+      "title": "Orbit Spinner",
+      "description": "Small moons chasing each other around an orbit.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/orbit-spinner/orbit-spinner.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:component",
+      "title": "Status Dot",
+      "description": "A presence indicator with a soft sonar pulse: online, away, busy, offline.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/status-dot/status-dot.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "liquid-loader",
+      "type": "registry:component",
+      "title": "Liquid Loader",
+      "description": "A round flask filling with water, waves rolling across the surface.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/liquid-loader/liquid-loader.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "steps",
+      "type": "registry:component",
+      "title": "Steps",
+      "description": "A step indicator whose connecting line fills as you move forward.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/steps/steps.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "countdown",
+      "type": "registry:component",
+      "title": "Countdown",
+      "description": "Days, hours, minutes and seconds, each digit sliding in as it changes.",
+      "categories": [
+        "loaders"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/countdown/countdown.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "tilt-card",
       "type": "registry:component",
       "title": "Tilt Card",

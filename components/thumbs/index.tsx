@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ComponentType } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { WaveBackground } from "@/registry/ombak/wave-background/wave-background";
 import { TextReveal } from "@/registry/ombak/text-reveal/text-reveal";
 import { ScrambleText } from "@/registry/ombak/scramble-text/scramble-text";
@@ -45,6 +45,16 @@ import { CaptionCard } from "@/registry/ombak/caption-card/caption-card";
 import { WaveCard } from "@/registry/ombak/wave-card/wave-card";
 import { ScratchCard } from "@/registry/ombak/scratch-card/scratch-card";
 import { ScatterPhotos } from "@/registry/ombak/scatter-photos/scatter-photos";
+import { WaveLoader } from "@/registry/ombak/wave-loader/wave-loader";
+import { Skeleton } from "@/registry/ombak/skeleton/skeleton";
+import { ProgressRing } from "@/registry/ombak/progress-ring/progress-ring";
+import { TypingDots } from "@/registry/ombak/typing-dots/typing-dots";
+import { TideProgress } from "@/registry/ombak/tide-progress/tide-progress";
+import { OrbitSpinner } from "@/registry/ombak/orbit-spinner/orbit-spinner";
+import { StatusDot } from "@/registry/ombak/status-dot/status-dot";
+import { LiquidLoader } from "@/registry/ombak/liquid-loader/liquid-loader";
+import { Steps } from "@/registry/ombak/steps/steps";
+import { Countdown } from "@/registry/ombak/countdown/countdown";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -435,6 +445,62 @@ function ScatterThumb() {
   );
 }
 
+function useCycle(step = 10, ms = 700) {
+  const [v, setV] = useState(20);
+  useEffect(() => {
+    const id = window.setInterval(() => setV((x) => (x >= 100 ? 0 : Math.min(100, x + step))), ms);
+    return () => window.clearInterval(id);
+  }, [step, ms]);
+  return v;
+}
+function WaveLoaderThumb() {
+  return <WaveLoader size={40} bars={6} />;
+}
+function SkeletonThumb() {
+  return (
+    <div className="w-48 space-y-3">
+      <div className="flex items-center gap-3">
+        <Skeleton variant="circle" className="size-9" />
+        <Skeleton className="h-3 w-24 rounded-md" />
+      </div>
+      <Skeleton variant="text" lines={2} />
+    </div>
+  );
+}
+function ProgressRingThumb() {
+  return <ProgressRing value={useCycle()} size={84} thickness={8} />;
+}
+function TypingThumb() {
+  return <TypingDots />;
+}
+function TideThumb() {
+  return <TideProgress value={useCycle(8)} className="w-52" showValue />;
+}
+function OrbitThumb() {
+  return <OrbitSpinner size={56} />;
+}
+function StatusDotThumb() {
+  return (
+    <div className="grid gap-2">
+      <StatusDot status="online">Online</StatusDot>
+      <StatusDot status="away">Away</StatusDot>
+      <StatusDot status="busy">Busy</StatusDot>
+    </div>
+  );
+}
+function LiquidThumb() {
+  return <LiquidLoader value={useCycle(10, 800)} size={100} />;
+}
+function StepsThumb() {
+  return (
+    <Steps className="w-60" current={2} steps={[{ title: "Plan" }, { title: "Pay" }, { title: "Done" }]} />
+  );
+}
+function CountdownThumb() {
+  const [to] = useState(() => Date.now() + 2 * 86400000 + 5 * 3600000);
+  return <Countdown to={to} tileClassName="text-xl px-2 py-1.5" labels={["d", "h", "m", "s"]} />;
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -488,4 +554,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "wave-card": { Thumb: WaveCardThumb },
   "scratch-card": { Thumb: ScratchThumb },
   "scatter-photos": { Thumb: ScatterThumb, bleed: true },
+  "wave-loader": { Thumb: WaveLoaderThumb },
+  skeleton: { Thumb: SkeletonThumb },
+  "progress-ring": { Thumb: ProgressRingThumb },
+  "typing-dots": { Thumb: TypingThumb },
+  "tide-progress": { Thumb: TideThumb },
+  "orbit-spinner": { Thumb: OrbitThumb },
+  "status-dot": { Thumb: StatusDotThumb },
+  "liquid-loader": { Thumb: LiquidThumb },
+  steps: { Thumb: StepsThumb },
+  countdown: { Thumb: CountdownThumb },
 };

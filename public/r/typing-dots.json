@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typing-dots",
+  "title": "Typing Dots",
+  "description": "The chat 'someone is typing' indicator: three dots hopping in a bubble.",
+  "files": [
+    {
+      "path": "registry/ombak/typing-dots/typing-dots.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport type TypingDotsProps = {\n  /** Dot color. Default your theme's muted-foreground color */\n  color?: string;\n  /** Dot size in px. Default 7 */\n  size?: number;\n  /** Show the chat bubble behind the dots. Default true */\n  bubble?: boolean;\n  /** Text for screen readers. Default \"Typing\" */\n  label?: string;\n  className?: string;\n};\n\n/**\n * The \"someone is typing…\" indicator from chat apps: three dots hopping in turn inside a bubble.\n * Pure CSS; pulses instead of hopping for reduced-motion users.\n */\nexport function TypingDots({ color = \"var(--muted-foreground)\", size = 7, bubble = true, label = \"Typing\", className }: TypingDotsProps) {\n  return (\n    <span\n      role=\"status\"\n      aria-label={label}\n      className={cn(\"inline-flex items-center gap-1\", bubble && \"rounded-2xl rounded-bl-md bg-muted px-4 py-3\", className)}\n    >\n      <style>{`@keyframes ombak-typing{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-55%);opacity:1}}@keyframes ombak-typing-calm{0%,60%,100%{opacity:.35}30%{opacity:1}}`}</style>\n      {[0, 1, 2].map((i) => (\n        <span\n          key={i}\n          aria-hidden\n          className=\"rounded-full motion-reduce:![animation-name:ombak-typing-calm]\"\n          style={{ width: size, height: size, background: color, animation: `ombak-typing 1.2s ease-in-out ${i * 0.16}s infinite` }}\n        />\n      ))}\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "loaders"
+  ],
+  "type": "registry:component"
+}

@@ -447,4 +447,74 @@ import { CustomCursor } from "@/components/custom-cursor";
   ]}
 />`,
   },
+  "wave-loader": {
+    Demo: D.WaveLoaderDemo,
+    usage: `import { WaveLoader } from "@/components/wave-loader";
+
+<WaveLoader />
+<WaveLoader bars={7} size={40} color="#5ef0c8" />`,
+  },
+  skeleton: {
+    Demo: D.SkeletonDemo,
+    usage: `import { Skeleton } from "@/components/skeleton";
+
+<Skeleton variant="circle" />
+<Skeleton className="h-40" />
+<Skeleton variant="text" lines={3} />`,
+  },
+  "progress-ring": {
+    Demo: D.ProgressRingDemo,
+    usage: `import { ProgressRing } from "@/components/progress-ring";
+
+<ProgressRing value={uploaded} />
+<ProgressRing label="Loading" /> {/* no value = spinner */}`,
+  },
+  "typing-dots": {
+    Demo: D.TypingDotsDemo,
+    usage: `import { TypingDots } from "@/components/typing-dots";
+
+{isTyping && <TypingDots label="Dewi is typing" />}`,
+  },
+  "tide-progress": {
+    Demo: D.TideProgressDemo,
+    usage: `import { TideProgress } from "@/components/tide-progress";
+
+<TideProgress value={progress} showValue />`,
+  },
+  "orbit-spinner": {
+    Demo: D.OrbitSpinnerDemo,
+    usage: `import { OrbitSpinner } from "@/components/orbit-spinner";
+
+<OrbitSpinner />
+<OrbitSpinner size={64} dots={4} />`,
+  },
+  "status-dot": {
+    Demo: D.StatusDotDemo,
+    usage: `import { StatusDot } from "@/components/status-dot";
+
+<StatusDot status="online">Aris · Online</StatusDot>
+<StatusDot status="busy" />`,
+  },
+  "liquid-loader": {
+    Demo: D.LiquidLoaderDemo,
+    usage: `import { LiquidLoader } from "@/components/liquid-loader";
+
+<LiquidLoader value={progress} />
+<LiquidLoader /> {/* no value = endless loader */}`,
+  },
+  steps: {
+    Demo: D.StepsDemo,
+    usage: `import { Steps } from "@/components/steps";
+
+<Steps
+  current={1}
+  steps={[{ title: "Account" }, { title: "Plan" }, { title: "Payment" }, { title: "Done" }]}
+/>`,
+  },
+  countdown: {
+    Demo: D.CountdownDemo,
+    usage: `import { Countdown } from "@/components/countdown";
+
+<Countdown to="2026-12-31T23:59:59" onComplete={() => setLive(true)} />`,
+  },
 };

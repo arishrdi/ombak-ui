@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "Loading placeholders with a soft sweep of light: blocks, avatars and text lines.",
+  "files": [
+    {
+      "path": "registry/ombak/skeleton/skeleton.tsx",
+      "content": "import { type CSSProperties } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type SkeletonProps = {\n  /** Shape preset. Default \"rect\" */\n  variant?: \"rect\" | \"circle\" | \"text\";\n  /** Number of lines for the text variant. The last line is shorter. Default 3 */\n  lines?: number;\n  /** Size and layout classes, e.g. \"h-32 w-full\" or \"size-12\". */\n  className?: string;\n  style?: CSSProperties;\n};\n\n/**\n * A loading placeholder with a soft light sweeping across it. Use it where content will appear:\n * rectangles for images, circles for avatars, and lines for text. Hidden from screen readers.\n */\nexport function Skeleton({ variant = \"rect\", lines = 3, className, style }: SkeletonProps) {\n  const base =\n    \"relative overflow-hidden bg-muted before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-foreground/[0.07] before:to-transparent before:[animation:ombak-skeleton_1.6s_ease-in-out_infinite] motion-reduce:before:hidden\";\n  const keyframes = <style>{`@keyframes ombak-skeleton{to{transform:translateX(100%)}}`}</style>;\n\n  if (variant === \"text\") {\n    return (\n      <div aria-hidden className={cn(\"w-full space-y-2.5\", className)} style={style}>\n        {keyframes}\n        {Array.from({ length: lines }, (_, i) => (\n          <div key={i} className={cn(base, \"h-3.5 rounded-md\")} style={{ width: i === lines - 1 && lines > 1 ? \"62%\" : \"100%\" }} />\n        ))}\n      </div>\n    );\n  }\n  return (\n    <div aria-hidden className={cn(base, variant === \"circle\" ? \"size-12 rounded-full\" : \"h-24 w-full rounded-xl\", className)} style={style}>\n      {keyframes}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "loaders"
+  ],
+  "type": "registry:component"
+}

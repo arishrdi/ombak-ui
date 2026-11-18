@@ -52,6 +52,16 @@ import { CaptionCard } from "@/registry/ombak/caption-card/caption-card";
 import { WaveCard } from "@/registry/ombak/wave-card/wave-card";
 import { ScratchCard } from "@/registry/ombak/scratch-card/scratch-card";
 import { ScatterPhotos } from "@/registry/ombak/scatter-photos/scatter-photos";
+import { WaveLoader } from "@/registry/ombak/wave-loader/wave-loader";
+import { Skeleton } from "@/registry/ombak/skeleton/skeleton";
+import { ProgressRing } from "@/registry/ombak/progress-ring/progress-ring";
+import { TypingDots } from "@/registry/ombak/typing-dots/typing-dots";
+import { TideProgress } from "@/registry/ombak/tide-progress/tide-progress";
+import { OrbitSpinner } from "@/registry/ombak/orbit-spinner/orbit-spinner";
+import { StatusDot } from "@/registry/ombak/status-dot/status-dot";
+import { LiquidLoader } from "@/registry/ombak/liquid-loader/liquid-loader";
+import { Steps } from "@/registry/ombak/steps/steps";
+import { Countdown } from "@/registry/ombak/countdown/countdown";
 import { useEffect, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
@@ -815,4 +825,131 @@ export function ScatterPhotosDemo() {
       ]}
     />
   );
+}
+
+/** Cycles 0 → 100 so progress demos are always moving. */
+function useDemoProgress(step = 12, ms = 700) {
+  const [v, setV] = useState(18);
+  useEffect(() => {
+    const id = window.setInterval(() => setV((x) => (x >= 100 ? 0 : Math.min(100, x + step))), ms);
+    return () => window.clearInterval(id);
+  }, [step, ms]);
+  return v;
+}
+
+export function WaveLoaderDemo() {
+  return (
+    <div className="flex items-center gap-10">
+      <WaveLoader />
+      <WaveLoader bars={7} size={40} color="#5ef0c8" />
+      <WaveLoader bars={4} size={18} color="#f97362" duration={0.8} />
+    </div>
+  );
+}
+
+export function SkeletonDemo() {
+  return (
+    <div className="w-full max-w-md space-y-5 rounded-2xl border bg-card p-6">
+      <div className="flex items-center gap-4">
+        <Skeleton variant="circle" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-1/2 rounded-md" />
+          <Skeleton className="h-3 w-1/3 rounded-md" />
+        </div>
+      </div>
+      <Skeleton className="h-40" />
+      <Skeleton variant="text" lines={3} />
+    </div>
+  );
+}
+
+export function ProgressRingDemo() {
+  const v = useDemoProgress();
+  return (
+    <div className="flex items-center gap-10">
+      <ProgressRing value={v} />
+      <ProgressRing value={v} size={96} thickness={10} color="#5ef0c8" />
+      <ProgressRing label="Loading" />
+    </div>
+  );
+}
+
+export function TypingDotsDemo() {
+  return (
+    <div className="w-full max-w-sm space-y-3">
+      <div className="ml-auto w-fit rounded-2xl rounded-br-md bg-primary px-4 py-2.5 text-sm text-primary-foreground">Is the new release out?</div>
+      <TypingDots />
+    </div>
+  );
+}
+
+export function TideProgressDemo() {
+  const v = useDemoProgress(9, 650);
+  return (
+    <div className="w-full max-w-md space-y-6 px-6">
+      <TideProgress value={v} showValue />
+      <TideProgress value={v} height={22} color="#5ef0c8" />
+      <TideProgress value={Math.min(100, v + 25)} height={8} color="#f97362" />
+    </div>
+  );
+}
+
+export function OrbitSpinnerDemo() {
+  return (
+    <div className="flex items-center gap-12">
+      <OrbitSpinner />
+      <OrbitSpinner size={64} dots={4} color="#5ef0c8" />
+      <OrbitSpinner size={28} color="#f97362" duration={1} />
+    </div>
+  );
+}
+
+export function StatusDotDemo() {
+  return (
+    <div className="grid gap-4 rounded-2xl border bg-card p-6 text-left">
+      <StatusDot status="online">Aris · Online</StatusDot>
+      <StatusDot status="away">Dewi · Away</StatusDot>
+      <StatusDot status="busy">Raka · In a meeting</StatusDot>
+      <StatusDot status="offline">Sari · Offline</StatusDot>
+    </div>
+  );
+}
+
+export function LiquidLoaderDemo() {
+  const v = useDemoProgress(10, 800);
+  return (
+    <div className="flex items-center gap-10">
+      <LiquidLoader value={v} />
+      <LiquidLoader size={140} color="#5ef0c8" />
+    </div>
+  );
+}
+
+export function StepsDemo() {
+  const [cur, setCur] = useState(1);
+  const steps = [
+    { title: "Account", description: "Your details" },
+    { title: "Plan", description: "Pick a plan" },
+    { title: "Payment", description: "Add a card" },
+    { title: "Done", description: "Start building" },
+  ];
+  return (
+    <div className="w-full max-w-2xl space-y-8 px-6">
+      <Steps steps={steps} current={cur} />
+      <div className="flex justify-center gap-3">
+        <button className="rounded-full border px-4 py-2 text-sm hover:bg-muted" onClick={() => setCur((c) => Math.max(0, c - 1))}>
+          Back
+        </button>
+        <button className="rounded-full bg-primary px-4 py-2 text-sm text-primary-foreground" onClick={() => setCur((c) => Math.min(steps.length, c + 1))}>
+          Next
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export function CountdownDemo() {
+  // a target that's always ~3 days away, so the demo never runs out
+  const [to] = useState(() => Date.now() + 3 * 86400000 + 4 * 3600000 + 12 * 60000);
+  return <Countdown to={to} />;
 }

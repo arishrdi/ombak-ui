@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wave-loader",
+  "title": "Wave Loader",
+  "description": "Bars that rise and fall in turn, like a wave passing through.",
+  "files": [
+    {
+      "path": "registry/ombak/wave-loader/wave-loader.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport type WaveLoaderProps = {\n  /** Number of bars. Default 5 */\n  bars?: number;\n  /** Bar color. Default your theme's primary color */\n  color?: string;\n  /** Height in px. Default 28 */\n  size?: number;\n  /** Seconds for one wave. Default 1.1 */\n  duration?: number;\n  /** Text for screen readers. Default \"Loading\" */\n  label?: string;\n  className?: string;\n};\n\n/**\n * Bars that rise and fall one after another, like a wave passing through.\n * Pure CSS; a gentle fade instead of movement for reduced-motion users.\n */\nexport function WaveLoader({ bars = 5, color = \"var(--primary)\", size = 28, duration = 1.1, label = \"Loading\", className }: WaveLoaderProps) {\n  return (\n    <span role=\"status\" aria-label={label} className={cn(\"inline-flex items-center gap-[3px]\", className)} style={{ height: size }}>\n      <style>{`@keyframes ombak-wave-bar{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}@keyframes ombak-wave-fade{0%,100%{opacity:.35}50%{opacity:1}}`}</style>\n      {Array.from({ length: bars }, (_, i) => (\n        <span\n          key={i}\n          aria-hidden\n          className=\"h-full rounded-full motion-reduce:![animation-name:ombak-wave-fade]\"\n          style={{\n            width: Math.max(3, size / 7),\n            background: color,\n            animation: `ombak-wave-bar ${duration}s ease-in-out ${(i * duration) / (bars * 1.6)}s infinite`,\n          }}\n        />\n      ))}\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "loaders"
+  ],
+  "type": "registry:component"
+}
