@@ -104,4 +104,116 @@ export function Hero() {
   <div className="p-6">Pro · $29</div>
 </TiltCard>`,
   },
+  "ripple-grid": {
+    Demo: D.RippleGridDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { RippleGrid } from "@/components/ripple-grid";
+
+<RippleGrid className="h-[480px]">
+  <h1>Touch the water.</h1>
+</RippleGrid>`,
+  },
+  bubbles: {
+    Demo: D.BubblesDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { Bubbles } from "@/components/bubbles";
+
+<Bubbles className="h-[480px] bg-slate-950 text-sky-300" count={50}>
+  <h1>Deep dive.</h1>
+</Bubbles>`,
+  },
+  "wave-text": {
+    Demo: D.WaveTextDemo,
+    usage: `import { WaveText } from "@/components/wave-text";
+
+<WaveText text="Ombak" className="text-7xl font-bold" />
+<WaveText text="hover me" trigger="hover" amplitude="0.4em" />`,
+  },
+  typewriter: {
+    Demo: D.TypewriterDemo,
+    usage: `import { Typewriter } from "@/components/typewriter";
+
+<h1>
+  We build <Typewriter words={["websites.", "products.", "brands."]} />
+</h1>`,
+  },
+  "highlight-text": {
+    Demo: D.HighlightTextDemo,
+    usage: `import { HighlightText } from "@/components/highlight-text";
+
+<p>
+  Good design is about <HighlightText>knowing what to leave out</HighlightText>.
+</p>
+
+// follow the scroll position instead of playing once
+<HighlightText scrub color="rgba(94, 240, 200, 0.45)">…</HighlightText>`,
+  },
+  "velocity-skew": {
+    Demo: D.VelocitySkewDemo,
+    usage: `import { VelocitySkew } from "@/components/velocity-skew";
+
+<VelocitySkew max={8}>
+  <div className="grid grid-cols-3 gap-4">{images}</div>
+</VelocitySkew>`,
+  },
+  "horizontal-scroll": {
+    Demo: D.HorizontalScrollDemo,
+    stage: "items-start",
+    usage: `import { HorizontalScroll } from "@/components/horizontal-scroll";
+
+<HorizontalScroll gap="1rem">
+  {projects.map((p) => (
+    <div key={p.id} className="h-[60vh] w-[480px] shrink-0">…</div>
+  ))}
+</HorizontalScroll>`,
+  },
+  "parallax-image": {
+    Demo: D.ParallaxImageDemo,
+    usage: `import { ParallaxImage } from "@/components/parallax-image";
+
+<ParallaxImage src="/hero.jpg" alt="Studio" className="aspect-[4/5] rounded-xl" />`,
+  },
+  "glow-card": {
+    Demo: D.GlowCardDemo,
+    usage: `import { GlowCard } from "@/components/glow-card";
+
+<div className="grid grid-cols-3 gap-4">
+  <GlowCard><div className="p-6">Starter</div></GlowCard>
+  <GlowCard><div className="p-6">Studio</div></GlowCard>
+  <GlowCard><div className="p-6">Agency</div></GlowCard>
+</div>`,
+  },
+  "ripple-button": {
+    Demo: D.RippleButtonDemo,
+    usage: `import { RippleButton } from "@/components/ripple-button";
+
+<RippleButton onClick={save}>Click me</RippleButton>
+<RippleButton className="border bg-transparent text-foreground" rippleColor="rgba(0,0,0,.15)">
+  Outline
+</RippleButton>`,
+  },
+  "hover-preview": {
+    Demo: D.HoverPreviewDemo,
+    usage: `import { HoverPreview } from "@/components/hover-preview";
+
+<HoverPreview
+  items={[
+    { title: "Lumen Lamp", meta: "2026", image: "/lumen.jpg", href: "/work/lumen" },
+    { title: "Field Notes", meta: "2025", image: "/field.jpg" },
+  ]}
+/>`,
+  },
+  "custom-cursor": {
+    Demo: D.CustomCursorDemo,
+    usage: `// app/layout.tsx
+import { CustomCursor } from "@/components/custom-cursor";
+
+<body>
+  {children}
+  <CustomCursor />
+</body>
+
+// anywhere: show a label inside the cursor
+<a href="/case" data-cursor-label="View">…</a>`,
+  },
 };

@@ -132,6 +132,11 @@ export default function Home() {
           <ComponentCard item={byName["count-up"]} className="md:col-span-2" />
           <ComponentCard item={byName["image-reveal"]} className="md:col-span-2" />
           <ComponentCard item={byName["stack-cards"]} className="md:col-span-2" />
+          <ComponentCard item={byName["ripple-grid"]} className="md:col-span-3" tall />
+          <ComponentCard item={byName["glow-card"]} className="md:col-span-3" tall />
+          <ComponentCard item={byName["wave-text"]} className="md:col-span-2" />
+          <ComponentCard item={byName["ripple-button"]} className="md:col-span-2" />
+          <ComponentCard item={byName["typewriter"]} className="md:col-span-2" />
         </div>
       </section>
 

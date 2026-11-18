@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "horizontal-scroll",
+  "title": "Horizontal Scroll",
+  "description": "Pins a section and turns vertical scrolling into horizontal movement.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/horizontal-scroll/horizontal-scroll.tsx",
+      "content": "\"use client\";\n\nimport { useRef, type ReactNode } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { useGSAP } from \"@gsap/react\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger, useGSAP);\n\nexport type HorizontalScrollProps = {\n  /** The panels, laid out in a row. */\n  children: ReactNode;\n  /** Space between panels, any CSS length. Default \"1.5rem\" */\n  gap?: string;\n  /** Below this viewport width (px) it becomes a native swipe row. Default 768 */\n  disableBelow?: number;\n  /** Scroll smoothing: true, or seconds of lag. Default 1 */\n  scrub?: boolean | number;\n  className?: string;\n};\n\n/**\n * Pins a section and turns vertical scrolling into a horizontal journey. On small screens and\n * for reduced-motion users it falls back to a native, snapping swipe row.\n */\nexport function HorizontalScroll({ children, gap = \"1.5rem\", disableBelow = 768, scrub = 1, className }: HorizontalScrollProps) {\n  const ref = useRef<HTMLDivElement>(null);\n  const trackRef = useRef<HTMLDivElement>(null);\n\n  useGSAP(\n    () => {\n      const root = ref.current;\n      const track = trackRef.current;\n      if (!root || !track || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n      const mm = gsap.matchMedia();\n      mm.add(`(min-width: ${disableBelow}px)`, () => {\n        gsap.set(root, { overflowX: \"hidden\" });\n        const distance = () => track.scrollWidth - root.clientWidth;\n        gsap.to(track, {\n          x: () => -distance(),\n          ease: \"none\",\n          scrollTrigger: { trigger: root, start: \"top top\", end: () => `+=${distance()}`, pin: true, scrub, invalidateOnRefresh: true },\n        });\n      });\n      return () => mm.revert();\n    },\n    { scope: ref, dependencies: [disableBelow, scrub] },\n  );\n\n  return (\n    <div ref={ref} className={cn(\"snap-x snap-mandatory overflow-x-auto\", className)}>\n      <div ref={trackRef} className=\"flex w-max *:snap-start\" style={{ gap }}>\n        {children}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "scroll"
+  ],
+  "type": "registry:component"
+}

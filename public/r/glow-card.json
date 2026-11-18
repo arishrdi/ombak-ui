@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glow-card",
+  "title": "Glow Card",
+  "description": "A card whose border lights up where the cursor is. Grids glow together.",
+  "files": [
+    {
+      "path": "registry/ombak/glow-card/glow-card.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type GlowCardProps = {\n  children: ReactNode;\n  /** Glow color. Any CSS color. Default \"rgba(94, 240, 200, 0.9)\" */\n  color?: string;\n  /** Glow radius in px. Default 320 */\n  size?: number;\n  /** Also light up the card's surface, not just its border. Default true */\n  surface?: boolean;\n  className?: string;\n};\n\n/**\n * A card whose border lights up where the cursor is, like sunlight catching the edge of a wave.\n * The glow follows the cursor even from outside the card, so a grid of cards glows together.\n */\nexport function GlowCard({ children, color = \"rgba(94, 240, 200, 0.9)\", size = 320, surface = true, className }: GlowCardProps) {\n  const ref = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || !window.matchMedia(\"(hover: hover) and (pointer: fine)\").matches) return;\n    let raf = 0;\n    const onMove = (e: PointerEvent) => {\n      cancelAnimationFrame(raf);\n      raf = requestAnimationFrame(() => {\n        const r = el.getBoundingClientRect();\n        const x = e.clientX - r.left;\n        const y = e.clientY - r.top;\n        // fade out as the cursor gets far from the card\n        const dx = Math.max(r.left - e.clientX, 0, e.clientX - r.right);\n        const dy = Math.max(r.top - e.clientY, 0, e.clientY - r.bottom);\n        const near = Math.max(0, 1 - Math.hypot(dx, dy) / (size * 0.8));\n        el.style.setProperty(\"--glow-x\", `${x}px`);\n        el.style.setProperty(\"--glow-y\", `${y}px`);\n        el.style.setProperty(\"--glow-o\", near.toFixed(3));\n      });\n    };\n    window.addEventListener(\"pointermove\", onMove);\n    return () => {\n      cancelAnimationFrame(raf);\n      window.removeEventListener(\"pointermove\", onMove);\n    };\n  }, [size]);\n\n  const glow = `radial-gradient(${size}px circle at var(--glow-x, -999px) var(--glow-y, -999px), ${color}, transparent 70%)`;\n\n  return (\n    <div ref={ref} className={cn(\"group relative rounded-xl bg-border p-px\", className)}>\n      {/* border glow */}\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-300\"\n        style={{ background: glow, opacity: \"var(--glow-o, 0)\" }}\n      />\n      <div className=\"relative h-full overflow-hidden rounded-[calc(var(--radius,0.75rem)+3px)] bg-card text-card-foreground\">\n        {surface && (\n          <div\n            aria-hidden\n            className=\"pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-[0.12]\"\n            style={{ background: glow }}\n          />\n        )}\n        <div className=\"relative\">{children}</div>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "interaction"
+  ],
+  "type": "registry:component"
+}

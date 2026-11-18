@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wave-text",
+  "title": "Wave Text",
+  "description": "Letters bob one after another, like a wave rolling through the word.",
+  "files": [
+    {
+      "path": "registry/ombak/wave-text/wave-text.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ElementType } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type WaveTextProps = {\n  /** Plain text to animate. */\n  text: string;\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** \"always\" keeps the wave rolling; \"hover\" sends one wave through on each hover. Default \"always\" */\n  trigger?: \"always\" | \"hover\";\n  /** How high letters rise, any CSS length. Default \"0.25em\" */\n  amplitude?: string;\n  /** Milliseconds for one full bob. Default 1600 */\n  duration?: number;\n  /** Milliseconds between neighbouring letters. Default 70 */\n  stagger?: number;\n  className?: string;\n};\n\n/**\n * Letters bob up and down one after another, like a wave rolling through the word.\n * Uses the Web Animations API, so it needs no CSS setup. Still for reduced-motion users.\n */\nexport function WaveText({\n  text,\n  as: Tag = \"span\",\n  trigger = \"always\",\n  amplitude = \"0.25em\",\n  duration = 1600,\n  stagger = 70,\n  className,\n}: WaveTextProps) {\n  const ref = useRef<HTMLElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const chars = Array.from(el.querySelectorAll<HTMLElement>(\"[data-wave-char]\"));\n    const frames = [\n      { transform: \"translateY(0)\" },\n      { transform: `translateY(calc(${amplitude} * -1))`, offset: 0.25 },\n      { transform: \"translateY(0)\", offset: 0.5 },\n      { transform: \"translateY(0)\" },\n    ];\n    let anims: Animation[] = [];\n\n    const play = (iterations: number) => {\n      anims.forEach((a) => a.cancel());\n      anims = chars.map((c, i) =>\n        c.animate(frames, { duration, delay: i * stagger, iterations, easing: \"ease-in-out\" }),\n      );\n    };\n\n    if (trigger === \"always\") {\n      play(Infinity);\n      return () => anims.forEach((a) => a.cancel());\n    }\n    const onEnter = () => play(1);\n    el.addEventListener(\"pointerenter\", onEnter);\n    return () => {\n      el.removeEventListener(\"pointerenter\", onEnter);\n      anims.forEach((a) => a.cancel());\n    };\n  }, [text, trigger, amplitude, duration, stagger]);\n\n  return (\n    <Tag ref={ref} aria-label={text} className={cn(\"inline-block\", className)}>\n      {Array.from(text).map((ch, i) => (\n        <span key={i} aria-hidden data-wave-char className=\"inline-block will-change-transform\">\n          {ch === \" \" ? \" \" : ch}\n        </span>\n      ))}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

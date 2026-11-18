@@ -6,20 +6,32 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (v0.1)
+## Components (22)
 
 | Component | Category | Dependencies |
 |---|---|---|
 | Wave Background | Backgrounds | none |
+| Ripple Grid | Backgrounds | none |
+| Bubbles | Backgrounds | none |
 | Text Reveal | Text | gsap, @gsap/react |
 | Scramble Text | Text | gsap |
-| Rolling Text | Text | none (pure CSS) |
+| Rolling Text | Text | none |
 | Count Up | Text | gsap |
+| Wave Text | Text | none |
+| Typewriter | Text | none |
+| Highlight Text | Text | gsap, @gsap/react |
 | Marquee | Scroll | gsap |
 | Stack Cards | Scroll | gsap, @gsap/react |
 | Image Reveal | Scroll | gsap, @gsap/react |
+| Velocity Skew | Scroll | gsap |
+| Horizontal Scroll | Scroll | gsap, @gsap/react |
+| Parallax Image | Scroll | gsap, @gsap/react |
 | Magnetic Button | Interaction | gsap |
 | Tilt Card | Interaction | gsap |
+| Glow Card | Interaction | none |
+| Ripple Button | Interaction | none |
+| Hover Preview | Interaction | gsap |
+| Custom Cursor | Interaction | gsap |
 
 ## Project structure
 
