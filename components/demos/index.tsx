@@ -10,6 +10,18 @@ import { StackCards } from "@/registry/ombak/stack-cards/stack-cards";
 import { ImageReveal } from "@/registry/ombak/image-reveal/image-reveal";
 import { MagneticButton } from "@/registry/ombak/magnetic-button/magnetic-button";
 import { TiltCard } from "@/registry/ombak/tilt-card/tilt-card";
+import { RippleGrid } from "@/registry/ombak/ripple-grid/ripple-grid";
+import { Bubbles } from "@/registry/ombak/bubbles/bubbles";
+import { WaveText } from "@/registry/ombak/wave-text/wave-text";
+import { Typewriter } from "@/registry/ombak/typewriter/typewriter";
+import { HighlightText } from "@/registry/ombak/highlight-text/highlight-text";
+import { VelocitySkew } from "@/registry/ombak/velocity-skew/velocity-skew";
+import { HorizontalScroll } from "@/registry/ombak/horizontal-scroll/horizontal-scroll";
+import { ParallaxImage } from "@/registry/ombak/parallax-image/parallax-image";
+import { GlowCard } from "@/registry/ombak/glow-card/glow-card";
+import { RippleButton } from "@/registry/ombak/ripple-button/ripple-button";
+import { HoverPreview } from "@/registry/ombak/hover-preview/hover-preview";
+import { CustomCursor } from "@/registry/ombak/custom-cursor/custom-cursor";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
 
@@ -171,6 +183,164 @@ export function TiltCardDemo() {
             <span className="font-display text-6xl font-bold tracking-tight">{price}</span>
           </div>
         </TiltCard>
+      ))}
+    </div>
+  );
+}
+
+export function RippleGridDemo() {
+  return (
+    <RippleGrid className="flex h-[420px] w-full items-center justify-center rounded-xl">
+      <div className="pointer-events-none text-center">
+        <p className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">Touch the water.</p>
+        <p className="mt-2 text-sm">Move or click anywhere.</p>
+      </div>
+    </RippleGrid>
+  );
+}
+
+export function BubblesDemo() {
+  return (
+    <Bubbles className="flex h-[420px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-[#0b3b66] to-[#06121f]">
+      <p className="pointer-events-none font-display text-4xl font-bold tracking-tight text-white md:text-5xl">Deep dive.</p>
+    </Bubbles>
+  );
+}
+
+export function WaveTextDemo() {
+  return (
+    <div className="space-y-10 text-center">
+      <WaveText text="Ombak" className="font-display text-7xl font-bold tracking-tight md:text-8xl" />
+      <p className="text-muted-foreground">
+        Or only on hover:{" "}
+        <WaveText text="hover me" trigger="hover" amplitude="0.4em" className="font-semibold text-foreground" />
+      </p>
+    </div>
+  );
+}
+
+export function TypewriterDemo() {
+  return (
+    <p className="font-display text-4xl font-bold tracking-tight md:text-6xl">
+      We build{" "}
+      <Typewriter words={["websites.", "products.", "brands.", "waves."]} className="text-surf" />
+    </p>
+  );
+}
+
+export function HighlightTextDemo() {
+  return (
+    <p className="max-w-2xl px-6 text-3xl leading-snug font-semibold tracking-tight md:text-4xl">
+      Good design is mostly about{" "}
+      <HighlightText>knowing what to leave out</HighlightText>, and great motion is about{" "}
+      <HighlightText color="rgba(94, 240, 200, 0.45)" delay={0.5}>
+        knowing when to stop.
+      </HighlightText>
+    </p>
+  );
+}
+
+export function VelocitySkewDemo() {
+  return (
+    <div className="w-full py-6">
+      <p className="mb-6 text-center text-sm text-muted-foreground">Scroll the page quickly ↕</p>
+      <VelocitySkew>
+        <div className="grid grid-cols-3 gap-4 px-4">
+          {[1, 2, 3, 4, 5, 6].map((n) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={n} src={`/demo/0${n}.svg`} alt="" className="aspect-square w-full rounded-xl object-cover" />
+          ))}
+        </div>
+      </VelocitySkew>
+    </div>
+  );
+}
+
+export function HorizontalScrollDemo() {
+  const names = ["Shore", "Swell", "Reef", "Tide", "Current", "Deep"];
+  return (
+    <div className="w-full">
+      <p className="mb-6 text-center text-sm text-muted-foreground">Scroll down: the row moves sideways →</p>
+      <HorizontalScroll className="rounded-xl" gap="1rem">
+        {names.map((n, i) => (
+          <div key={n} className="relative h-[340px] w-[min(70vw,420px)] shrink-0 overflow-hidden rounded-xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/demo/0${i + 1}.svg`} alt="" className="size-full object-cover" />
+            <span className="absolute bottom-4 left-5 font-display text-3xl font-bold text-white mix-blend-difference">{n}</span>
+          </div>
+        ))}
+      </HorizontalScroll>
+    </div>
+  );
+}
+
+export function ParallaxImageDemo() {
+  return (
+    <div className="grid w-full max-w-3xl items-end gap-5 px-6 sm:grid-cols-2">
+      <ParallaxImage src="/demo/01.svg" alt="Abstract ocean artwork" className="aspect-[4/5] rounded-xl" />
+      <ParallaxImage src="/demo/03.svg" alt="Abstract ocean artwork" speed={0.25} className="aspect-square rounded-xl" />
+    </div>
+  );
+}
+
+export function GlowCardDemo() {
+  const plans = [
+    ["Starter", "Everything to ship a landing page."],
+    ["Studio", "For teams shipping every week."],
+    ["Agency", "Unlimited client projects."],
+  ];
+  return (
+    <div className="grid w-full max-w-3xl gap-4 px-6 sm:grid-cols-3">
+      {plans.map(([t, d]) => (
+        <GlowCard key={t}>
+          <div className="flex h-48 flex-col justify-between p-6">
+            <span className="font-display text-2xl font-semibold">{t}</span>
+            <span className="text-sm text-muted-foreground">{d}</span>
+          </div>
+        </GlowCard>
+      ))}
+    </div>
+  );
+}
+
+export function RippleButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-5">
+      <RippleButton>Click me</RippleButton>
+      <RippleButton className="bg-surf text-[#06121f]" rippleColor="rgba(6, 18, 31, 0.25)">
+        Make a splash
+      </RippleButton>
+      <RippleButton className="border bg-transparent text-foreground" rippleColor="rgba(94, 240, 200, 0.35)">
+        Outline
+      </RippleButton>
+    </div>
+  );
+}
+
+export function HoverPreviewDemo() {
+  return (
+    <div className="w-full max-w-3xl px-6">
+      <HoverPreview
+        items={[
+          { title: "Lumen Lamp", meta: "Product launch", image: "/demo/01.svg" },
+          { title: "Field Notes", meta: "Editorial", image: "/demo/03.svg" },
+          { title: "Coral Coffee", meta: "Brand identity", image: "/demo/06.svg" },
+          { title: "Tide Studio", meta: "Portfolio", image: "/demo/02.svg" },
+        ]}
+      />
+    </div>
+  );
+}
+
+export function CustomCursorDemo() {
+  return (
+    <div className="grid w-full max-w-3xl gap-4 px-6 sm:grid-cols-3">
+      <CustomCursor />
+      {(["View", "Drag", "Play"] as const).map((label, i) => (
+        <div key={label} data-cursor-label={label} className="aspect-[4/5] overflow-hidden rounded-xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`/demo/0${i + 2}.svg`} alt="" className="size-full object-cover" />
+        </div>
       ))}
     </div>
   );

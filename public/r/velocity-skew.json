@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "velocity-skew",
+  "title": "Velocity Skew",
+  "description": "Content that leans with the speed of the scroll, then settles back.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/velocity-skew/velocity-skew.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ReactNode } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger);\n\nexport type VelocitySkewProps = {\n  children: ReactNode;\n  /** Maximum skew in degrees. Default 8 */\n  max?: number;\n  /** How strongly scroll speed turns into skew. Default 1 */\n  sensitivity?: number;\n  className?: string;\n};\n\n/**\n * Leans its content with the speed of the scroll, then settles back, like objects carried by a\n * current. Great on image grids and big headlines. Inactive for reduced-motion users.\n */\nexport function VelocitySkew({ children, max = 8, sensitivity = 1, className }: VelocitySkewProps) {\n  const ref = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const skewTo = gsap.quickTo(el, \"skewY\", { duration: 0.6, ease: \"power3.out\" });\n    const clamp = gsap.utils.clamp(-max, max);\n    let settle: gsap.core.Tween | null = null;\n    const st = ScrollTrigger.create({\n      onUpdate(self) {\n        skewTo(clamp((self.getVelocity() / -300) * sensitivity));\n        settle?.kill();\n        settle = gsap.delayedCall(0.12, () => skewTo(0));\n      },\n    });\n    return () => {\n      st.kill();\n      settle?.kill();\n      gsap.set(el, { skewY: 0 });\n    };\n  }, [max, sensitivity]);\n\n  return (\n    <div ref={ref} className={cn(\"origin-center will-change-transform\", className)}>\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "scroll"
+  ],
+  "type": "registry:component"
+}

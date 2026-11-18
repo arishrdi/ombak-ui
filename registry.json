@@ -19,6 +19,36 @@
       ]
     },
     {
+      "name": "ripple-grid",
+      "type": "registry:component",
+      "title": "Ripple Grid",
+      "description": "A dot grid that ripples like water under the cursor, on click, and on its own.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/ripple-grid/ripple-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bubbles",
+      "type": "registry:component",
+      "title": "Bubbles",
+      "description": "Soft bubbles rising and wobbling under water. They drift away from the cursor.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/bubbles/bubbles.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "text-reveal",
       "type": "registry:component",
       "title": "Text Reveal",
@@ -89,6 +119,55 @@
       ]
     },
     {
+      "name": "wave-text",
+      "type": "registry:component",
+      "title": "Wave Text",
+      "description": "Letters bob one after another, like a wave rolling through the word.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/wave-text/wave-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "typewriter",
+      "type": "registry:component",
+      "title": "Typewriter",
+      "description": "Types, pauses, deletes and cycles through words, with a blinking caret.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/typewriter/typewriter.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "highlight-text",
+      "type": "registry:component",
+      "title": "Highlight Text",
+      "description": "A marker stroke that sweeps across text as it scrolls into view.",
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/highlight-text/highlight-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "marquee",
       "type": "registry:component",
       "title": "Marquee",
@@ -145,6 +224,62 @@
       ]
     },
     {
+      "name": "velocity-skew",
+      "type": "registry:component",
+      "title": "Velocity Skew",
+      "description": "Content that leans with the speed of the scroll, then settles back.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/velocity-skew/velocity-skew.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "horizontal-scroll",
+      "type": "registry:component",
+      "title": "Horizontal Scroll",
+      "description": "Pins a section and turns vertical scrolling into horizontal movement.",
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
+      "categories": [
+        "scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/horizontal-scroll/horizontal-scroll.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "parallax-image",
+      "type": "registry:component",
+      "title": "Parallax Image",
+      "description": "An image that drifts slower than the page inside a masked frame.",
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
+      "categories": [
+        "scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/parallax-image/parallax-image.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "magnetic-button",
       "type": "registry:component",
       "title": "Magnetic Button",
@@ -176,6 +311,72 @@
       "files": [
         {
           "path": "registry/ombak/tilt-card/tilt-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "glow-card",
+      "type": "registry:component",
+      "title": "Glow Card",
+      "description": "A card whose border lights up where the cursor is. Grids glow together.",
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/glow-card/glow-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ripple-button",
+      "type": "registry:component",
+      "title": "Ripple Button",
+      "description": "A button that sends rings of water out from wherever you press it.",
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/ripple-button/ripple-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hover-preview",
+      "type": "registry:component",
+      "title": "Hover Preview",
+      "description": "A list that floats each row's image beside the cursor, tilting with your speed.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/hover-preview/hover-preview.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "custom-cursor",
+      "type": "registry:component",
+      "title": "Custom Cursor",
+      "description": "A dot and trailing ring that grows over links and can show labels.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/custom-cursor/custom-cursor.tsx",
           "type": "registry:component"
         }
       ]

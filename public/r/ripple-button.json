@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ripple-button",
+  "title": "Ripple Button",
+  "description": "A button that sends rings of water out from wherever you press it.",
+  "files": [
+    {
+      "path": "registry/ombak/ripple-button/ripple-button.tsx",
+      "content": "\"use client\";\n\nimport { useRef, type ButtonHTMLAttributes, type PointerEvent, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type RippleButtonProps = {\n  /** Ripple color. Any CSS color. Default \"rgba(255, 255, 255, 0.45)\" */\n  rippleColor?: string;\n  /** Milliseconds for one ripple. Default 750 */\n  duration?: number;\n  /** Button content. */\n  children?: ReactNode;\n  className?: string;\n} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"children\" | \"className\">;\n\n/**\n * A button that sends rings of water out from the exact point you press, plus a soft press-in.\n * Styled with your theme's primary color; works with mouse, touch and keyboard.\n */\nexport function RippleButton({\n  rippleColor = \"rgba(255, 255, 255, 0.45)\",\n  duration = 750,\n  className,\n  children,\n  onPointerDown,\n  onKeyDown,\n  ...rest\n}: RippleButtonProps) {\n  const ref = useRef<HTMLButtonElement>(null);\n\n  const ripple = (x: number, y: number) => {\n    const btn = ref.current;\n    if (!btn || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const r = btn.getBoundingClientRect();\n    const size = Math.hypot(Math.max(x, r.width - x), Math.max(y, r.height - y)) * 2;\n    for (const [delay, alpha] of [\n      [0, 1],\n      [120, 0.5],\n    ]) {\n      const ring = document.createElement(\"span\");\n      Object.assign(ring.style, {\n        position: \"absolute\",\n        left: `${x - size / 2}px`,\n        top: `${y - size / 2}px`,\n        width: `${size}px`,\n        height: `${size}px`,\n        borderRadius: \"9999px\",\n        background: rippleColor,\n        pointerEvents: \"none\",\n        opacity: \"0\",\n        zIndex: \"-1\", // behind the label, above the button background\n      });\n      btn.appendChild(ring);\n      ring\n        .animate(\n          [\n            { transform: \"scale(0)\", opacity: alpha },\n            { transform: \"scale(1)\", opacity: 0 },\n          ],\n          { duration, delay, easing: \"cubic-bezier(.2,.7,.3,1)\" },\n        )\n        .finished.then(() => ring.remove(), () => ring.remove());\n    }\n  };\n\n  const handleDown = (e: PointerEvent<HTMLButtonElement>) => {\n    onPointerDown?.(e);\n    const r = e.currentTarget.getBoundingClientRect();\n    ripple(e.clientX - r.left, e.clientY - r.top);\n  };\n\n  return (\n    <button\n      ref={ref}\n      onPointerDown={handleDown}\n      onKeyDown={(e) => {\n        onKeyDown?.(e);\n        if (e.key === \"Enter\" || e.key === \" \") {\n          const r = e.currentTarget.getBoundingClientRect();\n          ripple(r.width / 2, r.height / 2);\n        }\n      }}\n      className={cn(\n        \"relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground\",\n        \"transition-transform duration-150 outline-none select-none focus-visible:ring-4 focus-visible:ring-ring/50 active:scale-[0.97]\",\n        className,\n      )}\n      {...rest}\n    >\n      {children}\n    </button>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "interaction"
+  ],
+  "type": "registry:component"
+}

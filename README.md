@@ -6,20 +6,32 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (v0.1)
+## Components (22)
 
 | Component | Category | Dependencies |
 |---|---|---|
 | Wave Background | Backgrounds | none |
+| Ripple Grid | Backgrounds | none |
+| Bubbles | Backgrounds | none |
 | Text Reveal | Text | gsap, @gsap/react |
 | Scramble Text | Text | gsap |
-| Rolling Text | Text | none (pure CSS) |
+| Rolling Text | Text | none |
 | Count Up | Text | gsap |
+| Wave Text | Text | none |
+| Typewriter | Text | none |
+| Highlight Text | Text | gsap, @gsap/react |
 | Marquee | Scroll | gsap |
 | Stack Cards | Scroll | gsap, @gsap/react |
 | Image Reveal | Scroll | gsap, @gsap/react |
+| Velocity Skew | Scroll | gsap |
+| Horizontal Scroll | Scroll | gsap, @gsap/react |
+| Parallax Image | Scroll | gsap, @gsap/react |
 | Magnetic Button | Interaction | gsap |
 | Tilt Card | Interaction | gsap |
+| Glow Card | Interaction | none |
+| Ripple Button | Interaction | none |
+| Hover Preview | Interaction | gsap |
+| Custom Cursor | Interaction | gsap |
 
 ## Project structure
 
@@ -29,7 +41,8 @@ registry.json                     ← registry index: title, description, deps, 
 public/r/*.json                   ← built registry files (npm run registry:build)
 components/demos/index.tsx        ← live demos shown in the docs
 content/docs.tsx                  ← per-component usage snippet + demo mapping
-components/site/*                 ← docs site UI
+components/thumbs/index.tsx       ← small live previews for component cards
+components/site/*                 ← docs site UI (header, ⌘K search, theme toggle, mobile nav, previews)
 app/                              ← landing, /docs, /docs/components/[slug], /llms.txt
 lib/site.ts                       ← site URL (change when the domain is live)
 ```
@@ -52,7 +65,7 @@ npm run build            # registry + production build
    - Respect `prefers-reduced-motion`; skip hover-only effects on touch devices.
    - Register GSAP plugins at the top of the file (`if (typeof window !== "undefined") gsap.registerPlugin(...)`).
 2. Add an entry to `registry.json` (name, title, description, dependencies, categories, files).
-3. Add a demo to `components/demos/index.tsx` and a usage snippet to `content/docs.tsx`.
+3. Add a demo to `components/demos/index.tsx`, a usage snippet to `content/docs.tsx`, and a small preview to `components/thumbs/index.tsx`. Add it to the landing bento in `app/page.tsx` if it deserves a spot.
 4. `npm run build`, then check the page at `/docs/components/<name>`.
 
 ## Going live
