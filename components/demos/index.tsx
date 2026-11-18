@@ -42,6 +42,16 @@ import { ArrowButton } from "@/registry/ombak/arrow-button/arrow-button";
 import { SonarButton } from "@/registry/ombak/sonar-button/sonar-button";
 import { FillButton } from "@/registry/ombak/fill-button/fill-button";
 import { StatusButton } from "@/registry/ombak/status-button/status-button";
+import { FlipCard } from "@/registry/ombak/flip-card/flip-card";
+import { ExpandCard } from "@/registry/ombak/expand-card/expand-card";
+import { DepthGrid } from "@/registry/ombak/depth-grid/depth-grid";
+import { FanCards } from "@/registry/ombak/fan-cards/fan-cards";
+import { Book3D } from "@/registry/ombak/book-3d/book-3d";
+import { DepthCard } from "@/registry/ombak/depth-card/depth-card";
+import { CaptionCard } from "@/registry/ombak/caption-card/caption-card";
+import { WaveCard } from "@/registry/ombak/wave-card/wave-card";
+import { ScratchCard } from "@/registry/ombak/scratch-card/scratch-card";
+import { ScatterPhotos } from "@/registry/ombak/scatter-photos/scatter-photos";
 import { useEffect, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
@@ -620,5 +630,189 @@ export function StatusButtonDemo() {
         This one fails
       </StatusButton>
     </div>
+  );
+}
+
+const Face = ({ bg, children, dark }: { bg: string; children: React.ReactNode; dark?: boolean }) => (
+  <div className={`flex size-full flex-col justify-between p-5 ${dark ? "text-white" : "text-[#06121f]"}`} style={{ background: bg }}>
+    {children}
+  </div>
+);
+
+export function FlipCardDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-8">
+      <FlipCard
+        front={<Face bg="#0e7fbf" dark><span className="font-mono text-xs opacity-80">Hover me</span><span className="font-display text-4xl font-bold">Front</span></Face>}
+        back={<Face bg="#5ef0c8"><span className="font-mono text-xs">The other side</span><span className="text-sm">Anything can live back here: details, a price, a CTA.</span></Face>}
+      />
+      <FlipCard
+        trigger="click"
+        axis="x"
+        front={<Face bg="#f97362"><span className="font-mono text-xs">Click me</span><span className="font-display text-4xl font-bold">Flip</span></Face>}
+        back={<Face bg="#f4f1ea"><span className="font-mono text-xs">Click again</span><span className="font-display text-4xl font-bold">Back</span></Face>}
+      />
+    </div>
+  );
+}
+
+export function ExpandCardDemo() {
+  const items = [
+    ["/demo/01.svg", "Lumen Lamp", "Product launch"],
+    ["/demo/03.svg", "Field Notes", "Editorial"],
+    ["/demo/06.svg", "Coral Coffee", "Brand identity"],
+  ];
+  return (
+    <div className="grid w-full max-w-3xl gap-4 px-6 sm:grid-cols-3">
+      {items.map(([src, t, d]) => (
+        <ExpandCard
+          key={t}
+          label={t}
+          expanded={
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={src} alt="" className="aspect-[16/9] w-full object-cover" />
+              <div className="p-6">
+                <p className="font-display text-3xl font-bold tracking-tight">{t}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{d}</p>
+                <p className="mt-4 leading-relaxed text-muted-foreground">
+                  The card grew out of its own spot. Press Escape, click outside, or use the close button and it shrinks back into place.
+                </p>
+              </div>
+            </div>
+          }
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt="" className="aspect-[4/3] w-full object-cover" />
+          <div className="p-4">
+            <p className="font-semibold">{t}</p>
+            <p className="text-sm text-muted-foreground">{d}</p>
+          </div>
+        </ExpandCard>
+      ))}
+    </div>
+  );
+}
+
+export function DepthGridDemo() {
+  return (
+    <DepthGrid className="w-full max-w-3xl grid-cols-3 gap-4 px-6">
+      {[1, 2, 3, 4, 5, 6].map((n) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img key={n} src={`/demo/0${n}.svg`} alt="" tabIndex={0} className="aspect-square w-full rounded-xl object-cover outline-none" />
+      ))}
+    </DepthGrid>
+  );
+}
+
+export function FanCardsDemo() {
+  return (
+    <FanCards className="h-72">
+      {["#2dd4bf", "#38bdf8", "#818cf8", "#f97362", "#f4f1ea"].map((c, i) => (
+        <div key={c} className="flex size-full flex-col justify-between rounded-2xl border border-black/10 p-4 text-[#06121f] shadow-xl" style={{ background: c }}>
+          <span className="font-mono text-xs">0{i + 1}</span>
+          <span className="font-display text-2xl font-bold">Wave {i + 1}</span>
+        </div>
+      ))}
+    </FanCards>
+  );
+}
+
+export function Book3DDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-14 py-6">
+      <Book3D
+        cover={
+          <div className="flex size-full flex-col justify-between p-5 text-white">
+            <span className="font-mono text-[10px] tracking-widest uppercase opacity-80">Free guide</span>
+            <span className="font-display text-2xl leading-tight font-bold">The Motion Handbook</span>
+          </div>
+        }
+        page={<p>Chapter 1. Motion should explain, not decorate…</p>}
+      />
+      <Book3D
+        color="#f97362"
+        cover={
+          <div className="flex size-full flex-col justify-between p-5 text-[#06121f]">
+            <span className="font-mono text-[10px] tracking-widest uppercase">Case study</span>
+            <span className="font-display text-2xl leading-tight font-bold">Coral Coffee</span>
+          </div>
+        }
+        page={<p>How a tiny roastery tripled online orders.</p>}
+      />
+    </div>
+  );
+}
+
+export function DepthCardDemo() {
+  return (
+    <DepthCard className="h-80 w-72 border-0 bg-[#06121f] text-white">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/demo/02.svg" alt="" data-depth="0.2" className="absolute -inset-6 h-[calc(100%+3rem)] w-[calc(100%+3rem)] object-cover opacity-80" />
+      <div data-depth="0.6" className="absolute inset-x-5 bottom-20 rounded-xl bg-white/15 p-4 backdrop-blur">
+        <p className="text-xs opacity-80">Depth 0.6</p>
+        <p className="font-semibold">Floating glass panel</p>
+      </div>
+      <p data-depth="1" className="absolute inset-x-5 bottom-5 font-display text-3xl font-bold">Depth 1.0</p>
+    </DepthCard>
+  );
+}
+
+export function CaptionCardDemo() {
+  return (
+    <div className="flex flex-wrap justify-center gap-5">
+      <CaptionCard src="/demo/01.svg" alt="Abstract sea artwork" title="Lumen Lamp" caption="Product launch · 2026. A lamp that follows the light of the sun." />
+      <CaptionCard src="/demo/06.svg" alt="Abstract sea artwork" title="Coral Coffee" caption="Brand identity · 2025. Warm colors for a slow-roast brand." />
+    </div>
+  );
+}
+
+export function WaveCardDemo() {
+  return (
+    <div className="grid w-full max-w-2xl gap-5 px-6 sm:grid-cols-2">
+      <WaveCard className="h-64">
+        <div className="p-6">
+          <p className="font-display text-2xl font-bold">Starter</p>
+          <p className="mt-1 text-sm text-muted-foreground">Hover to raise the tide.</p>
+        </div>
+      </WaveCard>
+      <WaveCard className="h-64" colors={["#f97362", "#fbbf24", "#fde68a"]} level={0.45}>
+        <div className="p-6">
+          <p className="font-display text-2xl font-bold">Sunset</p>
+          <p className="mt-1 text-sm text-muted-foreground">Any colors you like.</p>
+        </div>
+      </WaveCard>
+    </div>
+  );
+}
+
+export function ScratchCardDemo() {
+  const [won, setWon] = useState(false);
+  return (
+    <div className="space-y-4 text-center">
+      <ScratchCard onReveal={() => setWon(true)}>
+        <div>
+          <p className="font-display text-4xl font-bold text-surf">20% OFF</p>
+          <p className="font-mono text-sm text-muted-foreground">Code: OMBAK20</p>
+        </div>
+      </ScratchCard>
+      <p className="text-sm text-muted-foreground">{won ? "Revealed! 🎉" : "Scratch with your mouse or finger."}</p>
+    </div>
+  );
+}
+
+export function ScatterPhotosDemo() {
+  return (
+    <ScatterPhotos
+      className="h-[440px] max-w-3xl bg-[#0b1f33]"
+      photos={[
+        { src: "/demo/01.svg", caption: "first light" },
+        { src: "/demo/02.svg", caption: "the swell" },
+        { src: "/demo/03.svg", caption: "low tide" },
+        { src: "/demo/04.svg", caption: "deep blue" },
+        { src: "/demo/05.svg", caption: "the reef" },
+        { src: "/demo/06.svg", caption: "sundown" },
+      ]}
+    />
   );
 }

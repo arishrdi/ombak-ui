@@ -568,6 +568,156 @@
       ]
     },
     {
+      "name": "flip-card",
+      "type": "registry:component",
+      "title": "Flip Card",
+      "description": "A card that turns over in 3D to show its back, on hover or click.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/flip-card/flip-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "expand-card",
+      "type": "registry:component",
+      "title": "Expand Card",
+      "description": "A card that grows smoothly out of its spot into a full dialog, then shrinks back.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/expand-card/expand-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "depth-grid",
+      "type": "registry:component",
+      "title": "Depth Grid",
+      "description": "The hovered item lifts toward you while the rest sink back. Pure CSS.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/depth-grid/depth-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "fan-cards",
+      "type": "registry:component",
+      "title": "Fan Cards",
+      "description": "A neat stack that fans out like a hand of playing cards.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/fan-cards/fan-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "book-3d",
+      "type": "registry:component",
+      "title": "Book 3D",
+      "description": "A 3D book that turns toward you and swings its cover open.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/book-3d/book-3d.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "depth-card",
+      "type": "registry:component",
+      "title": "Depth Card",
+      "description": "A card of floating layers that shift at different depths as it tilts.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/depth-card/depth-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "caption-card",
+      "type": "registry:component",
+      "title": "Caption Card",
+      "description": "An image card whose caption rises while the image slowly zooms.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/caption-card/caption-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "wave-card",
+      "type": "registry:component",
+      "title": "Wave Card",
+      "description": "A card with rolling waves along its bottom edge that rise on hover.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/wave-card/wave-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scratch-card",
+      "type": "registry:component",
+      "title": "Scratch Card",
+      "description": "Rub the cover with a mouse or finger to uncover the prize.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/scratch-card/scratch-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scatter-photos",
+      "type": "registry:component",
+      "title": "Scatter Photos",
+      "description": "Polaroids scattered on a table: drag and fling them, they glide to a stop.",
+      "categories": [
+        "cards"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/scatter-photos/scatter-photos.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "tilt-card",
       "type": "registry:component",
       "title": "Tilt Card",

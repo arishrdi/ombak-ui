@@ -35,6 +35,16 @@ import { ArrowButton } from "@/registry/ombak/arrow-button/arrow-button";
 import { SonarButton } from "@/registry/ombak/sonar-button/sonar-button";
 import { FillButton } from "@/registry/ombak/fill-button/fill-button";
 import { StatusButton } from "@/registry/ombak/status-button/status-button";
+import { FlipCard } from "@/registry/ombak/flip-card/flip-card";
+import { ExpandCard } from "@/registry/ombak/expand-card/expand-card";
+import { DepthGrid } from "@/registry/ombak/depth-grid/depth-grid";
+import { FanCards } from "@/registry/ombak/fan-cards/fan-cards";
+import { Book3D } from "@/registry/ombak/book-3d/book-3d";
+import { DepthCard } from "@/registry/ombak/depth-card/depth-card";
+import { CaptionCard } from "@/registry/ombak/caption-card/caption-card";
+import { WaveCard } from "@/registry/ombak/wave-card/wave-card";
+import { ScratchCard } from "@/registry/ombak/scratch-card/scratch-card";
+import { ScatterPhotos } from "@/registry/ombak/scatter-photos/scatter-photos";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -342,6 +352,89 @@ function SplashRealThumb() {
   return <SplashButton>Subscribe</SplashButton>;
 }
 
+function FlipThumb() {
+  return (
+    <FlipCard
+      className="h-36 w-28"
+      front={<div className="grid size-full place-items-center bg-[#0e7fbf] font-display text-xl font-bold text-white">Front</div>}
+      back={<div className="grid size-full place-items-center bg-[#5ef0c8] font-display text-xl font-bold text-[#06121f]">Back</div>}
+    />
+  );
+}
+function ExpandThumb() {
+  return (
+    <ExpandCard label="Lumen Lamp" className="w-40" expanded={<div className="p-8 font-display text-3xl font-bold">Lumen Lamp</div>}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/demo/01.svg" alt="" className="aspect-video w-full object-cover" />
+      <p className="p-2 text-xs font-semibold">Click to expand</p>
+    </ExpandCard>
+  );
+}
+function DepthGridThumb() {
+  return (
+    <DepthGrid className="w-56 grid-cols-3 gap-2">
+      {[1, 2, 3, 4, 5, 6].map((n) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img key={n} src={`/demo/0${n}.svg`} alt="" className="aspect-square w-full rounded-md object-cover" />
+      ))}
+    </DepthGrid>
+  );
+}
+function FanThumb() {
+  return (
+    <FanCards cardClassName="h-28 w-20" offset={30} spread={36}>
+      {["#2dd4bf", "#38bdf8", "#818cf8", "#f97362"].map((c) => (
+        <div key={c} className="size-full rounded-lg border border-black/10 shadow-lg" style={{ background: c }} />
+      ))}
+    </FanCards>
+  );
+}
+function BookThumb() {
+  return (
+    <Book3D
+      className="h-36 w-28"
+      cover={<p className="p-3 font-display text-sm leading-tight font-bold text-white">The Motion Handbook</p>}
+      page={<p className="text-[10px]">Chapter 1…</p>}
+      thickness={14}
+    />
+  );
+}
+function DepthCardThumb() {
+  return (
+    <DepthCard className="h-36 w-48 border-0 bg-[#06121f] text-white" shift={14}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/demo/02.svg" alt="" data-depth="0.2" className="absolute -inset-4 h-[calc(100%+2rem)] w-[calc(100%+2rem)] object-cover opacity-80" />
+      <p data-depth="1" className="absolute bottom-3 left-3 font-display text-lg font-bold">Depth</p>
+    </DepthCard>
+  );
+}
+function CaptionThumb() {
+  return <CaptionCard src="/demo/06.svg" alt="" title="Coral Coffee" caption="Brand identity · 2025" className="w-36" />;
+}
+function WaveCardThumb() {
+  return (
+    <WaveCard className="h-32 w-48">
+      <p className="p-3 text-sm font-semibold">Starter</p>
+    </WaveCard>
+  );
+}
+function ScratchThumb() {
+  return (
+    <ScratchCard className="h-28 w-48" brush={16}>
+      <p className="font-display text-2xl font-bold text-surf">20% OFF</p>
+    </ScratchCard>
+  );
+}
+function ScatterThumb() {
+  return (
+    <ScatterPhotos
+      className="size-full"
+      size={86}
+      photos={[{ src: "/demo/01.svg" }, { src: "/demo/03.svg" }, { src: "/demo/05.svg" }]}
+    />
+  );
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -385,4 +478,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "sonar-button": { Thumb: SonarThumb },
   "fill-button": { Thumb: FillThumb },
   "status-button": { Thumb: StatusThumb },
+  "flip-card": { Thumb: FlipThumb },
+  "expand-card": { Thumb: ExpandThumb },
+  "depth-grid": { Thumb: DepthGridThumb },
+  "fan-cards": { Thumb: FanThumb },
+  "book-3d": { Thumb: BookThumb },
+  "depth-card": { Thumb: DepthCardThumb },
+  "caption-card": { Thumb: CaptionThumb },
+  "wave-card": { Thumb: WaveCardThumb },
+  "scratch-card": { Thumb: ScratchThumb },
+  "scatter-photos": { Thumb: ScatterThumb, bleed: true },
 };

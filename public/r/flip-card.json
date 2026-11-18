@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flip-card",
+  "title": "Flip Card",
+  "description": "A card that turns over in 3D to show its back, on hover or click.",
+  "files": [
+    {
+      "path": "registry/ombak/flip-card/flip-card.tsx",
+      "content": "\"use client\";\n\nimport { useState, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type FlipCardProps = {\n  /** Front face. */\n  front: ReactNode;\n  /** Back face. */\n  back: ReactNode;\n  /** \"hover\" flips on hover (and focus); \"click\" flips on click, tap or Enter. Default \"hover\" */\n  trigger?: \"hover\" | \"click\";\n  /** Flip around the vertical (y) or horizontal (x) axis. Default \"y\" */\n  axis?: \"x\" | \"y\";\n  /** Milliseconds for the flip. Default 700 */\n  duration?: number;\n  /** Size the card here, e.g. \"h-72 w-56\". */\n  className?: string;\n};\n\n/**\n * A card that turns over in 3D to show its back. Keyboard users can focus it to flip (hover mode)\n * or press Enter/Space (click mode). Fades instead of spinning for reduced-motion users.\n */\nexport function FlipCard({ front, back, trigger = \"hover\", axis = \"y\", duration = 700, className }: FlipCardProps) {\n  const [flipped, setFlipped] = useState(false);\n  const rotate = axis === \"y\" ? \"rotateY(180deg)\" : \"rotateX(180deg)\";\n  const click = trigger === \"click\";\n\n  return (\n    <div\n      role={click ? \"button\" : undefined}\n      tabIndex={0}\n      aria-pressed={click ? flipped : undefined}\n      onClick={click ? () => setFlipped((f) => !f) : undefined}\n      onKeyDown={(e) => {\n        if (click && (e.key === \"Enter\" || e.key === \" \")) {\n          e.preventDefault();\n          setFlipped((f) => !f);\n        }\n      }}\n      className={cn(\"group/flip relative h-64 w-52 cursor-pointer rounded-2xl outline-none [perspective:1200px] focus-visible:ring-4 focus-visible:ring-ring/40\", className)}\n    >\n      <div\n        className={cn(\n          \"relative size-full [transform-style:preserve-3d] motion-reduce:!transform-none\",\n          !click && (axis === \"y\" ? \"group-hover/flip:[transform:rotateY(180deg)] group-focus-visible/flip:[transform:rotateY(180deg)]\" : \"group-hover/flip:[transform:rotateX(180deg)] group-focus-visible/flip:[transform:rotateX(180deg)]\"),\n        )}\n        style={{\n          transition: `transform ${duration}ms cubic-bezier(.3,.7,.2,1)`,\n          transform: click && flipped ? rotate : undefined,\n        }}\n      >\n        <div className=\"absolute inset-0 overflow-hidden rounded-2xl [backface-visibility:hidden]\">{front}</div>\n        <div\n          className=\"absolute inset-0 overflow-hidden rounded-2xl [backface-visibility:hidden]\"\n          style={{ transform: rotate }}\n        >\n          {back}\n        </div>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "cards"
+  ],
+  "type": "registry:component"
+}

@@ -366,4 +366,85 @@ import { CustomCursor } from "@/components/custom-cursor";
 // resolve = success, throw/reject = error
 <StatusButton onAction={() => saveSettings(form)}>Save changes</StatusButton>`,
   },
+  "flip-card": {
+    Demo: D.FlipCardDemo,
+    usage: `import { FlipCard } from "@/components/flip-card";
+
+<FlipCard className="h-72 w-56" front={<Front />} back={<Back />} />
+<FlipCard trigger="click" axis="x" front={<Front />} back={<Back />} />`,
+  },
+  "expand-card": {
+    Demo: D.ExpandCardDemo,
+    usage: `import { ExpandCard } from "@/components/expand-card";
+
+<ExpandCard label="Lumen Lamp" expanded={<ProjectDetails />}>
+  <img src="/lumen.jpg" alt="" />
+  <p className="p-4">Lumen Lamp</p>
+</ExpandCard>`,
+  },
+  "depth-grid": {
+    Demo: D.DepthGridDemo,
+    usage: `import { DepthGrid } from "@/components/depth-grid";
+
+<DepthGrid className="grid-cols-3 gap-4">
+  {photos.map((p) => <img key={p.id} src={p.src} alt="" />)}
+</DepthGrid>`,
+  },
+  "fan-cards": {
+    Demo: D.FanCardsDemo,
+    usage: `import { FanCards } from "@/components/fan-cards";
+
+<FanCards spread={40}>
+  <Card /> <Card /> <Card /> <Card />
+</FanCards>`,
+  },
+  "book-3d": {
+    Demo: D.Book3DDemo,
+    usage: `import { Book3D } from "@/components/book-3d";
+
+<Book3D cover={<h3 className="p-5 text-white">The Motion Handbook</h3>} page={<p>Chapter 1…</p>} />`,
+  },
+  "depth-card": {
+    Demo: D.DepthCardDemo,
+    usage: `import { DepthCard } from "@/components/depth-card";
+
+<DepthCard className="h-80 w-72">
+  <img src="/bg.jpg" alt="" data-depth="0.2" />
+  <div data-depth="0.6">Glass panel</div>
+  <h3 data-depth="1">Title</h3>
+</DepthCard>`,
+  },
+  "caption-card": {
+    Demo: D.CaptionCardDemo,
+    usage: `import { CaptionCard } from "@/components/caption-card";
+
+<CaptionCard src="/lumen.jpg" alt="Lumen lamp" title="Lumen Lamp" caption="Product launch · 2026" href="/work/lumen" />`,
+  },
+  "wave-card": {
+    Demo: D.WaveCardDemo,
+    usage: `import { WaveCard } from "@/components/wave-card";
+
+<WaveCard className="h-64">
+  <div className="p-6">Starter</div>
+</WaveCard>`,
+  },
+  "scratch-card": {
+    Demo: D.ScratchCardDemo,
+    usage: `import { ScratchCard } from "@/components/scratch-card";
+
+<ScratchCard onReveal={() => track("revealed")}>
+  <p className="text-4xl font-bold">20% OFF</p>
+</ScratchCard>`,
+  },
+  "scatter-photos": {
+    Demo: D.ScatterPhotosDemo,
+    usage: `import { ScatterPhotos } from "@/components/scatter-photos";
+
+<ScatterPhotos
+  photos={[
+    { src: "/a.jpg", caption: "first light" },
+    { src: "/b.jpg", caption: "the swell" },
+  ]}
+/>`,
+  },
 };

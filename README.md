@@ -6,7 +6,7 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (42)
+## Components (52)
 
 | Component | Category | Dependencies |
 |---|---|---|
@@ -45,6 +45,16 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Sonar Button | Buttons | none |
 | Fill Button | Buttons | none |
 | Status Button | Buttons | none |
+| Flip Card | Cards | none |
+| Expand Card | Cards | none |
+| Depth Grid | Cards | none |
+| Fan Cards | Cards | none |
+| Book 3D | Cards | none |
+| Depth Card | Cards | none |
+| Caption Card | Cards | none |
+| Wave Card | Cards | none |
+| Scratch Card | Cards | none |
+| Scatter Photos | Cards | none |
 | Tilt Card | Interaction | gsap |
 | Glow Card | Interaction | none |
 | Hover Preview | Interaction | gsap |
