@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "count-up",
+  "title": "Count Up",
+  "description": "Numbers that count up when they scroll into view, server-rendered for SEO.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/count-up/count-up.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ElementType } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger);\n\nexport type CountUpProps = {\n  /** Final number. */\n  value: number;\n  /** Starting number. Default 0 */\n  from?: number;\n  /** Decimal places. Default 0 */\n  decimals?: number;\n  prefix?: string;\n  suffix?: string;\n  /** Locale for separators. Default \"en-US\" */\n  locale?: string;\n  /** Seconds. Default 2 */\n  duration?: number;\n  /** HTML tag. Default \"span\" */\n  as?: ElementType;\n  className?: string;\n};\n\n/**\n * Counts up to a number when it scrolls into view.\n * The final value is server-rendered, so it's right for SEO and visitors without JavaScript.\n */\nexport function CountUp({\n  value,\n  from = 0,\n  decimals = 0,\n  prefix = \"\",\n  suffix = \"\",\n  locale = \"en-US\",\n  duration = 2,\n  as: Tag = \"span\",\n  className,\n}: CountUpProps) {\n  const ref = useRef<HTMLElement>(null);\n  const fmt = new Intl.NumberFormat(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });\n  const format = (n: number) => `${prefix}${fmt.format(n)}${suffix}`;\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const counter = { n: from };\n    el.textContent = format(from);\n    const tween = gsap.to(counter, {\n      n: value,\n      duration,\n      ease: \"power2.out\",\n      paused: true,\n      onUpdate: () => {\n        el.textContent = format(counter.n);\n      },\n    });\n    const st = ScrollTrigger.create({ trigger: el, start: \"top 90%\", once: true, onEnter: () => tween.play() });\n    return () => {\n      st.kill();\n      tween.kill();\n      el.textContent = format(value);\n    };\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [value, from, decimals, prefix, suffix, locale, duration]);\n\n  return (\n    <Tag ref={ref} className={cn(\"tabular-nums\", className)}>\n      {format(value)}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

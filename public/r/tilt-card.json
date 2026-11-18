@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tilt-card",
+  "title": "Tilt Card",
+  "description": "A card that leans toward the cursor in 3D with a glare highlight.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/tilt-card/tilt-card.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ReactNode } from \"react\";\nimport { gsap } from \"gsap\";\nimport { cn } from \"@/lib/utils\";\n\nexport type TiltCardProps = {\n  children: ReactNode;\n  /** Maximum tilt in degrees. Default 10 */\n  max?: number;\n  /** Scale while hovered. Default 1.03 */\n  scale?: number;\n  /** Glossy highlight that follows the cursor. Default true */\n  glare?: boolean;\n  /** CSS perspective in px. Default 900 */\n  perspective?: number;\n  className?: string;\n};\n\n/** A card that leans toward the cursor in 3D, with a glare highlight and an elastic return. */\nexport function TiltCard({ children, max = 10, scale = 1.03, glare = true, perspective = 900, className }: TiltCardProps) {\n  const ref = useRef<HTMLDivElement>(null);\n  const glareRef = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    if (!window.matchMedia(\"(hover: hover) and (pointer: fine)\").matches) return;\n\n    const rx = gsap.quickTo(el, \"rotationX\", { duration: 0.5, ease: \"power3.out\" });\n    const ry = gsap.quickTo(el, \"rotationY\", { duration: 0.5, ease: \"power3.out\" });\n    const move = (e: PointerEvent) => {\n      const r = el.getBoundingClientRect();\n      const px = (e.clientX - r.left) / r.width;\n      const py = (e.clientY - r.top) / r.height;\n      ry((px - 0.5) * 2 * max);\n      rx(-(py - 0.5) * 2 * max);\n      glareRef.current?.style.setProperty(\"--gx\", `${px * 100}%`);\n      glareRef.current?.style.setProperty(\"--gy\", `${py * 100}%`);\n    };\n    const enter = () => {\n      gsap.to(el, { scale, duration: 0.4, ease: \"power3.out\" });\n      if (glareRef.current) gsap.to(glareRef.current, { opacity: 1, duration: 0.3 });\n    };\n    const leave = () => {\n      gsap.to(el, { rotationX: 0, rotationY: 0, scale: 1, duration: 0.8, ease: \"elastic.out(1, 0.5)\" });\n      if (glareRef.current) gsap.to(glareRef.current, { opacity: 0, duration: 0.3 });\n    };\n    el.addEventListener(\"pointermove\", move);\n    el.addEventListener(\"pointerenter\", enter);\n    el.addEventListener(\"pointerleave\", leave);\n    return () => {\n      el.removeEventListener(\"pointermove\", move);\n      el.removeEventListener(\"pointerenter\", enter);\n      el.removeEventListener(\"pointerleave\", leave);\n    };\n  }, [max, scale]);\n\n  return (\n    <div style={{ perspective }}>\n      <div\n        ref={ref}\n        className={cn(\n          \"relative overflow-hidden rounded-xl border bg-card text-card-foreground [transform-style:preserve-3d] will-change-transform\",\n          className,\n        )}\n      >\n        {children}\n        {glare && (\n          <div\n            ref={glareRef}\n            aria-hidden\n            className=\"pointer-events-none absolute inset-0 opacity-0 mix-blend-overlay [background:radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(255,255,255,.45),transparent_55%)]\"\n          />\n        )}\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "interaction"
+  ],
+  "type": "registry:component"
+}

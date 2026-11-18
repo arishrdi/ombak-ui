@@ -1,0 +1,184 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ombak",
+  "homepage": "https://ombakui.com",
+  "items": [
+    {
+      "name": "wave-background",
+      "type": "registry:component",
+      "title": "Wave Background",
+      "description": "Layered ocean waves on a canvas that swell under the cursor. The signature Ombak component.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/wave-background/wave-background.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "text-reveal",
+      "type": "registry:component",
+      "title": "Text Reveal",
+      "description": "Masked line, word or letter reveals powered by GSAP SplitText.",
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/text-reveal/text-reveal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scramble-text",
+      "type": "registry:component",
+      "title": "Scramble Text",
+      "description": "Text that decodes itself on scroll-in and on hover.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/scramble-text/scramble-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rolling-text",
+      "type": "registry:component",
+      "title": "Rolling Text",
+      "description": "Letters roll up one by one on hover. Pure CSS, zero JavaScript.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/rolling-text/rolling-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "count-up",
+      "type": "registry:component",
+      "title": "Count Up",
+      "description": "Numbers that count up when they scroll into view, server-rendered for SEO.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/count-up/count-up.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "marquee",
+      "type": "registry:component",
+      "title": "Marquee",
+      "description": "Seamless infinite marquee that reacts to scroll speed and pauses on hover.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/marquee/marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "stack-cards",
+      "type": "registry:component",
+      "title": "Stack Cards",
+      "description": "Cards that stick and pile up as you scroll.",
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
+      "categories": [
+        "scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/stack-cards/stack-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "image-reveal",
+      "type": "registry:component",
+      "title": "Image Reveal",
+      "description": "A clip-path wipe that uncovers images while they settle from a zoom.",
+      "dependencies": [
+        "gsap",
+        "@gsap/react"
+      ],
+      "categories": [
+        "scroll"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/image-reveal/image-reveal.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:component",
+      "title": "Magnetic Button",
+      "description": "A button pulled toward the cursor that springs back elastically.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/magnetic-button/magnetic-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:component",
+      "title": "Tilt Card",
+      "description": "A card that leans toward the cursor in 3D with a glare highlight.",
+      "dependencies": [
+        "gsap"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/tilt-card/tilt-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

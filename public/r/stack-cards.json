@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stack-cards",
+  "title": "Stack Cards",
+  "description": "Cards that stick and pile up as you scroll.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/stack-cards/stack-cards.tsx",
+      "content": "\"use client\";\n\nimport { Children, useRef, type ReactNode } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { useGSAP } from \"@gsap/react\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger, useGSAP);\n\nexport type StackCardsProps = {\n  /** Each direct child becomes one card. */\n  children: ReactNode;\n  /** Where cards stick, measured from the top of the viewport. Any CSS length. Default \"12vh\" */\n  top?: string;\n  /** Extra offset per card so earlier cards peek out, in px. Default 16 */\n  peek?: number;\n  /** How much each covered card shrinks. Default 0.05 */\n  scaleStep?: number;\n  /** Darken covered cards. Default true */\n  dim?: boolean;\n  className?: string;\n};\n\n/**\n * Cards that stick and pile up while you scroll, the covered ones shrinking back.\n * Built on CSS sticky, so scrolling stays smooth.\n */\nexport function StackCards({ children, top = \"12vh\", peek = 16, scaleStep = 0.05, dim = true, className }: StackCardsProps) {\n  const ref = useRef<HTMLDivElement>(null);\n  const items = Children.toArray(children);\n\n  useGSAP(\n    () => {\n      const root = ref.current;\n      if (!root || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n      const cards = gsap.utils.toArray<HTMLElement>(\"[data-stack-card]\", root);\n      cards.forEach((card, i) => {\n        if (i === cards.length - 1) return;\n        const depth = cards.length - 1 - i;\n        gsap.fromTo(\n          card.firstElementChild,\n          { scale: 1, filter: dim ? \"brightness(1)\" : undefined },\n          {\n            scale: 1 - scaleStep * depth,\n            filter: dim ? `brightness(${1 - 0.12 * depth})` : undefined,\n            ease: \"none\",\n            scrollTrigger: {\n              trigger: cards[i + 1],\n              start: \"top bottom\",\n              endTrigger: cards[cards.length - 1],\n              end: `top ${top}`,\n              scrub: true,\n            },\n          },\n        );\n      });\n    },\n    { scope: ref, dependencies: [items.length, top, scaleStep, dim] },\n  );\n\n  return (\n    <div ref={ref} className={cn(\"relative\", className)}>\n      {items.map((child, i) => (\n        <div\n          key={i}\n          data-stack-card\n          className=\"sticky\"\n          style={{ top: `calc(${top} + ${i * peek}px)`, marginBottom: i === items.length - 1 ? 0 : \"8vh\" }}\n        >\n          <div className=\"origin-top will-change-transform\">{child}</div>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "scroll"
+  ],
+  "type": "registry:component"
+}

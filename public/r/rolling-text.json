@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rolling-text",
+  "title": "Rolling Text",
+  "description": "Letters roll up one by one on hover. Pure CSS, zero JavaScript.",
+  "files": [
+    {
+      "path": "registry/ombak/rolling-text/rolling-text.tsx",
+      "content": "import { type CSSProperties, type ElementType } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type RollingTextProps = {\n  /** Plain text to roll. */\n  text: string;\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** Milliseconds between letters. Default 18 */\n  stagger?: number;\n  /** Milliseconds per letter. Default 450 */\n  duration?: number;\n  className?: string;\n};\n\n/**\n * Letters roll up one after another on hover, revealing a copy underneath.\n * Pure CSS with no JavaScript, so it also works in Server Components. To roll when a parent\n * link or button is hovered, give that parent the Tailwind class `group/roll`.\n */\nexport function RollingText({ text, as: Tag = \"span\", stagger = 18, duration = 450, className }: RollingTextProps) {\n  return (\n    <Tag aria-label={text} className={cn(\"group/roll inline-flex overflow-hidden align-bottom leading-[1.15]\", className)}>\n      {Array.from(text).map((ch, i) => (\n        <span\n          key={i}\n          aria-hidden\n          className=\"inline-block [text-shadow:0_1.15em_currentColor] transition-transform ease-[cubic-bezier(.7,0,.2,1)] group-hover/roll:-translate-y-[1.15em] group-focus-visible/roll:-translate-y-[1.15em] motion-reduce:transition-none\"\n          style={{ transitionDuration: `${duration}ms`, transitionDelay: `${i * stagger}ms` } as CSSProperties}\n        >\n          {ch === \" \" ? \" \" : ch}\n        </span>\n      ))}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

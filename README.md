@@ -1,0 +1,66 @@
+# Ombak UI
+
+Motion components for React: scroll, GSAP and canvas effects you can paste into any shadcn project.
+
+```bash
+npx shadcn@latest add https://ombakui.com/r/wave-background.json
+```
+
+## Components (v0.1)
+
+| Component | Category | Dependencies |
+|---|---|---|
+| Wave Background | Backgrounds | none |
+| Text Reveal | Text | gsap, @gsap/react |
+| Scramble Text | Text | gsap |
+| Rolling Text | Text | none (pure CSS) |
+| Count Up | Text | gsap |
+| Marquee | Scroll | gsap |
+| Stack Cards | Scroll | gsap, @gsap/react |
+| Image Reveal | Scroll | gsap, @gsap/react |
+| Magnetic Button | Interaction | gsap |
+| Tilt Card | Interaction | gsap |
+
+## Project structure
+
+```
+registry/ombak/<name>/<name>.tsx   ← the components (what users install)
+registry.json                     ← registry index: title, description, deps, category
+public/r/*.json                   ← built registry files (npm run registry:build)
+components/demos/index.tsx        ← live demos shown in the docs
+content/docs.tsx                  ← per-component usage snippet + demo mapping
+components/site/*                 ← docs site UI
+app/                              ← landing, /docs, /docs/components/[slug], /llms.txt
+lib/site.ts                       ← site URL (change when the domain is live)
+```
+
+## Develop
+
+```bash
+npm install
+npm run registry:build   # writes public/r/*.json
+npm run dev              # http://localhost:3000
+npm run build            # registry + production build
+```
+
+## Add a new component
+
+1. Create `registry/ombak/<name>/<name>.tsx`. Rules:
+   - `"use client"` when it uses hooks; import `cn` from `@/lib/utils`.
+   - Style with shadcn theme tokens (`bg-primary`, `bg-card`, `text-muted-foreground`, …) so it follows the user's theme.
+   - Export `type <Name>Props` with a `/** comment. Default x */` above each prop: the docs props table is generated from it.
+   - Respect `prefers-reduced-motion`; skip hover-only effects on touch devices.
+   - Register GSAP plugins at the top of the file (`if (typeof window !== "undefined") gsap.registerPlugin(...)`).
+2. Add an entry to `registry.json` (name, title, description, dependencies, categories, files).
+3. Add a demo to `components/demos/index.tsx` and a usage snippet to `content/docs.tsx`.
+4. `npm run build`, then check the page at `/docs/components/<name>`.
+
+## Going live
+
+1. Set the domain in `lib/site.ts` (or the `NEXT_PUBLIC_SITE_URL` env var) and in `registry.json` → `homepage`.
+2. Deploy to Vercel. The registry is served as static files from `/r/`.
+3. Submit the registry to the shadcn registry directory so people can use `npx shadcn add @ombak/<name>` without extra config.
+
+## License
+
+Free components: MIT, see LICENSE.

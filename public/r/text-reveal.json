@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-reveal",
+  "title": "Text Reveal",
+  "description": "Masked line, word or letter reveals powered by GSAP SplitText.",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/text-reveal/text-reveal.tsx",
+      "content": "\"use client\";\n\nimport { useRef, type ElementType, type ReactNode } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { SplitText } from \"gsap/SplitText\";\nimport { useGSAP } from \"@gsap/react\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);\n\nexport type TextRevealProps = {\n  children: ReactNode;\n  /** HTML tag to render. Default \"h2\" */\n  as?: ElementType;\n  /** Split into lines, words or characters. Default \"lines\" */\n  split?: \"lines\" | \"words\" | \"chars\";\n  /** \"scroll\" plays when the text enters the viewport, \"load\" plays on mount. Default \"scroll\" */\n  trigger?: \"scroll\" | \"load\";\n  /** Seconds per piece. Default 1 */\n  duration?: number;\n  /** Seconds between pieces. Default depends on split */\n  stagger?: number;\n  /** Seconds before starting. Default 0 */\n  delay?: number;\n  /** Blur-to-sharp while revealing. Default false */\n  blur?: boolean;\n  /** ScrollTrigger start position. Default \"top 85%\" */\n  start?: string;\n  className?: string;\n};\n\nconst STAGGER = { lines: 0.08, words: 0.04, chars: 0.02 } as const;\n\n/**\n * Masked text reveal: lines, words or letters slide up from behind an invisible mask.\n * Re-splits on resize and after fonts load. Shows plain text for reduced-motion users.\n */\nexport function TextReveal({\n  children,\n  as: Tag = \"h2\",\n  split = \"lines\",\n  trigger = \"scroll\",\n  duration = 1,\n  stagger,\n  delay = 0,\n  blur = false,\n  start = \"top 85%\",\n  className,\n}: TextRevealProps) {\n  const ref = useRef<HTMLElement>(null);\n\n  useGSAP(\n    () => {\n      const el = ref.current;\n      if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n      SplitText.create(el, {\n        type: split === \"chars\" ? \"lines,words,chars\" : split === \"words\" ? \"lines,words\" : \"lines\",\n        mask: \"lines\",\n        autoSplit: true,\n        onSplit(self) {\n          const targets = split === \"chars\" ? self.chars : split === \"words\" ? self.words : self.lines;\n          return gsap.fromTo(\n            targets,\n            { yPercent: 115, opacity: blur ? 0 : 1, filter: blur ? \"blur(8px)\" : undefined },\n            {\n              yPercent: 0,\n              opacity: 1,\n              filter: blur ? \"blur(0px)\" : undefined,\n              duration,\n              delay,\n              stagger: stagger ?? STAGGER[split],\n              ease: \"expo.out\",\n              scrollTrigger: trigger === \"scroll\" ? { trigger: el, start, once: true } : undefined,\n            },\n          );\n        },\n      });\n    },\n    { scope: ref, dependencies: [split, trigger, duration, stagger, delay, blur, start] },\n  );\n\n  return (\n    <Tag ref={ref} className={cn(className)}>\n      {children}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

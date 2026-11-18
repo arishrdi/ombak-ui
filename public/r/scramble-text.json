@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scramble-text",
+  "title": "Scramble Text",
+  "description": "Text that decodes itself on scroll-in and on hover.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/scramble-text/scramble-text.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ElementType } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { ScrambleTextPlugin } from \"gsap/ScrambleTextPlugin\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);\n\nexport type ScrambleTextProps = {\n  /** The final text. */\n  text: string;\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** Scramble when entering the viewport, on hover, or both. Default \"both\" */\n  trigger?: \"view\" | \"hover\" | \"both\";\n  /** Characters shown while scrambling. Default uppercase letters and digits */\n  chars?: string;\n  /** Seconds. Default 1 */\n  duration?: number;\n  className?: string;\n};\n\n/** Text that decodes itself when it scrolls into view, and again on every hover. */\nexport function ScrambleText({\n  text,\n  as: Tag = \"span\",\n  trigger = \"both\",\n  chars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\",\n  duration = 1,\n  className,\n}: ScrambleTextProps) {\n  const ref = useRef<HTMLElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    let tween: gsap.core.Tween | null = null;\n    const play = () => {\n      tween?.kill();\n      tween = gsap.to(el, { duration, ease: \"none\", scrambleText: { text, chars, speed: 0.6, revealDelay: duration * 0.25 } });\n    };\n    const st = trigger !== \"hover\" ? ScrollTrigger.create({ trigger: el, start: \"top 90%\", once: true, onEnter: play }) : null;\n    if (trigger !== \"view\") el.addEventListener(\"pointerenter\", play);\n    return () => {\n      st?.kill();\n      tween?.kill();\n      el.removeEventListener(\"pointerenter\", play);\n      el.textContent = text;\n    };\n  }, [text, trigger, chars, duration]);\n\n  return (\n    <Tag ref={ref} aria-label={text} className={cn(\"font-mono\", className)}>\n      {text}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}
