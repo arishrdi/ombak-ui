@@ -297,4 +297,73 @@ import { CustomCursor } from "@/components/custom-cursor";
 
 <SplashButton onClick={subscribe}>Subscribe</SplashButton>`,
   },
+  "shiny-button": {
+    Demo: D.ShinyButtonDemo,
+    usage: `import { ShinyButton } from "@/components/shiny-button";
+
+<ShinyButton>Get started</ShinyButton>
+<ShinyButton trigger="hover">Shine on hover</ShinyButton>`,
+  },
+  "border-beam": {
+    Demo: D.BorderBeamDemo,
+    usage: `import { BorderBeam } from "@/components/border-beam";
+
+<BorderBeam className="rounded-2xl">
+  <div className="p-6">Pro plan</div>
+</BorderBeam>`,
+  },
+  "hold-button": {
+    Demo: D.HoldButtonDemo,
+    usage: `import { HoldButton } from "@/components/hold-button";
+
+<HoldButton holdTime={1200} onConfirm={deleteProject} doneLabel="Deleted">
+  Hold to delete
+</HoldButton>`,
+  },
+  "copy-button": {
+    Demo: D.CopyButtonDemo,
+    usage: `import { CopyButton } from "@/components/copy-button";
+
+<CopyButton value="npx shadcn add @ombak/copy-button" />
+<CopyButton value={email} label="Copy email" />`,
+  },
+  "like-button": {
+    Demo: D.LikeButtonDemo,
+    usage: `import { LikeButton } from "@/components/like-button";
+
+<LikeButton count={128} onChange={(liked, count) => save(liked)} />`,
+  },
+  "slide-button": {
+    Demo: D.SlideButtonDemo,
+    usage: `import { SlideButton } from "@/components/slide-button";
+
+<SlideButton label="Slide to pay $49" doneLabel="Paid" onConfirm={pay} />`,
+  },
+  "arrow-button": {
+    Demo: D.ArrowButtonDemo,
+    usage: `import { ArrowButton } from "@/components/arrow-button";
+
+<ArrowButton>Start building</ArrowButton>
+<ArrowButton as="a" href="/docs" variant="grow">Read the docs</ArrowButton>`,
+  },
+  "sonar-button": {
+    Demo: D.SonarButtonDemo,
+    usage: `import { SonarButton } from "@/components/sonar-button";
+
+<SonarButton>Book a call</SonarButton>`,
+  },
+  "fill-button": {
+    Demo: D.FillButtonDemo,
+    usage: `import { FillButton } from "@/components/fill-button";
+
+<FillButton>Dive in</FillButton>
+<FillButton color="#0ea5e9" fillTextColor="#fff">Make waves</FillButton>`,
+  },
+  "status-button": {
+    Demo: D.StatusButtonDemo,
+    usage: `import { StatusButton } from "@/components/status-button";
+
+// resolve = success, throw/reject = error
+<StatusButton onAction={() => saveSettings(form)}>Save changes</StatusButton>`,
+  },
 };

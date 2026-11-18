@@ -32,6 +32,16 @@ import { MagnifyDock } from "@/registry/ombak/magnify-dock/magnify-dock";
 import { TorchReveal } from "@/registry/ombak/torch-reveal/torch-reveal";
 import { SwipeStack } from "@/registry/ombak/swipe-stack/swipe-stack";
 import { SplashButton } from "@/registry/ombak/splash-button/splash-button";
+import { ShinyButton } from "@/registry/ombak/shiny-button/shiny-button";
+import { BorderBeam } from "@/registry/ombak/border-beam/border-beam";
+import { HoldButton } from "@/registry/ombak/hold-button/hold-button";
+import { CopyButton } from "@/registry/ombak/copy-button/copy-button";
+import { LikeButton } from "@/registry/ombak/like-button/like-button";
+import { SlideButton } from "@/registry/ombak/slide-button/slide-button";
+import { ArrowButton } from "@/registry/ombak/arrow-button/arrow-button";
+import { SonarButton } from "@/registry/ombak/sonar-button/sonar-button";
+import { FillButton } from "@/registry/ombak/fill-button/fill-button";
+import { StatusButton } from "@/registry/ombak/status-button/status-button";
 import { useEffect, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
@@ -500,6 +510,115 @@ export function SplashButtonDemo() {
       <SplashButton className="bg-surf text-[#06121f]" colors={["#f97362", "#fbbf24", "#f472b6"]}>
         Subscribe
       </SplashButton>
+    </div>
+  );
+}
+
+export function ShinyButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-5">
+      <ShinyButton>Get started</ShinyButton>
+      <ShinyButton trigger="hover" className="bg-surf text-[#06121f]">Shine on hover</ShinyButton>
+    </div>
+  );
+}
+
+export function BorderBeamDemo() {
+  return (
+    <div className="grid w-full max-w-2xl gap-6 px-6 sm:grid-cols-2">
+      <BorderBeam className="rounded-2xl">
+        <div className="p-6">
+          <p className="font-display text-xl font-semibold">Pro plan</p>
+          <p className="mt-2 text-sm text-muted-foreground">The beam keeps circling the card.</p>
+        </div>
+      </BorderBeam>
+      <BorderBeam className="rounded-full" colors={["transparent", "#f97362", "#fbbf24"]} duration={3}>
+        <div className="flex items-center gap-3 rounded-full px-5 py-3 text-sm">
+          <span className="size-2 rounded-full bg-emerald-500" /> New: 42 components
+        </div>
+      </BorderBeam>
+    </div>
+  );
+}
+
+export function HoldButtonDemo() {
+  const [n, setN] = useState(0);
+  return (
+    <div className="space-y-4 text-center">
+      <HoldButton onConfirm={() => setN((x) => x + 1)} doneLabel="Deleted">Hold to delete</HoldButton>
+      <p className="text-sm text-muted-foreground">Confirmed {n} time{n === 1 ? "" : "s"}. Let go early and nothing happens.</p>
+    </div>
+  );
+}
+
+export function CopyButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-4">
+      <div className="flex items-center gap-3 rounded-xl border bg-card py-2 pr-2 pl-4 font-mono text-sm">
+        npx shadcn add @ombak/copy-button
+        <CopyButton value="npx shadcn add @ombak/copy-button" />
+      </div>
+      <CopyButton value="hello@ombakui.com" label="Copy email" />
+    </div>
+  );
+}
+
+export function LikeButtonDemo() {
+  return (
+    <div className="flex items-center gap-4">
+      <LikeButton count={128} />
+      <LikeButton count={2049} defaultLiked color="#0ea5e9" />
+    </div>
+  );
+}
+
+export function SlideButtonDemo() {
+  return <SlideButton label="Slide to pay $49" doneLabel="Paid" />;
+}
+
+export function ArrowButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-5">
+      <ArrowButton>Start building</ArrowButton>
+      <ArrowButton variant="grow" className="border bg-transparent text-foreground">
+        Read the docs
+      </ArrowButton>
+    </div>
+  );
+}
+
+export function SonarButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-12 py-10">
+      <SonarButton>Book a call</SonarButton>
+      <SonarButton className="bg-surf text-[#06121f]" color="#5ef0c8" rings={2}>
+        Live now
+      </SonarButton>
+    </div>
+  );
+}
+
+export function FillButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-5">
+      <FillButton>Dive in</FillButton>
+      <FillButton color="#0ea5e9" fillTextColor="#fff">
+        Make waves
+      </FillButton>
+    </div>
+  );
+}
+
+export function StatusButtonDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-5">
+      <StatusButton onAction={() => new Promise((r) => setTimeout(r, 1200))}>Save changes</StatusButton>
+      <StatusButton
+        onAction={() => new Promise((_, reject) => setTimeout(() => reject(new Error("nope")), 1200))}
+        className="bg-transparent text-foreground ring-1 ring-border"
+      >
+        This one fails
+      </StatusButton>
     </div>
   );
 }

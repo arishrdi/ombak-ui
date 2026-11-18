@@ -378,11 +378,191 @@
         "gsap"
       ],
       "categories": [
-        "interaction"
+        "buttons"
       ],
       "files": [
         {
           "path": "registry/ombak/magnetic-button/magnetic-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ripple-button",
+      "type": "registry:component",
+      "title": "Ripple Button",
+      "description": "A button that sends rings of water out from wherever you press it.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/ripple-button/ripple-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "splash-button",
+      "type": "registry:component",
+      "title": "Splash Button",
+      "description": "A button that bursts into droplets that arc out and fall with gravity.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/splash-button/splash-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "shiny-button",
+      "type": "registry:component",
+      "title": "Shiny Button",
+      "description": "A band of light sweeps across the button, like sun glinting off wet glass.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/shiny-button/shiny-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "border-beam",
+      "type": "registry:component",
+      "title": "Border Beam",
+      "description": "A beam of light that travels around the border of any box.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/border-beam/border-beam.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hold-button",
+      "type": "registry:component",
+      "title": "Hold Button",
+      "description": "Hold to confirm: a fill rises while you hold, and the action fires when it's full.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/hold-button/hold-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:component",
+      "title": "Copy Button",
+      "description": "Copies text; the icon morphs from two sheets into a check mark.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/copy-button/copy-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "like-button",
+      "type": "registry:component",
+      "title": "Like Button",
+      "description": "A heart that pops and bursts into particles, with a rolling count.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/like-button/like-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "slide-button",
+      "type": "registry:component",
+      "title": "Slide Button",
+      "description": "Slide to confirm: drag the knob to the end so the action can't happen by accident.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/slide-button/slide-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "arrow-button",
+      "type": "registry:component",
+      "title": "Arrow Button",
+      "description": "A call-to-action whose arrow slides or grows on hover. Pure CSS.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/arrow-button/arrow-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "sonar-button",
+      "type": "registry:component",
+      "title": "Sonar Button",
+      "description": "A call-to-action that sends out soft sonar rings to get noticed.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/sonar-button/sonar-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "fill-button",
+      "type": "registry:component",
+      "title": "Fill Button",
+      "description": "An outline button that fills with water on hover, a wave rolling on top.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/fill-button/fill-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "status-button",
+      "type": "registry:component",
+      "title": "Status Button",
+      "description": "Shrinks into a spinner while your action runs, then shows a check or a cross.",
+      "categories": [
+        "buttons"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/status-button/status-button.tsx",
           "type": "registry:component"
         }
       ]
@@ -416,21 +596,6 @@
       "files": [
         {
           "path": "registry/ombak/glow-card/glow-card.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "ripple-button",
-      "type": "registry:component",
-      "title": "Ripple Button",
-      "description": "A button that sends rings of water out from wherever you press it.",
-      "categories": [
-        "interaction"
-      ],
-      "files": [
-        {
-          "path": "registry/ombak/ripple-button/ripple-button.tsx",
           "type": "registry:component"
         }
       ]
@@ -512,21 +677,6 @@
       "files": [
         {
           "path": "registry/ombak/swipe-stack/swipe-stack.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
-      "name": "splash-button",
-      "type": "registry:component",
-      "title": "Splash Button",
-      "description": "A button that bursts into droplets that arc out and fall with gravity.",
-      "categories": [
-        "interaction"
-      ],
-      "files": [
-        {
-          "path": "registry/ombak/splash-button/splash-button.tsx",
           "type": "registry:component"
         }
       ]

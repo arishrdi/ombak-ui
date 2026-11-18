@@ -23,6 +23,18 @@ import { Odometer } from "@/registry/ombak/odometer/odometer";
 import { GradientText } from "@/registry/ombak/gradient-text/gradient-text";
 import { ShimmerText } from "@/registry/ombak/shimmer-text/shimmer-text";
 import { TorchReveal } from "@/registry/ombak/torch-reveal/torch-reveal";
+import { RippleButton } from "@/registry/ombak/ripple-button/ripple-button";
+import { SplashButton } from "@/registry/ombak/splash-button/splash-button";
+import { ShinyButton } from "@/registry/ombak/shiny-button/shiny-button";
+import { BorderBeam } from "@/registry/ombak/border-beam/border-beam";
+import { HoldButton } from "@/registry/ombak/hold-button/hold-button";
+import { CopyButton } from "@/registry/ombak/copy-button/copy-button";
+import { LikeButton } from "@/registry/ombak/like-button/like-button";
+import { SlideButton } from "@/registry/ombak/slide-button/slide-button";
+import { ArrowButton } from "@/registry/ombak/arrow-button/arrow-button";
+import { SonarButton } from "@/registry/ombak/sonar-button/sonar-button";
+import { FillButton } from "@/registry/ombak/fill-button/fill-button";
+import { StatusButton } from "@/registry/ombak/status-button/status-button";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -198,30 +210,6 @@ function GlowCardThumb() {
   );
 }
 
-function RippleButtonThumb() {
-  // a span (the card is already a link) with a ripple that repeats on its own
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => {
-      const ring = document.createElement("span");
-      Object.assign(ring.style, {
-        position: "absolute", left: "50%", top: "50%", width: "220px", height: "220px", margin: "-110px 0 0 -110px",
-        borderRadius: "9999px", background: "rgba(255,255,255,.45)", pointerEvents: "none", zIndex: "-1",
-      });
-      el.appendChild(ring);
-      ring.animate([{ transform: "scale(0)", opacity: 1 }, { transform: "scale(1)", opacity: 0 }], { duration: 900, easing: "cubic-bezier(.2,.7,.3,1)" })
-        .finished.then(() => ring.remove(), () => ring.remove());
-    }, 1600);
-    return () => window.clearInterval(id);
-  }, []);
-  return (
-    <span ref={ref} className="relative isolate inline-flex overflow-hidden rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground">
-      Make a splash
-    </span>
-  );
-}
 
 function HoverPreviewThumb() {
   return (
@@ -312,21 +300,46 @@ function SwipeStackThumb() {
     </div>
   );
 }
-function SplashButtonThumb() {
-  // droplets burst out of the button while the card is hovered
-  const drops = [[-38, -30], [-14, -44], [12, -42], [38, -28], [-52, -8], [54, -6], [-26, -52], [28, -50]];
+
+function ShinyThumb() {
+  return <ShinyButton interval={2}>Get started</ShinyButton>;
+}
+function BorderBeamThumb() {
   return (
-    <span className="relative inline-flex">
-      <span className="relative z-10 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground">Subscribe</span>
-      {drops.map(([x, y], i) => (
-        <span
-          key={i}
-          className="absolute top-1/2 left-1/2 size-2 -translate-1/2 rounded-full opacity-0 transition-all duration-700 ease-out group-hover:translate-x-[var(--x)] group-hover:translate-y-[var(--y)] group-hover:opacity-100"
-          style={{ ["--x" as string]: `${x}px`, ["--y" as string]: `${y}px`, background: ["#5ef0c8", "#38bdf8", "#2dd4bf"][i % 3] }}
-        />
-      ))}
-    </span>
+    <BorderBeam className="w-48 rounded-xl">
+      <div className="p-4 text-sm font-semibold">Pro plan</div>
+    </BorderBeam>
   );
+}
+function HoldThumb() {
+  return <HoldButton doneLabel="Deleted">Hold to delete</HoldButton>;
+}
+function CopyThumb() {
+  return <CopyButton value="npx shadcn add @ombak/copy-button" label="Copy" />;
+}
+function LikeThumb() {
+  return <LikeButton count={128} />;
+}
+function SlideThumb() {
+  return <SlideButton className="w-60" label="Slide to confirm" />;
+}
+function ArrowThumb() {
+  return <ArrowButton>Start building</ArrowButton>;
+}
+function SonarThumb() {
+  return <SonarButton>Book a call</SonarButton>;
+}
+function FillThumb() {
+  return <FillButton>Dive in</FillButton>;
+}
+function StatusThumb() {
+  return <StatusButton onAction={() => new Promise((r) => setTimeout(r, 1000))}>Save</StatusButton>;
+}
+function RippleRealThumb() {
+  return <RippleButton>Click me</RippleButton>;
+}
+function SplashRealThumb() {
+  return <SplashButton>Subscribe</SplashButton>;
 }
 
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
@@ -349,7 +362,7 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "horizontal-scroll": { Thumb: HorizontalScrollThumb },
   "parallax-image": { Thumb: ParallaxThumb },
   "glow-card": { Thumb: GlowCardThumb },
-  "ripple-button": { Thumb: RippleButtonThumb },
+  "ripple-button": { Thumb: RippleRealThumb },
   "hover-preview": { Thumb: HoverPreviewThumb },
   "custom-cursor": { Thumb: CustomCursorThumb },
   caustics: { Thumb: CausticsThumb, bleed: true },
@@ -361,5 +374,15 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "magnify-dock": { Thumb: MagnifyDockThumb },
   "torch-reveal": { Thumb: TorchRevealThumb },
   "swipe-stack": { Thumb: SwipeStackThumb },
-  "splash-button": { Thumb: SplashButtonThumb },
+  "splash-button": { Thumb: SplashRealThumb },
+  "shiny-button": { Thumb: ShinyThumb },
+  "border-beam": { Thumb: BorderBeamThumb },
+  "hold-button": { Thumb: HoldThumb },
+  "copy-button": { Thumb: CopyThumb },
+  "like-button": { Thumb: LikeThumb },
+  "slide-button": { Thumb: SlideThumb },
+  "arrow-button": { Thumb: ArrowThumb },
+  "sonar-button": { Thumb: SonarThumb },
+  "fill-button": { Thumb: FillThumb },
+  "status-button": { Thumb: StatusThumb },
 };

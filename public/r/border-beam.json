@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "border-beam",
+  "title": "Border Beam",
+  "description": "A beam of light that travels around the border of any box.",
+  "files": [
+    {
+      "path": "registry/ombak/border-beam/border-beam.tsx",
+      "content": "\"use client\";\n\nimport { type CSSProperties, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type BorderBeamProps = {\n  /** The content that gets the moving border. */\n  children: ReactNode;\n  /** Beam colors, from tail to head. Default [\"transparent\", \"#2dd4bf\", \"#a5f3fc\"] */\n  colors?: string[];\n  /** Seconds for one lap. Default 4 */\n  duration?: number;\n  /** Border thickness in px. Default 1.5 */\n  width?: number;\n  /** Length of the beam as a share of the lap, 0–1. Default 0.25 */\n  length?: number;\n  className?: string;\n};\n\n/**\n * A beam of light that travels around the border of any box. Wrap a card, an input or a CTA.\n * Pure CSS (a rotating conic gradient); a still beam for reduced-motion users.\n */\nexport function BorderBeam({\n  children,\n  colors = [\"transparent\", \"#2dd4bf\", \"#a5f3fc\"],\n  duration = 4,\n  width = 1.5,\n  length = 0.25,\n  className,\n}: BorderBeamProps) {\n  const deg = Math.round(length * 360);\n  const stops = colors.map((c, i) => `${c} ${Math.round((i / (colors.length - 1)) * deg)}deg`).join(\", \");\n  const style = {\n    \"--beam\": `conic-gradient(from var(--beam-angle), ${stops}, transparent ${deg}deg)`,\n    \"--beam-duration\": `${duration}s`,\n    padding: width,\n  } as CSSProperties;\n\n  return (\n    <div className={cn(\"relative isolate overflow-hidden rounded-xl bg-border\", className)} style={style}>\n      <style>{`@property --beam-angle{syntax:'<angle>';inherits:false;initial-value:0deg}\n@keyframes ombak-beam{to{--beam-angle:360deg}}`}</style>\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10 [animation:ombak-beam_var(--beam-duration)_linear_infinite] [background:var(--beam)] motion-reduce:animate-none\"\n      />\n      <div className=\"relative h-full rounded-[inherit] bg-card text-card-foreground\">{children}</div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "buttons"
+  ],
+  "type": "registry:component"
+}

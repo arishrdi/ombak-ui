@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonar-button",
+  "title": "Sonar Button",
+  "description": "A call-to-action that sends out soft sonar rings to get noticed.",
+  "files": [
+    {
+      "path": "registry/ombak/sonar-button/sonar-button.tsx",
+      "content": "import { type ButtonHTMLAttributes, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type SonarButtonProps = {\n  /** Button content. */\n  children?: ReactNode;\n  /** Ring color. Default your theme's primary color */\n  color?: string;\n  /** Number of rings in flight. Default 3 */\n  rings?: number;\n  /** Seconds for one ring to fade out. Default 2.4 */\n  duration?: number;\n  className?: string;\n} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"children\" | \"className\" | \"color\">;\n\n/**\n * A call-to-action that sends out soft sonar rings, so it gets noticed without shouting.\n * Pure CSS; no rings for reduced-motion users.\n */\nexport function SonarButton({ children, color = \"var(--primary)\", rings = 3, duration = 2.4, className, ...rest }: SonarButtonProps) {\n  return (\n    <span className=\"relative inline-flex\">\n      <style>{`@keyframes ombak-sonar{from{transform:scale(1);opacity:.55}to{transform:scale(1.9);opacity:0}}`}</style>\n      {Array.from({ length: rings }, (_, i) => (\n        <span\n          key={i}\n          aria-hidden\n          className=\"pointer-events-none absolute inset-0 rounded-full motion-reduce:hidden\"\n          style={{\n            border: `2px solid ${color}`,\n            animation: `ombak-sonar ${duration}s cubic-bezier(.2,.6,.3,1) ${(i * duration) / rings}s infinite`,\n            opacity: 0,\n          }}\n        />\n      ))}\n      <button\n        className={cn(\n          \"relative inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground\",\n          \"transition-transform duration-150 outline-none focus-visible:ring-4 focus-visible:ring-ring/50 active:scale-[0.97]\",\n          className,\n        )}\n        {...rest}\n      >\n        {children}\n      </button>\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "buttons"
+  ],
+  "type": "registry:component"
+}

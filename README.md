@@ -6,7 +6,7 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (32)
+## Components (42)
 
 | Component | Category | Dependencies |
 |---|---|---|
@@ -32,16 +32,26 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Velocity Skew | Scroll | gsap |
 | Horizontal Scroll | Scroll | gsap, @gsap/react |
 | Parallax Image | Scroll | gsap, @gsap/react |
-| Magnetic Button | Interaction | gsap |
+| Magnetic Button | Buttons | gsap |
+| Ripple Button | Buttons | none |
+| Splash Button | Buttons | none |
+| Shiny Button | Buttons | none |
+| Border Beam | Buttons | none |
+| Hold Button | Buttons | none |
+| Copy Button | Buttons | none |
+| Like Button | Buttons | none |
+| Slide Button | Buttons | none |
+| Arrow Button | Buttons | none |
+| Sonar Button | Buttons | none |
+| Fill Button | Buttons | none |
+| Status Button | Buttons | none |
 | Tilt Card | Interaction | gsap |
 | Glow Card | Interaction | none |
-| Ripple Button | Interaction | none |
 | Hover Preview | Interaction | gsap |
 | Custom Cursor | Interaction | gsap |
 | Magnify Dock | Interaction | none |
 | Torch Reveal | Interaction | none |
 | Swipe Stack | Interaction | none |
-| Splash Button | Interaction | none |
 
 ## Project structure
 
