@@ -6,7 +6,7 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (92)
+## Components (102)
 
 | Component | Category | Dependencies |
 |---|---|---|
@@ -15,6 +15,11 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Bubbles | Backgrounds | none |
 | Caustics | Backgrounds | none |
 | Current Lines | Backgrounds | none |
+| Aurora | Backgrounds | none |
+| Light Rays | Backgrounds | none |
+| Plankton | Backgrounds | none |
+| Rain Ripples | Backgrounds | none |
+| Dot Swell | Backgrounds | none |
 | Text Reveal | Text | gsap, @gsap/react |
 | Scramble Text | Text | gsap |
 | Rolling Text | Text | none |
@@ -95,6 +100,11 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Star Rating | Forms | none |
 | Number Stepper | Forms | none |
 | Expand Search | Forms | none |
+| Toast Stack | Overlays | none |
+| Ripple Dialog | Overlays | none |
+| Drift Tooltip | Overlays | none |
+| Tide Drawer | Overlays | none |
+| Bloom Popover | Overlays | none |
 | Tilt Card | Interaction | gsap |
 | Glow Card | Interaction | none |
 | Hover Preview | Interaction | gsap |

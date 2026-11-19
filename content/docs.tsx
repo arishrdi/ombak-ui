@@ -225,6 +225,51 @@ import { CustomCursor } from "@/components/custom-cursor";
   <h1>Under the surface.</h1>
 </Caustics>`,
   },
+  aurora: {
+    Demo: D.AuroraDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { Aurora } from "@/components/aurora";
+
+<Aurora className="h-[480px] bg-slate-950" colors={["#3fd1b0", "#0ea5e9", "#6366f1"]}>
+  <h1>After the sunset.</h1>
+</Aurora>`,
+  },
+  "light-rays": {
+    Demo: D.LightRaysDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { LightRays } from "@/components/light-rays";
+
+<LightRays className="h-[480px] bg-gradient-to-b from-sky-900 to-slate-950" count={10}>
+  <h1>Into the blue.</h1>
+</LightRays>`,
+  },
+  plankton: {
+    Demo: D.PlanktonDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { Plankton } from "@/components/plankton";
+
+<Plankton className="h-[480px]" color="#5ef0c8" radius={160}>
+  <h1>Move to light it up.</h1>
+</Plankton>`,
+  },
+  "rain-ripples": {
+    Demo: D.RainRipplesDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { RainRipples } from "@/components/rain-ripples";
+
+<RainRipples className="h-[480px] bg-slate-900 text-sky-200" rate={8}>
+  <h1>Rain on the sea.</h1>
+</RainRipples>`,
+  },
+  "dot-swell": {
+    Demo: D.DotSwellDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { DotSwell } from "@/components/dot-swell";
+
+<DotSwell className="h-[480px] bg-slate-950 text-cyan-300" amplitude={30}>
+  <h1>Open water.</h1>
+</DotSwell>`,
+  },
   "current-lines": {
     Demo: D.CurrentLinesDemo,
     stage: "p-0 md:p-0",
@@ -729,5 +774,56 @@ import { CustomCursor } from "@/components/custom-cursor";
     usage: `import { ExpandSearch } from "@/components/expand-search";
 
 <ExpandSearch onSearch={setQuery} onSubmit={runSearch} />`,
+  },
+  "toast-stack": {
+    Demo: D.ToastStackDemo,
+    usage: `import { Toaster, toast } from "@/components/toast-stack";
+
+// once, e.g. in app/layout.tsx
+<Toaster position="bottom-right" />
+
+// anywhere
+toast("Changes saved", { description: "Your profile is up to date." });
+toast.success("Payment received");
+toast.error("Upload failed", { duration: 6000 });`,
+  },
+  "ripple-dialog": {
+    Demo: D.RippleDialogDemo,
+    usage: `import { RippleDialog } from "@/components/ripple-dialog";
+
+<RippleDialog
+  trigger={<button>Delete project</button>}
+  title="Delete this project?"
+  description="You can't undo this."
+>
+  <form method="dialog"><button>Cancel</button></form>
+</RippleDialog>
+
+// or controlled
+<RippleDialog open={open} onOpenChange={setOpen} title="Settings">…</RippleDialog>`,
+  },
+  "drift-tooltip": {
+    Demo: D.DriftTooltipDemo,
+    usage: `import { DriftTooltip } from "@/components/drift-tooltip";
+
+<DriftTooltip content="Bold">
+  <button aria-label="Bold">B</button>
+</DriftTooltip>`,
+  },
+  "tide-drawer": {
+    Demo: D.TideDrawerDemo,
+    usage: `import { TideDrawer } from "@/components/tide-drawer";
+
+<TideDrawer trigger={<button>Share</button>} title="Share this page">
+  {/* anything */}
+</TideDrawer>`,
+  },
+  "bloom-popover": {
+    Demo: D.BloomPopoverDemo,
+    usage: `import { BloomPopover } from "@/components/bloom-popover";
+
+<BloomPopover trigger="Notifications" label="Notification settings">
+  <p>Notify me about…</p>
+</BloomPopover>`,
   },
 };

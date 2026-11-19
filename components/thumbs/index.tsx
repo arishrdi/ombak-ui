@@ -85,6 +85,15 @@ import { TagInput } from "@/registry/ombak/tag-input/tag-input";
 import { StarRating } from "@/registry/ombak/star-rating/star-rating";
 import { NumberStepper } from "@/registry/ombak/number-stepper/number-stepper";
 import { ExpandSearch } from "@/registry/ombak/expand-search/expand-search";
+import { RippleDialog } from "@/registry/ombak/ripple-dialog/ripple-dialog";
+import { DriftTooltip } from "@/registry/ombak/drift-tooltip/drift-tooltip";
+import { TideDrawer } from "@/registry/ombak/tide-drawer/tide-drawer";
+import { BloomPopover } from "@/registry/ombak/bloom-popover/bloom-popover";
+import { Aurora } from "@/registry/ombak/aurora/aurora";
+import { LightRays } from "@/registry/ombak/light-rays/light-rays";
+import { Plankton } from "@/registry/ombak/plankton/plankton";
+import { RainRipples } from "@/registry/ombak/rain-ripples/rain-ripples";
+import { DotSwell } from "@/registry/ombak/dot-swell/dot-swell";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -681,6 +690,76 @@ function SearchThumb() {
   return <ExpandSearch hotkey={false} width="13rem" />;
 }
 
+
+function AuroraThumb() {
+  return <Aurora className="size-full bg-[#050c16]" blur={40} />;
+}
+function LightRaysThumb() {
+  return <LightRays className="size-full bg-gradient-to-b from-[#0b4a6e] to-[#031421]" />;
+}
+function PlanktonThumb() {
+  return <Plankton className="size-full" count={90} />;
+}
+function RainRipplesThumb() {
+  return <RainRipples className="size-full bg-gradient-to-b from-[#0c2533] to-[#071822]" maxRadius={50} />;
+}
+function DotSwellThumb() {
+  return <DotSwell className="size-full bg-[#050c16]" columns={36} rows={16} amplitude={16} />;
+}
+function ToastThumb() {
+  // a still picture of the stack: the real <Toaster /> is fixed to the viewport
+  return (
+    <div className="relative h-28 w-64" aria-hidden>
+      {[2, 1, 0].map((d) => (
+        <div
+          key={d}
+          className="absolute inset-x-0 bottom-0 flex items-start gap-3 rounded-2xl border bg-popover p-3.5 text-left shadow-lg"
+          style={{ transform: `translateY(${-d * 12}px) scale(${1 - d * 0.06})`, zIndex: 3 - d, opacity: d === 2 ? 0.6 : 1 }}
+        >
+          <span className="mt-1.5 size-2 shrink-0 rounded-full bg-emerald-500" />
+          <div>
+            <p className="text-sm font-medium">Payment received</p>
+            <p className="text-xs text-muted-foreground">Rp 250.000 from Wayan</p>
+          </div>
+          {d === 0 && <span className="absolute inset-x-0 bottom-0 h-0.5 w-2/3 rounded-full bg-emerald-500/60" />}
+        </div>
+      ))}
+    </div>
+  );
+}
+function RippleDialogThumb() {
+  return (
+    <RippleDialog
+      trigger={<button type="button" className="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground">Open dialog</button>}
+      title="Ripple Dialog"
+      description="Opened from where you clicked."
+    />
+  );
+}
+function DriftTooltipThumb() {
+  return (
+    <DriftTooltip content="Drifting along">
+      <button type="button" className="rounded-full border bg-background px-8 py-2.5 text-sm font-medium">Hover along me</button>
+    </DriftTooltip>
+  );
+}
+function TideDrawerThumb() {
+  return (
+    <TideDrawer
+      trigger={<button type="button" className="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground">Open drawer</button>}
+      title="Tide Drawer"
+      description="Drag the handle down to close."
+    />
+  );
+}
+function BloomPopoverThumb() {
+  return (
+    <BloomPopover trigger="Open popover" label="Example">
+      <p className="text-sm">Blooms out of its trigger.</p>
+    </BloomPopover>
+  );
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -774,4 +853,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "star-rating": { Thumb: StarThumb },
   "number-stepper": { Thumb: StepperThumb },
   "expand-search": { Thumb: SearchThumb },
+  aurora: { Thumb: AuroraThumb, bleed: true },
+  "light-rays": { Thumb: LightRaysThumb, bleed: true },
+  plankton: { Thumb: PlanktonThumb, bleed: true },
+  "rain-ripples": { Thumb: RainRipplesThumb, bleed: true },
+  "dot-swell": { Thumb: DotSwellThumb, bleed: true },
+  "toast-stack": { Thumb: ToastThumb },
+  "ripple-dialog": { Thumb: RippleDialogThumb },
+  "drift-tooltip": { Thumb: DriftTooltipThumb },
+  "tide-drawer": { Thumb: TideDrawerThumb },
+  "bloom-popover": { Thumb: BloomPopoverThumb },
 };

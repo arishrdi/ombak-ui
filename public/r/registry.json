@@ -79,6 +79,81 @@
       ]
     },
     {
+      "name": "aurora",
+      "type": "registry:component",
+      "title": "Aurora",
+      "description": "Soft blobs of colored light drifting slowly behind your content. Pure CSS.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/aurora/aurora.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "light-rays",
+      "type": "registry:component",
+      "title": "Light Rays",
+      "description": "Shafts of sunlight slanting down through the water, each swaying on its own rhythm. Pure CSS.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/light-rays/light-rays.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "plankton",
+      "type": "registry:component",
+      "title": "Plankton",
+      "description": "Bioluminescent specks drifting in dark water that flare up as the cursor passes.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/plankton/plankton.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rain-ripples",
+      "type": "registry:component",
+      "title": "Rain Ripples",
+      "description": "Rain falling on still water: drops spread into flattened rings. Click to drop your own.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/rain-ripples/rain-ripples.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dot-swell",
+      "type": "registry:component",
+      "title": "Dot Swell",
+      "description": "An ocean surface drawn as dots in perspective, rolling with swells and lifting toward the cursor.",
+      "categories": [
+        "background"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/dot-swell/dot-swell.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "text-reveal",
       "type": "registry:component",
       "title": "Text Reveal",
@@ -1430,6 +1505,81 @@
       "files": [
         {
           "path": "registry/ombak/swipe-stack/swipe-stack.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "toast-stack",
+      "type": "registry:component",
+      "title": "Toast Stack",
+      "description": "Toasts that fold into a stack, fan out on hover, drain a tide line and swipe away. Call toast() anywhere.",
+      "categories": [
+        "overlays"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/toast-stack/toast-stack.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ripple-dialog",
+      "type": "registry:component",
+      "title": "Ripple Dialog",
+      "description": "A modal that opens as a ripple from where you clicked. Native <dialog>, so focus and Escape just work.",
+      "categories": [
+        "overlays"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/ripple-dialog/ripple-dialog.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "drift-tooltip",
+      "type": "registry:component",
+      "title": "Drift Tooltip",
+      "description": "A tooltip that floats into place and drifts sideways after the cursor, like it's carried by a current.",
+      "categories": [
+        "overlays"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/drift-tooltip/drift-tooltip.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tide-drawer",
+      "type": "registry:component",
+      "title": "Tide Drawer",
+      "description": "A bottom sheet that rises like the tide with a rolling wave edge. Drag it down to let it ebb away.",
+      "categories": [
+        "overlays"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/tide-drawer/tide-drawer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bloom-popover",
+      "type": "registry:component",
+      "title": "Bloom Popover",
+      "description": "A popover that blooms out of its trigger with a soft spring and a little tail.",
+      "categories": [
+        "overlays"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/bloom-popover/bloom-popover.tsx",
           "type": "registry:component"
         }
       ]
