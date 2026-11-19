@@ -13,6 +13,7 @@ export function navGroups(): NavGroup[] {
         { href: "/docs/components", title: "All components" },
         { href: "/blocks", title: "Blocks" },
         { href: "/templates", title: "Templates" },
+        { href: "/themes", title: "Themes" },
         { href: "/kit", title: "Your kit" },
       ],
     },

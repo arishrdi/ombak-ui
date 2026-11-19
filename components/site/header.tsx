@@ -11,17 +11,18 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-hairline bg-background/60 backdrop-blur-2xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/50">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
-        <div className="flex items-center gap-2 md:gap-8">
+        <div className="flex items-center gap-2 lg:gap-8">
           <MobileNav groups={groups} />
           <Link href="/" aria-label="Ombak UI home">
             <Logo />
           </Link>
-          <nav className="hidden items-center gap-1 text-[13px] font-medium text-muted-foreground md:flex">
+          <nav className="hidden items-center gap-1 text-[13px] font-medium text-muted-foreground lg:flex">
             <Link href="/docs" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Docs</Link>
             <Link href="/docs/components" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Components</Link>
             <Link href="/blocks" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Blocks</Link>
-            <Link href="/templates" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">
-              Templates
+            <Link href="/templates" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Templates</Link>
+            <Link href="/themes" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">
+              Themes
               <span className="rounded-full bg-surf/15 px-1.5 py-px font-mono text-[9px] tracking-wider text-surf uppercase">New</span>
             </Link>
             <Link href="/docs/installation" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Installation</Link>

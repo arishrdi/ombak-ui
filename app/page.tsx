@@ -320,6 +320,7 @@ export default function Home() {
               <li><Link href="/docs/components" className="hover:text-foreground">Components</Link></li>
               <li><Link href="/blocks" className="hover:text-foreground">Blocks</Link></li>
               <li><Link href="/templates" className="hover:text-foreground">Templates</Link></li>
+              <li><Link href="/themes" className="hover:text-foreground">Themes</Link></li>
             </ul>
           </div>
           <div>
