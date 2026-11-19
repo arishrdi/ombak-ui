@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { thumbs } from "@/components/thumbs";
+import { KitButton } from "./kit-button";
 import { cn } from "@/lib/utils";
 
 export type CardItem = { name: string; title: string; description: string; category: string };
@@ -34,6 +35,10 @@ export function ComponentCard({ item, className, tall }: { item: CardItem; class
           className="pointer-events-none absolute inset-0 opacity-[0.5] [background-image:linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
         />
         <div className={cn("relative flex items-center justify-center", t?.bleed ? "size-full" : "")}>{t && <t.Thumb />}</div>
+        {/* shown on hover/focus, always once added, and always on touch screens */}
+        <span className="absolute top-2.5 right-2.5 z-[3] opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-within:opacity-100 has-[[aria-pressed=true]]:opacity-100 [@media(hover:none)]:opacity-100">
+          <KitButton name={item.name} title={item.title} variant="icon" />
+        </span>
       </div>
       <div className="pointer-events-none flex flex-1 items-start justify-between gap-4 px-5 pt-4 pb-5">
         <div className="min-w-0">

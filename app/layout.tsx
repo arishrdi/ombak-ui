@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Header } from "@/components/site/header";
 import { ChromeGate } from "@/components/site/chrome-gate";
+import { KitTray } from "@/components/site/kit-tray";
 import { themeScript } from "@/components/site/theme-toggle";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
         </ChromeGate>
         {children}
+        <KitTray />
       </body>
     </html>
   );
