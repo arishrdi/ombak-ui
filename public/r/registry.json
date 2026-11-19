@@ -1648,6 +1648,89 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "saas-landing",
+      "type": "registry:block",
+      "title": "SaaS Landing",
+      "description": "A complete product landing page: wave hero, logos, features, numbers, pricing, testimonials, FAQ and CTA.",
+      "categories": [
+        "template"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/navbar-floating.json",
+        "https://ombakui.com/r/hero-wave.json",
+        "https://ombakui.com/r/logo-marquee.json",
+        "https://ombakui.com/r/feature-bento.json",
+        "https://ombakui.com/r/stats-band.json",
+        "https://ombakui.com/r/pricing-tiers.json",
+        "https://ombakui.com/r/testimonial-wall.json",
+        "https://ombakui.com/r/faq-split.json",
+        "https://ombakui.com/r/cta-caustics.json",
+        "https://ombakui.com/r/footer-wave.json"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/saas-landing/saas-landing.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "studio-landing",
+      "type": "registry:block",
+      "title": "Studio Landing",
+      "description": "A portfolio page for a creative studio: rotating headline, hover-preview work list, service cards and contact form.",
+      "categories": [
+        "template"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/navbar-floating.json",
+        "https://ombakui.com/r/stats-band.json",
+        "https://ombakui.com/r/testimonial-wall.json",
+        "https://ombakui.com/r/contact-form.json",
+        "https://ombakui.com/r/footer-wave.json",
+        "https://ombakui.com/r/curved-marquee.json",
+        "https://ombakui.com/r/hover-preview.json",
+        "https://ombakui.com/r/orbit-text.json",
+        "https://ombakui.com/r/rotating-words.json",
+        "https://ombakui.com/r/text-reveal.json",
+        "https://ombakui.com/r/wave-card.json"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/studio-landing/studio-landing.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "app-launch",
+      "type": "registry:block",
+      "title": "App Launch",
+      "description": "A pre-launch page with a bubbly hero, countdown, waitlist form, scroll-lit statement, features and FAQ.",
+      "categories": [
+        "template"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/navbar-floating.json",
+        "https://ombakui.com/r/feature-bento.json",
+        "https://ombakui.com/r/faq-split.json",
+        "https://ombakui.com/r/footer-wave.json",
+        "https://ombakui.com/r/bubbles.json",
+        "https://ombakui.com/r/count-up.json",
+        "https://ombakui.com/r/countdown.json",
+        "https://ombakui.com/r/floating-input.json",
+        "https://ombakui.com/r/scroll-words.json",
+        "https://ombakui.com/r/status-button.json",
+        "https://ombakui.com/r/text-reveal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/app-launch/app-launch.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
