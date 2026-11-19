@@ -8,8 +8,8 @@ export default function ComponentsIndex() {
   const list = cardItems();
   return (
     <div>
-      <h1 className="font-display text-5xl font-bold tracking-tight">Components</h1>
-      <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
+      <h1 className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">Components</h1>
+      <p className="mt-3 max-w-2xl text-[17px] leading-relaxed text-muted-foreground">
         {list.length} components, all free and MIT licensed. Hover the previews to play with them.
       </p>
       <div className="mt-10">

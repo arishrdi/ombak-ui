@@ -32,22 +32,22 @@ export default async function ComponentPage({ params }: Params) {
   const next = items[index + 1];
 
   return (
-    <article className="space-y-12">
+    <article className="prose-ombak space-y-14">
       <header>
-        <nav className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+        <nav className="mb-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
           <a href="/docs/components" className="hover:text-foreground">Components</a>
-          <span>/</span>
+          <span className="opacity-40">/</span>
           <span>{CATEGORY_LABELS[item.categories?.[0] ?? ""]}</span>
         </nav>
-        <h1 className="font-display text-5xl font-bold tracking-tight">{item.title}</h1>
-        <p className="mt-3 max-w-2xl text-lg text-muted-foreground">{item.description}</p>
+        <h1 className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{item.title}</h1>
+        <p className="mt-3 max-w-2xl text-[17px] leading-relaxed text-muted-foreground">{item.description}</p>
         <div className="mt-5 flex flex-wrap gap-2">
           {(deps.length ? deps : ["no dependencies"]).map((d) => (
-            <span key={d} className="rounded-full border bg-muted/40 px-3 py-1 font-mono text-xs text-muted-foreground">
+            <span key={d} className="surface rounded-full px-3 py-1 font-mono text-[11px] text-muted-foreground">
               {d}
             </span>
           ))}
-          <span className="rounded-full border border-surf/40 bg-surf/10 px-3 py-1 text-xs text-surf">MIT · free</span>
+          <span className="rounded-full bg-surf/10 px-3 py-1 font-mono text-[11px] text-surf shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--surf)_30%,transparent)]">MIT · free</span>
         </div>
       </header>
 
@@ -58,7 +58,7 @@ export default async function ComponentPage({ params }: Params) {
       />
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
+        <h2 className="font-display text-xl font-semibold tracking-[-0.02em]">Installation</h2>
         <InstallTabs
           cli={<CodeBlock lang="bash" code={`npx shadcn@latest add ${registryUrl(slug)}`} />}
           manual={
@@ -79,18 +79,28 @@ export default async function ComponentPage({ params }: Params) {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
+        <h2 className="font-display text-xl font-semibold tracking-[-0.02em]">Usage</h2>
         <CodeBlock code={doc.usage} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Props</h2>
+        <h2 className="font-display text-xl font-semibold tracking-[-0.02em]">Props</h2>
         <PropsTable props={getProps(slug)} />
       </section>
 
-      <nav className="flex justify-between gap-4 border-t pt-8 text-sm">
-        {prev ? <a href={`/docs/components/${prev.name}`} className="text-muted-foreground hover:text-foreground">← {prev.title}</a> : <span />}
-        {next ? <a href={`/docs/components/${next.name}`} className="text-muted-foreground hover:text-foreground">{next.title} →</a> : <span />}
+      <nav className="grid gap-4 border-t border-hairline pt-10 sm:grid-cols-2">
+        {prev ? (
+          <a href={`/docs/components/${prev.name}`} className="surface glow-border group rounded-2xl p-5 transition-shadow duration-500 hover:shadow-soft-md">
+            <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">← Previous</span>
+            <span className="mt-1.5 block font-medium tracking-[-0.01em]">{prev.title}</span>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a href={`/docs/components/${next.name}`} className="surface glow-border group rounded-2xl p-5 text-right transition-shadow duration-500 hover:shadow-soft-md">
+            <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Next →</span>
+            <span className="mt-1.5 block font-medium tracking-[-0.01em]">{next.title}</span>
+          </a>
+        ) : <span />}
       </nav>
     </article>
   );

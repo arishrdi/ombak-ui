@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-wave",
+  "title": "Hero Wave",
+  "description": "A full-height hero on animated waves with a word-by-word headline and a magnetic button.",
+  "registryDependencies": [
+    "https://ombakui.com/r/magnetic-button.json",
+    "https://ombakui.com/r/rolling-text.json",
+    "https://ombakui.com/r/text-reveal.json",
+    "https://ombakui.com/r/wave-background.json"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/hero-wave/hero-wave.tsx",
+      "content": "\"use client\";\n\nimport { WaveBackground } from \"@/components/wave-background\";\nimport { TextReveal } from \"@/components/text-reveal\";\nimport { MagneticButton } from \"@/components/magnetic-button\";\nimport { RollingText } from \"@/components/rolling-text\";\nimport { cn } from \"@/lib/utils\";\n\nexport type HeroWaveProps = {\n  /** Small label in the pill above the headline. */\n  badge?: string;\n  /** Main headline. Revealed word by word on load. */\n  title?: string;\n  /** Supporting paragraph under the headline. */\n  description?: string;\n  /** Primary call to action. */\n  primary?: { label: string; href: string };\n  /** Secondary text link. */\n  secondary?: { label: string; href: string };\n  /** Wave colors, back to front. */\n  colors?: string[];\n  className?: string;\n};\n\n/**\n * A full-height hero on animated ocean waves: badge, word-by-word headline,\n * a magnetic primary button and a rolling text link.\n */\nexport function HeroWave({\n  badge = \"New: 92 components\",\n  title = \"Make your website move like water.\",\n  description = \"A calm, fast landing page hero. Waves swell under the cursor, the headline rises word by word.\",\n  primary = { label: \"Get started\", href: \"#\" },\n  secondary = { label: \"Read the docs\", href: \"#\" },\n  colors = [\"#0f2a66\", \"#0b5e91\", \"#138fa3\", \"#3fd1b0\"],\n  className,\n}: HeroWaveProps) {\n  return (\n    <WaveBackground colors={colors} baseline={0.88} amplitude={0.06} blur={2} className={cn(\"bg-[#050c16] text-white\", className)}>\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(50%_40%_at_50%_0%,rgba(94,240,200,.14),transparent_70%)]\"\n      />\n      <div className=\"mx-auto flex min-h-[640px] max-w-5xl flex-col items-center px-6 pt-24 pb-56 text-center md:pt-32\">\n        <span className=\"inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-3 py-1 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.1)] backdrop-blur\">\n          <span className=\"size-1.5 rounded-full bg-[#5ef0c8] shadow-[0_0_10px_#5ef0c8]\" />\n          {badge}\n        </span>\n        <TextReveal\n          as=\"h1\"\n          split=\"words\"\n          trigger=\"load\"\n          stagger={0.06}\n          className=\"mt-7 text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] font-semibold tracking-[-0.045em]\"\n        >\n          {title}\n        </TextReveal>\n        <p className=\"mt-6 max-w-xl text-base leading-relaxed text-white/60 md:text-lg\">{description}</p>\n        <div className=\"mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-4\">\n          <MagneticButton as=\"a\" href={primary.href} className=\"bg-white px-7 text-[#050c16]\">\n            {primary.label} →\n          </MagneticButton>\n          <a href={secondary.href} className=\"group/roll text-sm font-medium text-white/85 hover:text-white\">\n            <RollingText text={secondary.label} />\n          </a>\n        </div>\n      </div>\n    </WaveBackground>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "hero"
+  ],
+  "type": "registry:block"
+}

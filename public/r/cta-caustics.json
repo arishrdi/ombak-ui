@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-caustics",
+  "title": "CTA Caustics",
+  "description": "A closing call to action in a panel of shimmering underwater light.",
+  "registryDependencies": [
+    "https://ombakui.com/r/caustics.json",
+    "https://ombakui.com/r/magnetic-button.json"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/cta-caustics/cta-caustics.tsx",
+      "content": "\"use client\";\n\nimport { Caustics } from \"@/components/caustics\";\nimport { MagneticButton } from \"@/components/magnetic-button\";\nimport { cn } from \"@/lib/utils\";\n\nexport type CtaCausticsProps = {\n  title?: string;\n  description?: string;\n  primary?: { label: string; href: string };\n  secondary?: { label: string; href: string };\n  className?: string;\n};\n\n/** A closing call to action in a rounded panel with shimmering underwater light. */\nexport function CtaCaustics({\n  title = \"Ready to make your site move?\",\n  description = \"Free, open source, and one command away.\",\n  primary = { label: \"Get started\", href: \"#\" },\n  secondary = { label: \"Star on GitHub\", href: \"#\" },\n  className,\n}: CtaCausticsProps) {\n  return (\n    <section className={cn(\"bg-background px-4 py-16 md:px-6 md:py-24\", className)}>\n      <Caustics className=\"mx-auto max-w-6xl rounded-[28px] bg-[#04202a] text-white shadow-2xl ring-1 ring-white/10\">\n        <div className=\"flex flex-col items-center px-6 py-20 text-center md:py-28\">\n          <h2 className=\"max-w-3xl text-4xl font-semibold tracking-[-0.045em] md:text-6xl\">{title}</h2>\n          <p className=\"mt-5 max-w-lg text-white/65\">{description}</p>\n          <div className=\"mt-10 flex flex-wrap justify-center gap-3\">\n            <MagneticButton as=\"a\" href={primary.href} className=\"bg-white text-[#04202a]\">\n              {primary.label}\n            </MagneticButton>\n            <MagneticButton as=\"a\" href={secondary.href} className=\"bg-white/5 text-white ring-1 ring-white/25\">\n              {secondary.label}\n            </MagneticButton>\n          </div>\n        </div>\n      </Caustics>\n    </section>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "cta"
+  ],
+  "type": "registry:block"
+}

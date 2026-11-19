@@ -1433,6 +1433,158 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "hero-wave",
+      "type": "registry:block",
+      "title": "Hero Wave",
+      "description": "A full-height hero on animated waves with a word-by-word headline and a magnetic button.",
+      "categories": [
+        "hero"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/magnetic-button.json",
+        "https://ombakui.com/r/rolling-text.json",
+        "https://ombakui.com/r/text-reveal.json",
+        "https://ombakui.com/r/wave-background.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-wave/hero-wave.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "logo-marquee",
+      "type": "registry:block",
+      "title": "Logo Marquee",
+      "description": "A \"trusted by\" strip of logos drifting past with faded edges.",
+      "categories": [
+        "social-proof"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/marquee.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-marquee/logo-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "stats-band",
+      "type": "registry:block",
+      "title": "Stats Band",
+      "description": "Headline numbers that count up on scroll, split by hairline dividers.",
+      "categories": [
+        "social-proof"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/count-up.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/stats-band/stats-band.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "feature-bento",
+      "type": "registry:block",
+      "title": "Feature Bento",
+      "description": "A bento grid of feature cards with a cursor-following glow.",
+      "categories": [
+        "features"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/glow-card.json",
+        "https://ombakui.com/r/text-reveal.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/feature-bento/feature-bento.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:block",
+      "title": "Pricing Tiers",
+      "description": "Three plans with a monthly/yearly switch; the featured plan has a travelling border beam.",
+      "categories": [
+        "pricing"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/border-beam.json",
+        "https://ombakui.com/r/fill-button.json",
+        "https://ombakui.com/r/segmented-control.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-tiers/pricing-tiers.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "testimonial-wall",
+      "type": "registry:block",
+      "title": "Testimonial Wall",
+      "description": "Two rows of review cards drifting in opposite directions.",
+      "categories": [
+        "social-proof"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/marquee.json",
+        "https://ombakui.com/r/star-rating.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/testimonial-wall/testimonial-wall.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "faq-split",
+      "type": "registry:block",
+      "title": "FAQ Split",
+      "description": "A two-column FAQ with a sticky heading and an animated accordion.",
+      "categories": [
+        "faq"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/accordion.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-split/faq-split.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-caustics",
+      "type": "registry:block",
+      "title": "CTA Caustics",
+      "description": "A closing call to action in a panel of shimmering underwater light.",
+      "categories": [
+        "cta"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/caustics.json",
+        "https://ombakui.com/r/magnetic-button.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/cta-caustics/cta-caustics.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

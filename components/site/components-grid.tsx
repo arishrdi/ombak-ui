@@ -17,7 +17,7 @@ export function ComponentsGrid({ items }: { items: CardItem[] }) {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by category">
+        <div className="surface flex max-w-full gap-1 overflow-x-auto rounded-full p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Filter by category">
           {categories.map((c) => {
             const count = c === "All" ? items.length : items.filter((i) => i.category === c).length;
             return (
@@ -27,11 +27,11 @@ export function ComponentsGrid({ items }: { items: CardItem[] }) {
                 aria-selected={cat === c}
                 onClick={() => setCat(c)}
                 className={cn(
-                  "rounded-full border px-3.5 py-1.5 text-sm transition",
-                  cat === c ? "border-transparent bg-foreground text-background" : "text-muted-foreground hover:text-foreground",
+                  "shrink-0 rounded-full px-3.5 py-1.5 text-[13px] font-medium whitespace-nowrap transition duration-300",
+                  cat === c ? "bg-foreground text-background shadow-soft-sm" : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                {c} <span className="ml-1 opacity-60">{count}</span>
+                {c} <span className="ml-1 font-mono text-[11px] opacity-50">{count}</span>
               </button>
             );
           })}
@@ -41,13 +41,13 @@ export function ComponentsGrid({ items }: { items: CardItem[] }) {
           onChange={(e) => setQ(e.target.value)}
           placeholder="Filter components…"
           aria-label="Filter components"
-          className="h-9 w-full rounded-lg border bg-muted/40 px-3 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/50 sm:w-60"
+          className="surface h-10 w-full rounded-full px-4 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/50 sm:w-64"
         />
       </div>
       {shown.length === 0 ? (
         <p className="py-20 text-center text-muted-foreground">No components match “{q}”.</p>
       ) : (
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((item) => (
             <ComponentCard key={item.name} item={item} />
           ))}

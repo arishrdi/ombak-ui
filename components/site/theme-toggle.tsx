@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 /** Inline script for <head>: applies the saved theme before paint, so there's no flash. */
-export const themeScript = `(function(){try{var t=localStorage.getItem('ombak-theme');var d=t?t==='dark':true;document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}})();`;
+export const themeScript = `(function(){try{var t=localStorage.getItem('ombak-theme');var d=t?t==='dark':true;document.documentElement.classList.toggle('dark',d);}catch(e){document.documentElement.classList.add('dark');}window.addEventListener('storage',function(e){if(e.key==='ombak-theme')document.documentElement.classList.toggle('dark',e.newValue!=='light');});})();`;
 
 export function ThemeToggle() {
   const [dark, setDark] = useState(true);

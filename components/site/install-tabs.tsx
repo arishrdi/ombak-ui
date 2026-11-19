@@ -7,7 +7,7 @@ export function InstallTabs({ cli, manual }: { cli: ReactNode; manual: ReactNode
   const [tab, setTab] = useState<"cli" | "manual">("cli");
   return (
     <div>
-      <div className="mb-3 inline-flex rounded-lg border bg-muted/40 p-1">
+      <div className="surface mb-3 inline-flex rounded-full p-1">
         {(
           [
             ["cli", "CLI"],
@@ -18,8 +18,8 @@ export function InstallTabs({ cli, manual }: { cli: ReactNode; manual: ReactNode
             key={key}
             onClick={() => setTab(key)}
             className={cn(
-              "rounded-md px-3 py-1.5 text-sm font-medium transition",
-              tab === key ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
+              "rounded-full px-4 py-1.5 text-[13px] font-medium transition duration-300",
+              tab === key ? "bg-foreground text-background shadow-soft-sm" : "text-muted-foreground hover:text-foreground",
             )}
           >
             {label}

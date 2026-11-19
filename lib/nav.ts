@@ -1,4 +1,4 @@
-import { CATEGORY_LABELS, groupedItems, items } from "@/lib/registry";
+import { CATEGORY_LABELS, blocks, groupedItems, items } from "@/lib/registry";
 
 export type NavGroup = { label: string; links: { href: string; title: string; description?: string }[] };
 
@@ -11,12 +11,17 @@ export function navGroups(): NavGroup[] {
         { href: "/docs", title: "Introduction" },
         { href: "/docs/installation", title: "Installation" },
         { href: "/docs/components", title: "All components" },
+        { href: "/blocks", title: "Blocks" },
       ],
     },
     ...groupedItems().map((g) => ({
       label: g.label,
       links: g.items.map((i) => ({ href: `/docs/components/${i.name}`, title: i.title, description: i.description })),
     })),
+    {
+      label: "Blocks",
+      links: blocks.map((b) => ({ href: `/blocks/${b.name}`, title: b.title, description: b.description })),
+    },
   ];
 }
 

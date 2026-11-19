@@ -6,9 +6,9 @@ export const metadata: Metadata = { title: "Introduction" };
 
 export default function Intro() {
   return (
-    <article className="max-w-2xl">
-      <h1 className="font-display text-5xl font-bold tracking-tight">Introduction</h1>
-      <p className="mt-4 text-lg text-muted-foreground">
+    <article className="prose-ombak max-w-2xl">
+      <h1 className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">Introduction</h1>
+      <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground">
         Ombak UI is a collection of motion components for React: scroll effects, text animations and interactive
         details, built with GSAP, Tailwind CSS and canvas.
       </p>
