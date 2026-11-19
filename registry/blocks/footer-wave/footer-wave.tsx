@@ -19,7 +19,7 @@ export type FooterWaveProps = {
   onSubscribe?: (email: string) => Promise<unknown> | unknown;
   /** Status line next to the copyright. Set to null to hide it. */
   status?: string | null;
-  /** Copyright line. */
+  /** Copyright line. Kept static: reading the clock during render breaks prerendering with cacheComponents. */
   copyright?: string;
   className?: string;
 };
@@ -63,7 +63,7 @@ export function FooterWave({
   columns = DEFAULT_COLUMNS,
   onSubscribe,
   status = "All systems normal",
-  copyright = `© ${new Date().getFullYear()} Lautan, Inc.`,
+  copyright = "© Lautan, Inc. All rights reserved.",
   className,
 }: FooterWaveProps) {
   const [email, setEmail] = useState("");
