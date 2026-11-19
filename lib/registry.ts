@@ -32,8 +32,13 @@ const all = registry.items as RegistryItem[];
 /** Single components (registry:component). */
 export const items = all.filter((i) => i.type !== "registry:block");
 
+const isTemplate = (i: RegistryItem) => i.categories?.includes("template") ?? false;
+
 /** Page sections composed from components (registry:block). */
-export const blocks = all.filter((i) => i.type === "registry:block");
+export const blocks = all.filter((i) => i.type === "registry:block" && !isTemplate(i));
+
+/** Whole pages composed from blocks and components (registry:block, category "template"). */
+export const templates = all.filter((i) => i.type === "registry:block" && isTemplate(i));
 
 export const BLOCK_CATEGORY_LABELS: Record<string, string> = {
   hero: "Hero",
@@ -72,19 +77,42 @@ export function getBlock(slug: string) {
   return blocks.find((b) => b.name === slug);
 }
 
-/** Block source as the user receives it: component imports point at "@/components/<name>". */
+export function getTemplate(slug: string) {
+  return templates.find((t) => t.name === slug);
+}
+
+/** Rewrites site-internal imports to where files land after install: "@/components/<name>". */
+function toInstalledImports(src: string) {
+  return src.replace(/@\/registry\/(?:ombak|blocks)\/([\w-]+)\/\1/g, "@/components/$1");
+}
+
+/** Block source as the user receives it. */
 export function getBlockSource(slug: string) {
   const block = getBlock(slug);
   if (!block) return "";
-  const src = fs.readFileSync(path.join(process.cwd(), "registry", "blocks", block.name, `${block.name}.tsx`), "utf8");
-  return src.replace(/@\/registry\/ombak\/([\w-]+)\/\1/g, "@/components/$1");
+  return toInstalledImports(fs.readFileSync(path.join(process.cwd(), "registry", "blocks", block.name, `${block.name}.tsx`), "utf8"));
+}
+
+/** Template source as the user receives it. */
+export function getTemplateSource(slug: string) {
+  const t = getTemplate(slug);
+  if (!t) return "";
+  return toInstalledImports(fs.readFileSync(path.join(process.cwd(), "registry", "templates", t.name, `${t.name}.tsx`), "utf8"));
+}
+
+function dependencyNames(item?: RegistryItem) {
+  return (item?.registryDependencies ?? []).map((d) => d.match(/\/r\/([\w-]+)\.json$/)?.[1]).filter((n): n is string => !!n);
 }
 
 /** Names of the Ombak components a block is built from. */
 export function blockComponents(slug: string) {
-  return (getBlock(slug)?.registryDependencies ?? [])
-    .map((d) => d.match(/\/r\/([\w-]+)\.json$/)?.[1])
-    .filter((n): n is string => !!n && !!getItem(n));
+  return dependencyNames(getBlock(slug)).filter((n) => !!getItem(n));
+}
+
+/** The blocks (in page order) and extra components a template uses. */
+export function templateParts(slug: string) {
+  const names = dependencyNames(getTemplate(slug));
+  return { blocks: names.filter((n) => !!getBlock(n)), components: names.filter((n) => !!getItem(n)) };
 }
 
 export function getProps(slug: string): PropDoc[] {

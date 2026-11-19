@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "saas-landing",
+  "title": "SaaS Landing",
+  "description": "A complete product landing page: wave hero, logos, features, numbers, pricing, testimonials, FAQ and CTA.",
+  "registryDependencies": [
+    "https://ombakui.com/r/navbar-floating.json",
+    "https://ombakui.com/r/hero-wave.json",
+    "https://ombakui.com/r/logo-marquee.json",
+    "https://ombakui.com/r/feature-bento.json",
+    "https://ombakui.com/r/stats-band.json",
+    "https://ombakui.com/r/pricing-tiers.json",
+    "https://ombakui.com/r/testimonial-wall.json",
+    "https://ombakui.com/r/faq-split.json",
+    "https://ombakui.com/r/cta-caustics.json",
+    "https://ombakui.com/r/footer-wave.json"
+  ],
+  "files": [
+    {
+      "path": "registry/templates/saas-landing/saas-landing.tsx",
+      "content": "\"use client\";\n\nimport { NavbarFloating } from \"@/components/navbar-floating\";\nimport { HeroWave } from \"@/components/hero-wave\";\nimport { LogoMarquee } from \"@/components/logo-marquee\";\nimport { FeatureBento } from \"@/components/feature-bento\";\nimport { StatsBand } from \"@/components/stats-band\";\nimport { PricingTiers } from \"@/components/pricing-tiers\";\nimport { TestimonialWall } from \"@/components/testimonial-wall\";\nimport { FaqSplit } from \"@/components/faq-split\";\nimport { CtaCaustics } from \"@/components/cta-caustics\";\nimport { FooterWave } from \"@/components/footer-wave\";\nimport { cn } from \"@/lib/utils\";\n\nexport type SaasLandingProps = {\n  className?: string;\n};\n\n/**\n * A complete SaaS landing page: floating navbar, wave hero, logos, features, numbers, pricing,\n * testimonials, FAQ, closing CTA and footer. Every section is an Ombak block, so edit the copy\n * here or open the block file to change its layout.\n */\nexport function SaasLanding({ className }: SaasLandingProps) {\n  return (\n    <div className={cn(\"min-h-screen bg-background text-foreground\", className)}>\n      <NavbarFloating\n        links={[\n          { label: \"Features\", href: \"#features\" },\n          { label: \"Pricing\", href: \"#pricing\" },\n          { label: \"Customers\", href: \"#customers\" },\n          { label: \"FAQ\", href: \"#faq\" },\n        ]}\n        cta={{ label: \"Start free\", href: \"#pricing\" }}\n        // overlap the dark hero; the \"dark\" class gives the bar light text and a dark glass pill\n        className=\"dark -mb-[76px] text-foreground\"\n      />\n      <main>\n        <HeroWave\n          badge=\"Lautan 2.0 is here\"\n          title=\"Ship calm, fast websites your team loves.\"\n          description=\"Lautan gives product teams a motion-ready design system, hosting and analytics in one place. Set up in minutes, not sprints.\"\n          primary={{ label: \"Start free\", href: \"#pricing\" }}\n          secondary={{ label: \"Book a demo\", href: \"#faq\" }}\n        />\n        <LogoMarquee />\n        <div id=\"features\" className=\"scroll-mt-20\">\n          <FeatureBento />\n        </div>\n        <StatsBand className=\"border-y bg-muted/30\" />\n        <div id=\"pricing\" className=\"scroll-mt-20\">\n          <PricingTiers />\n        </div>\n        <div id=\"customers\" className=\"scroll-mt-20\">\n          <TestimonialWall className=\"border-t\" />\n        </div>\n        <div id=\"faq\" className=\"scroll-mt-20\">\n          <FaqSplit className=\"border-t\" />\n        </div>\n        <CtaCaustics title=\"Your next launch, without the stress.\" primary={{ label: \"Start free\", href: \"#pricing\" }} secondary={{ label: \"Talk to sales\", href: \"#faq\" }} />\n      </main>\n      <FooterWave />\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "template"
+  ],
+  "type": "registry:block"
+}
