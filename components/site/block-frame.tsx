@@ -53,6 +53,7 @@ export function BlockFrame({
   title,
   width,
   reloadKey = 0,
+  fixedHeight,
   className,
 }: {
   slug: string;
@@ -60,10 +61,13 @@ export function BlockFrame({
   /** CSS width of the frame (e.g. "100%" or 390). */
   width: number | string;
   reloadKey?: number;
+  /** Keep the frame at this height and let it scroll, instead of growing to fit. */
+  fixedHeight?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLIFrameElement>(null);
-  const height = useBlockHeight(ref, [reloadKey]);
+  const measured = useBlockHeight(ref, [reloadKey]);
+  const height = measured && fixedHeight ? fixedHeight : measured;
 
   return (
     <iframe

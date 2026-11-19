@@ -11,7 +11,7 @@ const VIEWPORTS = [
 ] as const;
 
 /** Preview / Code switcher for a block, with viewport sizes, replay and open-in-new-tab. */
-export function BlockPreview({ slug, title, code }: { slug: string; title: string; code: ReactNode }) {
+export function BlockPreview({ slug, title, code, frameHeight }: { slug: string; title: string; code: ReactNode; frameHeight?: number }) {
   const [tab, setTab] = useState<"preview" | "code">("preview");
   const [vp, setVp] = useState<(typeof VIEWPORTS)[number]["key"]>("desktop");
   const [run, setRun] = useState(0);
@@ -87,7 +87,7 @@ export function BlockPreview({ slug, title, code }: { slug: string; title: strin
             className="relative mx-auto max-w-full overflow-hidden rounded-[18px] shadow-[0_0_0_1px_var(--border)] transition-[width] duration-500 ease-out-expo"
             style={{ width }}
           >
-            <BlockFrame slug={slug} title={title} width="100%" reloadKey={run} />
+            <BlockFrame slug={slug} title={title} width="100%" reloadKey={run} fixedHeight={frameHeight} />
           </div>
         </div>
       </div>
