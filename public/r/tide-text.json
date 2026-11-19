@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tide-text",
+  "title": "Tide Text",
+  "description": "Outlined display text with water inside that rises on hover.",
+  "files": [
+    {
+      "path": "registry/ombak/tide-text/tide-text.tsx",
+      "content": "import { type ElementType } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type TideTextProps = {\n  /** The text (best with big, bold display type). */\n  text: string;\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** Water level from 0 to 100. Default 55 */\n  level?: number;\n  /** Water color. Default your theme's primary color */\n  color?: string;\n  /** Raise the water to the top on hover. Default true */\n  fillOnHover?: boolean;\n  className?: string;\n};\n\n/**\n * Outlined display text with water inside it: a wave rolls across the surface and the level\n * rises to the brim on hover. Pure CSS (an SVG wave clipped to the letters).\n */\nexport function TideText({ text, as: Tag = \"span\", level = 55, color = \"var(--primary)\", fillOnHover = true, className }: TideTextProps) {\n  const wave = encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='400' viewBox='0 0 200 400' preserveAspectRatio='none'><path d='M0 20 Q 25 0 50 20 T 100 20 T 150 20 T 200 20 V 400 H 0 Z' fill='black'/></svg>`,\n  );\n  // The mask image is twice the element's height, with the wave crest 10% of the way down it.\n  // For mask-position-y p (a share of the size difference, -1 × height), the surface sits at\n  // (0.1 - p) × height, so to put it at (1 - level) we need p = level - 0.9.\n  const y = (l: number) => `${Math.round((l / 100 - 0.9) * 1000) / 10}%`;\n  return (\n    <Tag\n      aria-label={text}\n      className={cn(\"group/tide relative inline-block font-black\", className)}\n      style={{ [\"--tide-color\" as string]: color, [\"--tide-y\" as string]: y(level) }}\n    >\n      <style>{`@keyframes ombak-tide-text{to{-webkit-mask-position-x:-200px;mask-position-x:-200px}}`}</style>\n      {/* the outline */}\n      <span aria-hidden className=\"text-transparent [-webkit-text-stroke:2px_var(--tide-color)]\">\n        {text}\n      </span>\n      {/* the water: the text filled with color, masked by a wave that sits at the water level */}\n      <span\n        aria-hidden\n        className={cn(\n          \"absolute inset-0 [animation:ombak-tide-text_2.4s_linear_infinite] transition-[-webkit-mask-position-y,mask-position-y] duration-1000 ease-[cubic-bezier(.3,.7,.2,1)] motion-reduce:animate-none\",\n          fillOnHover && \"group-hover/tide:[--tide-y:40%]\",\n        )}\n        style={{\n          color: \"var(--tide-color)\",\n          WebkitMaskImage: `url(\"data:image/svg+xml,${wave}\")`,\n          maskImage: `url(\"data:image/svg+xml,${wave}\")`,\n          WebkitMaskRepeat: \"repeat-x\",\n          maskRepeat: \"repeat-x\",\n          WebkitMaskSize: \"200px 200%\",\n          maskSize: \"200px 200%\",\n          // mask-position-y isn't in React's style typings yet\n          [\"WebkitMaskPositionY\" as string]: \"var(--tide-y)\",\n          [\"maskPositionY\" as string]: \"var(--tide-y)\",\n        }}\n      >\n        {text}\n      </span>\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

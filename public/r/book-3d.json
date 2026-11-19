@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "book-3d",
+  "title": "Book 3D",
+  "description": "A 3D book that turns toward you and swings its cover open.",
+  "files": [
+    {
+      "path": "registry/ombak/book-3d/book-3d.tsx",
+      "content": "import { type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type Book3DProps = {\n  /** Cover content (title, image…). */\n  cover: ReactNode;\n  /** First page, revealed when the cover opens. */\n  page?: ReactNode;\n  /** Cover color behind your content. Default \"#0e7fbf\" */\n  color?: string;\n  /** Book thickness in px. Default 22 */\n  thickness?: number;\n  /** Size classes. Default \"h-64 w-48\" */\n  className?: string;\n};\n\n/**\n * A 3D book that turns toward you and swings its cover open on hover or focus. Great for\n * ebooks, guides, case studies and lead magnets. Pure CSS; no turning for reduced-motion users.\n */\nexport function Book3D({ cover, page, color = \"#0e7fbf\", thickness = 22, className }: Book3DProps) {\n  return (\n    <div tabIndex={0} className={cn(\"group/book relative h-64 w-48 outline-none [perspective:1400px]\", className)}>\n      <div\n        className=\"relative size-full [transform-style:preserve-3d] [transform:rotateY(-24deg)] transition-transform duration-700 ease-[cubic-bezier(.3,.7,.2,1)] group-hover/book:[transform:rotateY(-8deg)] group-focus-visible/book:[transform:rotateY(-8deg)] motion-reduce:transition-none\"\n      >\n        {/* pages block (the book's thickness) */}\n        <div\n          className=\"absolute inset-y-[3px] right-0 bg-[repeating-linear-gradient(90deg,#f8fafc_0_2px,#e2e8f0_2px_3px)]\"\n          style={{ width: thickness, transform: `rotateY(90deg) translateZ(${thickness / 2}px) translateX(${thickness / 2}px)`, transformOrigin: \"right\" }}\n        />\n        {/* back cover */}\n        <div className=\"absolute inset-0 rounded-r-md\" style={{ background: color, transform: `translateZ(${-thickness}px)` }} />\n        {/* first page */}\n        <div className=\"absolute inset-[3px] overflow-hidden rounded-r-sm bg-[#f8fafc] p-4 text-sm text-slate-700\" style={{ transform: \"translateZ(-1px)\" }}>\n          {page}\n        </div>\n        {/* front cover, hinged on the left */}\n        <div\n          className=\"absolute inset-0 origin-left overflow-hidden rounded-r-md shadow-[inset_4px_0_6px_-3px_rgba(0,0,0,.35)] transition-transform duration-700 ease-[cubic-bezier(.3,.7,.2,1)] group-hover/book:[transform:rotateY(-58deg)] group-focus-visible/book:[transform:rotateY(-58deg)] motion-reduce:transition-none\"\n          style={{ background: color }}\n        >\n          {cover}\n        </div>\n      </div>\n      {/* floor shadow */}\n      <div className=\"pointer-events-none absolute inset-x-4 -bottom-4 h-6 rounded-[50%] bg-black/30 blur-md\" />\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "cards"
+  ],
+  "type": "registry:component"
+}

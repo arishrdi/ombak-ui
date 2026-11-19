@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wave-underline",
+  "title": "Wave Underline",
+  "description": "A link underline that turns into a rolling wave on hover.",
+  "files": [
+    {
+      "path": "registry/ombak/wave-underline/wave-underline.tsx",
+      "content": "import { type ComponentPropsWithoutRef, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type WaveUnderlineProps = {\n  /** Link text. */\n  children: ReactNode;\n  /** Underline color. Default your theme's primary color */\n  color?: string;\n  className?: string;\n} & Omit<ComponentPropsWithoutRef<\"a\">, \"children\" | \"className\" | \"color\">;\n\n/**\n * A link whose straight underline turns into a rolling wave on hover or focus.\n * Pure CSS and SVG, so it works in Server Components; a still wave for reduced motion.\n */\nexport function WaveUnderline({ children, color = \"var(--primary)\", className, ...rest }: WaveUnderlineProps) {\n  const wave = encodeURIComponent(\n    `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='6' viewBox='0 0 20 6'><path d='M0 3 Q 5 0 10 3 T 20 3' fill='none' stroke='black' stroke-width='1.6'/></svg>`,\n  );\n  return (\n    <a className={cn(\"group/wu relative inline-block pb-1.5 font-medium outline-none\", className)} {...rest}>\n      <style>{`@keyframes ombak-wu{to{background-position-x:-20px}}`}</style>\n      {children}\n      {/* straight line */}\n      <span\n        aria-hidden\n        className=\"absolute inset-x-0 bottom-0 h-[2px] origin-left rounded-full transition-transform duration-300 group-hover/wu:scale-x-0 group-focus-visible/wu:scale-x-0\"\n        style={{ background: color }}\n      />\n      {/* wave, drawn with a mask so it takes the color */}\n      <span\n        aria-hidden\n        className=\"absolute inset-x-0 -bottom-[2px] h-[6px] scale-x-0 opacity-0 transition-all duration-300 group-hover/wu:scale-x-100 group-hover/wu:opacity-100 group-hover/wu:[animation:ombak-wu_.6s_linear_infinite] group-focus-visible/wu:scale-x-100 group-focus-visible/wu:opacity-100 motion-reduce:!animate-none\"\n        style={{\n          background: color,\n          WebkitMaskImage: `url(\"data:image/svg+xml,${wave}\")`,\n          maskImage: `url(\"data:image/svg+xml,${wave}\")`,\n          WebkitMaskRepeat: \"repeat-x\",\n          maskRepeat: \"repeat-x\",\n          WebkitMaskSize: \"20px 6px\",\n          maskSize: \"20px 6px\",\n        }}\n      />\n    </a>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

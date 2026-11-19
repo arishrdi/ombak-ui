@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "odometer",
+  "title": "Odometer",
+  "description": "A mechanical counter where every digit rolls on its own wheel.",
+  "files": [
+    {
+      "path": "registry/ombak/odometer/odometer.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type OdometerProps = {\n  /** The number to show. Change it and the digits roll to the new value. */\n  value: number;\n  /** Decimal places. Default 0 */\n  decimals?: number;\n  /** Locale for separators. Default \"en-US\" */\n  locale?: string;\n  prefix?: string;\n  suffix?: string;\n  /** Milliseconds for a digit to roll. Default 1400 */\n  duration?: number;\n  /** Milliseconds between neighbouring digits. Default 60 */\n  stagger?: number;\n  /** Roll in from zero when scrolled into view. Default true */\n  onView?: boolean;\n  className?: string;\n};\n\n/**\n * A mechanical counter: every digit rolls on its own wheel to the new value.\n * Screen readers and search engines get the formatted number as plain text.\n */\nexport function Odometer({\n  value,\n  decimals = 0,\n  locale = \"en-US\",\n  prefix = \"\",\n  suffix = \"\",\n  duration = 1400,\n  stagger = 60,\n  onView = true,\n  className,\n}: OdometerProps) {\n  const text = new Intl.NumberFormat(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);\n  const ref = useRef<HTMLSpanElement>(null);\n  const [armed, setArmed] = useState(!onView);\n  const [still, setStill] = useState(false);\n\n  useEffect(() => {\n    if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) {\n      setStill(true);\n      setArmed(true);\n      return;\n    }\n    if (!onView || !ref.current) return;\n    const io = new IntersectionObserver(([e]) => {\n      if (e.isIntersecting) {\n        io.disconnect();\n        requestAnimationFrame(() => setArmed(true));\n      }\n    });\n    io.observe(ref.current);\n    return () => io.disconnect();\n  }, [onView]);\n\n  const chars = text.split(\"\");\n  const digitCount = chars.filter((c) => /\\d/.test(c)).length;\n  let digitIndex = 0;\n\n  return (\n    <span ref={ref} className={cn(\"inline-flex items-baseline tabular-nums\", className)}>\n      <span className=\"sr-only\">{`${prefix}${text}${suffix}`}</span>\n      <span aria-hidden className=\"inline-flex leading-none\">\n        {prefix}\n        {chars.map((c, i) => {\n          if (!/\\d/.test(c)) return <span key={i}>{c}</span>;\n          const d = Number(c);\n          const order = digitCount - 1 - digitIndex++; // rightmost digits move first\n          return (\n            <span key={i} className=\"relative inline-block h-[1em] overflow-hidden\">\n              <span\n                className=\"flex flex-col\"\n                style={{\n                  transform: `translateY(${armed ? -d : 0}em)`,\n                  transition: still ? \"none\" : `transform ${duration}ms cubic-bezier(.2,.8,.2,1) ${order * stagger}ms`,\n                }}\n              >\n                {Array.from({ length: 10 }, (_, n) => (\n                  <span key={n} className=\"block h-[1em]\">\n                    {n}\n                  </span>\n                ))}\n              </span>\n            </span>\n          );\n        })}\n        {suffix}\n      </span>\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

@@ -18,6 +18,11 @@ export const CATEGORY_LABELS: Record<string, string> = {
   text: "Text",
   scroll: "Scroll",
   interaction: "Interaction",
+  buttons: "Buttons",
+  cards: "Cards",
+  loaders: "Loaders",
+  navigation: "Navigation",
+  forms: "Forms",
 };
 
 export const items = registry.items as RegistryItem[];

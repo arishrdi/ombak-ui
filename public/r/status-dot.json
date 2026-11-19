@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "status-dot",
+  "title": "Status Dot",
+  "description": "A presence indicator with a soft sonar pulse: online, away, busy, offline.",
+  "files": [
+    {
+      "path": "registry/ombak/status-dot/status-dot.tsx",
+      "content": "import { type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst COLORS = { online: \"#22c55e\", away: \"#f59e0b\", busy: \"#ef4444\", offline: \"#94a3b8\" } as const;\n\nexport type StatusDotProps = {\n  /** Which status to show. Default \"online\" */\n  status?: keyof typeof COLORS;\n  /** Pulse outward to draw attention. Defaults to true when online */\n  pulse?: boolean;\n  /** Optional text next to the dot. When omitted, the status is still announced to screen readers. */\n  children?: ReactNode;\n  /** Dot size in px. Default 10 */\n  size?: number;\n  className?: string;\n};\n\n/**\n * A presence indicator: a colored dot with a soft sonar pulse. Use it on avatars, team lists and\n * system status pages. Pure CSS; no pulse for reduced-motion users.\n */\nexport function StatusDot({ status = \"online\", pulse, children, size = 10, className }: StatusDotProps) {\n  const color = COLORS[status];\n  const pulsing = pulse ?? status === \"online\";\n  return (\n    <span className={cn(\"inline-flex items-center gap-2 text-sm\", className)}>\n      <style>{`@keyframes ombak-status-ping{75%,100%{transform:scale(2.4);opacity:0}}`}</style>\n      <span className=\"relative inline-flex\" style={{ width: size, height: size }}>\n        {pulsing && (\n          <span\n            aria-hidden\n            className=\"absolute inset-0 rounded-full opacity-60 [animation:ombak-status-ping_1.6s_cubic-bezier(0,0,.2,1)_infinite] motion-reduce:hidden\"\n            style={{ background: color }}\n          />\n        )}\n        <span className=\"relative inline-flex size-full rounded-full\" style={{ background: color }} />\n      </span>\n      {children ?? <span className=\"sr-only\">{status}</span>}\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "loaders"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "depth-grid",
+  "title": "Depth Grid",
+  "description": "The hovered item lifts toward you while the rest sink back. Pure CSS.",
+  "files": [
+    {
+      "path": "registry/ombak/depth-grid/depth-grid.tsx",
+      "content": "import { Children, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type DepthGridProps = {\n  /** Each direct child becomes a cell. */\n  children: ReactNode;\n  /** How far the other cells recede, 0–1. Default 0.5 */\n  depth?: number;\n  /** Blur the cells that recede. Default true */\n  blur?: boolean;\n  /** Grid classes, e.g. \"grid-cols-3 gap-4\". Default \"grid-cols-2 gap-4 md:grid-cols-3\" */\n  className?: string;\n};\n\n/**\n * A grid where the hovered (or focused) item lifts toward you while the rest sink back into the\n * water. Pure CSS using :has(), so it also works in Server Components.\n */\nexport function DepthGrid({ children, depth = 0.5, blur = true, className }: DepthGridProps) {\n  return (\n    <div\n      className={cn(\"group/depth grid grid-cols-2 gap-4 md:grid-cols-3\", className)}\n      style={{ [\"--recede-scale\" as string]: 1 - depth * 0.08, [\"--recede-opacity\" as string]: 1 - depth * 0.7, [\"--recede-blur\" as string]: blur ? `${depth * 4}px` : \"0px\" }}\n    >\n      {Children.toArray(children).map((child, i) => (\n        <div\n          key={i}\n          className={cn(\n            \"transition-[transform,opacity,filter] duration-500 ease-out motion-reduce:transition-none\",\n            // when any cell is hovered/focused, everything recedes...\n            \"group-has-[>div:hover]/depth:scale-[var(--recede-scale)] group-has-[>div:hover]/depth:opacity-[var(--recede-opacity)] group-has-[>div:hover]/depth:blur-[var(--recede-blur)]\",\n            \"group-has-[>div:focus-within]/depth:scale-[var(--recede-scale)] group-has-[>div:focus-within]/depth:opacity-[var(--recede-opacity)] group-has-[>div:focus-within]/depth:blur-[var(--recede-blur)]\",\n            // ...except the one under the cursor, which lifts\n            \"hover:!scale-[1.03] hover:!opacity-100 hover:!blur-none focus-within:!scale-[1.03] focus-within:!opacity-100 focus-within:!blur-none\",\n          )}\n        >\n          {child}\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "cards"
+  ],
+  "type": "registry:component"
+}

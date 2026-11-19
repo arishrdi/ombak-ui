@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tide-progress",
+  "title": "Tide Progress",
+  "description": "A progress bar filled with water, its front edge rolling like a wave.",
+  "files": [
+    {
+      "path": "registry/ombak/tide-progress/tide-progress.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\nexport type TideProgressProps = {\n  /** Progress from 0 to 100. */\n  value: number;\n  /** Bar height in px. Default 14 */\n  height?: number;\n  /** Water color. Default your theme's primary color */\n  color?: string;\n  /** Show the percentage at the end. Default false */\n  showValue?: boolean;\n  /** Accessible name. Default \"Progress\" */\n  label?: string;\n  className?: string;\n};\n\n/**\n * A progress bar filled with water: the leading edge rolls like a little wave as it moves.\n * Pure CSS and SVG; exposes role=\"progressbar\" with the current value.\n */\nexport function TideProgress({ value, height = 14, color = \"var(--primary)\", showValue = false, label = \"Progress\", className }: TideProgressProps) {\n  const v = Math.max(0, Math.min(100, value));\n  return (\n    <div className={cn(\"flex w-full items-center gap-3\", className)}>\n      <div\n        role=\"progressbar\"\n        aria-label={label}\n        aria-valuemin={0}\n        aria-valuemax={100}\n        aria-valuenow={Math.round(v)}\n        className=\"relative w-full overflow-hidden rounded-full bg-muted\"\n        style={{ height }}\n      >\n        <style>{`@keyframes ombak-tide{to{transform:translateY(-50%)}}`}</style>\n        <div\n          className=\"absolute inset-y-0 left-0 transition-[width] duration-700 ease-[cubic-bezier(.3,.7,.2,1)]\"\n          style={{ width: `${v}%`, background: color }}\n        >\n          {/* the rolling wave on the water's front edge */}\n          <svg\n            viewBox=\"0 0 10 40\"\n            preserveAspectRatio=\"none\"\n            aria-hidden\n            className=\"absolute top-0 left-full h-[200%] w-[7px] [animation:ombak-tide_1.2s_linear_infinite] motion-reduce:animate-none\"\n            style={{ fill: color }}\n          >\n            <path d=\"M0 0 Q 10 5 0 10 T 0 20 T 0 30 T 0 40 Z\" />\n          </svg>\n        </div>\n      </div>\n      {showValue && <span className=\"w-10 text-right text-sm font-medium tabular-nums\">{Math.round(v)}%</span>}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "loaders"
+  ],
+  "type": "registry:component"
+}

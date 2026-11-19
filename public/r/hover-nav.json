@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-nav",
+  "title": "Hover Nav",
+  "description": "A soft highlight that glides between links as the cursor moves.",
+  "files": [
+    {
+      "path": "registry/ombak/hover-nav/hover-nav.tsx",
+      "content": "\"use client\";\n\nimport { useRef, useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type HoverNavLink = { label: string; href: string };\n\nexport type HoverNavProps = {\n  /** The links. */\n  links: HoverNavLink[];\n  /** href of the current page; it gets an underline and aria-current. */\n  current?: string;\n  className?: string;\n};\n\n/**\n * Navigation links with a soft highlight that glides between them as the cursor (or keyboard\n * focus) moves, then fades out when you leave. The current page is marked with aria-current.\n */\nexport function HoverNav({ links, current, className }: HoverNavProps) {\n  const navRef = useRef<HTMLDivElement>(null);\n  const [hl, setHl] = useState({ left: 0, width: 0, visible: false });\n\n  const show = (el: HTMLElement) => setHl({ left: el.offsetLeft, width: el.offsetWidth, visible: true });\n\n  return (\n    <nav\n      ref={navRef}\n      onPointerLeave={() => setHl((h) => ({ ...h, visible: false }))}\n      onBlur={(e) => {\n        if (!navRef.current?.contains(e.relatedTarget as Node)) setHl((h) => ({ ...h, visible: false }));\n      }}\n      className={cn(\"relative inline-flex items-center gap-1\", className)}\n    >\n      <span\n        aria-hidden\n        className=\"pointer-events-none absolute inset-y-0 rounded-full bg-muted transition-all duration-300 ease-[cubic-bezier(.3,.7,.2,1)] motion-reduce:transition-none\"\n        style={{ left: hl.left, width: hl.width, opacity: hl.visible ? 1 : 0 }}\n      />\n      {links.map((l) => {\n        const isCurrent = current === l.href;\n        return (\n          <a\n            key={l.href}\n            href={l.href}\n            aria-current={isCurrent ? \"page\" : undefined}\n            onPointerEnter={(e) => show(e.currentTarget)}\n            onFocus={(e) => show(e.currentTarget)}\n            className={cn(\n              \"relative z-10 rounded-full px-4 py-2 text-sm font-medium transition-colors outline-none\",\n              isCurrent ? \"text-foreground\" : \"text-muted-foreground hover:text-foreground focus-visible:text-foreground\",\n            )}\n          >\n            {l.label}\n            {isCurrent && <span aria-hidden className=\"absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-primary\" />}\n          </a>\n        );\n      })}\n    </nav>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:component"
+}

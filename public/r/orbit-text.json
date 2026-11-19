@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "orbit-text",
+  "title": "Orbit Text",
+  "description": "Text around a slowly turning circle, the classic badge.",
+  "files": [
+    {
+      "path": "registry/ombak/orbit-text/orbit-text.tsx",
+      "content": "import { useId, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type OrbitTextProps = {\n  /** Text placed around the circle. A trailing separator like \" • \" makes the loop seamless. */\n  text: string;\n  /** Diameter in px. Default 160 */\n  size?: number;\n  /** Seconds per full turn; negative spins the other way. Default 14 */\n  duration?: number;\n  /** Something in the middle, e.g. an icon or logo. */\n  children?: ReactNode;\n  /** Pause while hovered. Default true */\n  pauseOnHover?: boolean;\n  className?: string;\n};\n\n/**\n * Text set around a circle that slowly turns, the classic \"scroll down\" or \"available for work\"\n * badge. Pure SVG and CSS; it stops turning for reduced-motion users.\n */\nexport function OrbitText({ text, size = 160, duration = 14, children, pauseOnHover = true, className }: OrbitTextProps) {\n  const id = `ombak-orbit-text-${useId().replace(/:/g, \"\")}`;\n  const r = 40; // in the 100×100 viewBox\n  return (\n    <div className={cn(\"group/orbit relative inline-grid place-items-center\", className)} style={{ width: size, height: size }}>\n      <style>{`@keyframes ombak-orbit-text{to{transform:rotate(360deg)}}`}</style>\n      <svg\n        viewBox=\"0 0 100 100\"\n        aria-label={text}\n        role=\"img\"\n        className={cn(\n          \"absolute inset-0 size-full motion-reduce:!animate-none\",\n          pauseOnHover && \"group-hover/orbit:[animation-play-state:paused]\",\n        )}\n        style={{ animation: `ombak-orbit-text ${Math.abs(duration)}s linear infinite`, animationDirection: duration < 0 ? \"reverse\" : \"normal\" }}\n      >\n        <defs>\n          <path id={id} d={`M50,50 m-${r},0 a${r},${r} 0 1,1 ${r * 2},0 a${r},${r} 0 1,1 -${r * 2},0`} />\n        </defs>\n        <text className=\"fill-current text-[9.4px] font-semibold tracking-[0.22em] uppercase\">\n          <textPath href={`#${id}`} textLength={2 * Math.PI * r - 1} lengthAdjust=\"spacing\">\n            {text}\n          </textPath>\n        </text>\n      </svg>\n      <div className=\"relative\">{children}</div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

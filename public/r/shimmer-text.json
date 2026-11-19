@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shimmer-text",
+  "title": "Shimmer Text",
+  "description": "A light sheen that glides across text, for loading states and quiet CTAs.",
+  "files": [
+    {
+      "path": "registry/ombak/shimmer-text/shimmer-text.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ElementType, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type ShimmerTextProps = {\n  children: ReactNode;\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** Resting text color. Default a muted version of your theme's foreground */\n  baseColor?: string;\n  /** Color of the moving sheen. Default your theme's foreground */\n  shimmerColor?: string;\n  /** Milliseconds for one sweep. Default 2400 */\n  duration?: number;\n  /** Width of the sheen, in % of the text width. Default 20 */\n  spread?: number;\n  className?: string;\n};\n\n/**\n * A light sheen that glides across the text over and over. Perfect for \"thinking…\" states,\n * badges and quiet calls to action. Uses your theme's foreground color by default.\n */\nexport function ShimmerText({\n  children,\n  as: Tag = \"span\",\n  baseColor = \"color-mix(in oklab, var(--foreground, #111) 45%, transparent)\",\n  shimmerColor = \"var(--foreground, #111)\",\n  duration = 2400,\n  spread = 20,\n  className,\n}: ShimmerTextProps) {\n  const ref = useRef<HTMLElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const a = el.animate([{ backgroundPosition: \"150% 0\" }, { backgroundPosition: \"-50% 0\" }], {\n      duration,\n      iterations: Infinity,\n      easing: \"ease-in-out\",\n    });\n    return () => a.cancel();\n  }, [duration]);\n\n  const half = spread / 2;\n  return (\n    <Tag\n      ref={ref}\n      className={cn(\"inline-block bg-clip-text text-transparent [-webkit-background-clip:text]\", className)}\n      style={{\n        backgroundImage: `linear-gradient(110deg, ${baseColor} ${50 - half}%, ${shimmerColor} 50%, ${baseColor} ${50 + half}%)`,\n        backgroundSize: \"250% 100%\",\n        backgroundPosition: \"150% 0\",\n      }}\n    >\n      {children}\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

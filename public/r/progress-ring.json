@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress-ring",
+  "title": "Progress Ring",
+  "description": "A circular progress indicator that animates to its value, or spins.",
+  "files": [
+    {
+      "path": "registry/ombak/progress-ring/progress-ring.tsx",
+      "content": "import { type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type ProgressRingProps = {\n  /** Progress from 0 to 100. Leave undefined for an endless spinner. */\n  value?: number;\n  /** Diameter in px. Default 64 */\n  size?: number;\n  /** Ring thickness in px. Default 6 */\n  thickness?: number;\n  /** Ring color. Default your theme's primary color */\n  color?: string;\n  /** Content in the middle. Defaults to the percentage when a value is set. */\n  children?: ReactNode;\n  /** Accessible name. Default \"Progress\" */\n  label?: string;\n  className?: string;\n};\n\n/**\n * A circular progress indicator. With a value it animates smoothly to it; without one it spins.\n * Exposes role=\"progressbar\" with the current value for screen readers.\n */\nexport function ProgressRing({ value, size = 64, thickness = 6, color = \"var(--primary)\", children, label = \"Progress\", className }: ProgressRingProps) {\n  const r = (size - thickness) / 2;\n  const c = 2 * Math.PI * r;\n  const determinate = typeof value === \"number\";\n  const v = determinate ? Math.max(0, Math.min(100, value)) : 25;\n\n  return (\n    <div\n      role=\"progressbar\"\n      aria-label={label}\n      aria-valuemin={0}\n      aria-valuemax={100}\n      aria-valuenow={determinate ? Math.round(v) : undefined}\n      className={cn(\"relative inline-grid place-items-center\", className)}\n      style={{ width: size, height: size }}\n    >\n      <style>{`@keyframes ombak-ring-spin{to{transform:rotate(360deg)}}`}</style>\n      <svg\n        width={size}\n        height={size}\n        className={cn(\"-rotate-90\", !determinate && \"[animation:ombak-ring-spin_1s_linear_infinite] motion-reduce:[animation-duration:3s]\")}\n        aria-hidden\n      >\n        <circle cx={size / 2} cy={size / 2} r={r} fill=\"none\" strokeWidth={thickness} className=\"stroke-muted\" />\n        <circle\n          cx={size / 2}\n          cy={size / 2}\n          r={r}\n          fill=\"none\"\n          stroke={color}\n          strokeWidth={thickness}\n          strokeLinecap=\"round\"\n          strokeDasharray={c}\n          strokeDashoffset={c * (1 - v / 100)}\n          style={{ transition: \"stroke-dashoffset 600ms cubic-bezier(.3,.7,.2,1)\" }}\n        />\n      </svg>\n      <span className=\"absolute text-xs font-semibold tabular-nums\">{children ?? (determinate ? `${Math.round(v)}%` : null)}</span>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "loaders"
+  ],
+  "type": "registry:component"
+}

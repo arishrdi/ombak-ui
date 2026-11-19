@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fill-button",
+  "title": "Fill Button",
+  "description": "An outline button that fills with water on hover, a wave rolling on top.",
+  "files": [
+    {
+      "path": "registry/ombak/fill-button/fill-button.tsx",
+      "content": "import { type ButtonHTMLAttributes, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type FillButtonProps = {\n  /** Button content. */\n  children?: ReactNode;\n  /** Water color. Default your theme's primary color */\n  color?: string;\n  /** Text color once filled. Default your theme's primary-foreground color */\n  fillTextColor?: string;\n  className?: string;\n} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, \"children\" | \"className\" | \"color\">;\n\n/**\n * An outline button that fills with water on hover: the level rises with a rolling wave on top.\n * Pure CSS and SVG; fills instantly for reduced-motion users.\n */\nexport function FillButton({\n  children,\n  color = \"var(--primary)\",\n  fillTextColor = \"var(--primary-foreground)\",\n  className,\n  style,\n  ...rest\n}: FillButtonProps) {\n  return (\n    <button\n      className={cn(\n        \"group/fill relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border-2 bg-transparent px-7 py-3 text-sm font-semibold text-foreground\",\n        \"transition-colors duration-500 outline-none focus-visible:ring-4 focus-visible:ring-ring/50\",\n        \"hover:text-[var(--fill-text)] focus-visible:text-[var(--fill-text)]\",\n        className,\n      )}\n      style={{ ...style, borderColor: color, [\"--fill\" as string]: color, [\"--fill-text\" as string]: fillTextColor }}\n      {...rest}\n    >\n      <style>{`@keyframes ombak-fill-wave{to{transform:translateX(-50%)}}`}</style>\n      <span\n        aria-hidden\n        className=\"absolute inset-x-0 bottom-0 -z-10 h-[260%] translate-y-full transition-transform duration-700 ease-[cubic-bezier(.3,.7,.3,1)] group-hover/fill:translate-y-[62%] group-focus-visible/fill:translate-y-[62%] motion-reduce:duration-0\"\n      >\n        {/* rolling wave on the water surface */}\n        <svg\n          viewBox=\"0 0 240 20\"\n          preserveAspectRatio=\"none\"\n          className=\"absolute -top-[9px] left-0 h-[10px] w-[200%] [animation:ombak-fill-wave_1.6s_linear_infinite] motion-reduce:animate-none\"\n          style={{ fill: \"var(--fill)\" }}\n        >\n          <path d=\"M0 10 Q 15 0 30 10 T 60 10 T 90 10 T 120 10 T 150 10 T 180 10 T 210 10 T 240 10 V 20 H 0 Z\" />\n        </svg>\n        <span className=\"absolute inset-0\" style={{ background: \"var(--fill)\" }} />\n      </span>\n      <span className=\"relative\">{children}</span>\n    </button>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "buttons"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "title": "Accordion",
+  "description": "Panels that open with a smooth height animation and a turning plus sign.",
+  "files": [
+    {
+      "path": "registry/ombak/accordion/accordion.tsx",
+      "content": "\"use client\";\n\nimport { useId, useState, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type AccordionItem = {\n  /** The question or heading. */\n  title: ReactNode;\n  /** The answer or panel content. */\n  content: ReactNode;\n};\n\nexport type AccordionProps = {\n  /** The items. */\n  items: AccordionItem[];\n  /** Allow several items open at once. Default false */\n  multiple?: boolean;\n  /** Indexes open at first. Default [] */\n  defaultOpen?: number[];\n  className?: string;\n};\n\n/**\n * An accordion whose panels open and close with a smooth height animation (CSS grid rows, no\n * measuring) and a rotating plus sign. Buttons expose aria-expanded and control their panels.\n */\nexport function Accordion({ items, multiple = false, defaultOpen = [], className }: AccordionProps) {\n  const [open, setOpen] = useState<number[]>(defaultOpen);\n  const id = useId();\n  const toggle = (i: number) =>\n    setOpen((o) => (o.includes(i) ? o.filter((x) => x !== i) : multiple ? [...o, i] : [i]));\n\n  return (\n    <div className={cn(\"w-full divide-y rounded-2xl border bg-card\", className)}>\n      {items.map((it, i) => {\n        const isOpen = open.includes(i);\n        return (\n          <div key={i}>\n            <h3>\n              <button\n                type=\"button\"\n                id={`${id}-h-${i}`}\n                aria-expanded={isOpen}\n                aria-controls={`${id}-p-${i}`}\n                onClick={() => toggle(i)}\n                className=\"flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium outline-none hover:bg-muted/40 focus-visible:bg-muted/60\"\n              >\n                {it.title}\n                <span aria-hidden className=\"relative size-4 shrink-0\">\n                  <span className=\"absolute top-1/2 left-0 h-0.5 w-4 -translate-y-1/2 rounded-full bg-current\" />\n                  <span\n                    className={cn(\n                      \"absolute top-1/2 left-0 h-0.5 w-4 -translate-y-1/2 rounded-full bg-current transition-transform duration-300\",\n                      isOpen ? \"rotate-0\" : \"rotate-90\",\n                    )}\n                  />\n                </span>\n              </button>\n            </h3>\n            <div\n              id={`${id}-p-${i}`}\n              role=\"region\"\n              aria-labelledby={`${id}-h-${i}`}\n              className={cn(\n                \"grid transition-[grid-template-rows] duration-400 ease-[cubic-bezier(.3,.7,.2,1)] motion-reduce:transition-none\",\n                isOpen ? \"grid-rows-[1fr]\" : \"grid-rows-[0fr]\",\n              )}\n              inert={!isOpen}\n            >\n              <div className=\"overflow-hidden\">\n                <div className=\"px-5 pb-5 text-sm leading-relaxed text-muted-foreground\">{it.content}</div>\n              </div>\n            </div>\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:component"
+}

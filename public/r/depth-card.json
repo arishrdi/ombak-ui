@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "depth-card",
+  "title": "Depth Card",
+  "description": "A card of floating layers that shift at different depths as it tilts.",
+  "files": [
+    {
+      "path": "registry/ombak/depth-card/depth-card.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type DepthCardProps = {\n  /**\n   * Card content. Mark any element with data-depth=\"0.2\" … \"1\" to make it float at that depth:\n   * deeper layers move more with the cursor.\n   */\n  children: ReactNode;\n  /** Maximum tilt in degrees. Default 8 */\n  tilt?: number;\n  /** How far (px) a depth=\"1\" layer shifts. Default 24 */\n  shift?: number;\n  className?: string;\n};\n\n/**\n * A card made of floating layers: tag elements with data-depth and they shift at different\n * speeds as the card tilts, for a real sense of depth. Still for touch and reduced-motion users.\n */\nexport function DepthCard({ children, tilt = 8, shift = 24, className }: DepthCardProps) {\n  const ref = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const el = ref.current;\n    if (!el) return;\n    if (window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    if (!window.matchMedia(\"(hover: hover) and (pointer: fine)\").matches) return;\n    const layers = Array.from(el.querySelectorAll<HTMLElement>(\"[data-depth]\"));\n    const cur = { x: 0, y: 0 };\n    const target = { x: 0, y: 0 };\n    let raf = 0;\n\n    const apply = () => {\n      el.style.transform = `perspective(900px) rotateX(${-cur.y * tilt}deg) rotateY(${cur.x * tilt}deg)`;\n      for (const l of layers) {\n        const d = Number(l.dataset.depth) || 0;\n        l.style.transform = `translate3d(${cur.x * shift * d}px, ${cur.y * shift * d}px, 0)`;\n      }\n    };\n    const tick = () => {\n      cur.x += (target.x - cur.x) * 0.12;\n      cur.y += (target.y - cur.y) * 0.12;\n      apply();\n      raf = Math.abs(target.x - cur.x) + Math.abs(target.y - cur.y) > 0.001 ? requestAnimationFrame(tick) : 0;\n    };\n    const kick = () => {\n      if (!raf) raf = requestAnimationFrame(tick);\n    };\n    const move = (e: PointerEvent) => {\n      const r = el.getBoundingClientRect();\n      target.x = ((e.clientX - r.left) / r.width - 0.5) * 2;\n      target.y = ((e.clientY - r.top) / r.height - 0.5) * 2;\n      kick();\n    };\n    const leave = () => {\n      target.x = target.y = 0;\n      kick();\n    };\n    layers.forEach((l) => (l.style.willChange = \"transform\"));\n    el.addEventListener(\"pointermove\", move);\n    el.addEventListener(\"pointerleave\", leave);\n    return () => {\n      cancelAnimationFrame(raf);\n      el.removeEventListener(\"pointermove\", move);\n      el.removeEventListener(\"pointerleave\", leave);\n    };\n  }, [tilt, shift]);\n\n  return (\n    <div ref={ref} className={cn(\"relative overflow-hidden rounded-2xl border bg-card text-card-foreground will-change-transform\", className)}>\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "cards"
+  ],
+  "type": "registry:component"
+}

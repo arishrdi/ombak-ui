@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bottom-bar",
+  "title": "Bottom Bar",
+  "description": "A mobile tab bar where the active icon hops into a bubble.",
+  "files": [
+    {
+      "path": "registry/ombak/bottom-bar/bottom-bar.tsx",
+      "content": "\"use client\";\n\nimport { useState, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type BottomBarItem = {\n  /** Label under the icon (and accessible name). */\n  label: string;\n  /** Icon element. */\n  icon: ReactNode;\n};\n\nexport type BottomBarProps = {\n  /** The tabs. */\n  items: BottomBarItem[];\n  /** Active index (controlled). */\n  value?: number;\n  /** Active index when uncontrolled. Default 0 */\n  defaultValue?: number;\n  /** Called with the tapped index. */\n  onChange?: (index: number) => void;\n  className?: string;\n};\n\n/**\n * A mobile tab bar: the active icon hops up into a bubble and its label slides in.\n * Fixed-position is up to you; the bar itself is a plain nav with aria-current on the active tab.\n */\nexport function BottomBar({ items, value, defaultValue = 0, onChange, className }: BottomBarProps) {\n  const [inner, setInner] = useState(defaultValue);\n  const active = value ?? inner;\n  return (\n    <nav className={cn(\"flex w-full max-w-sm items-stretch justify-around rounded-2xl border bg-card px-2 py-2 shadow-lg\", className)}>\n      {items.map((it, i) => {\n        const on = i === active;\n        return (\n          <button\n            key={it.label}\n            type=\"button\"\n            aria-current={on ? \"page\" : undefined}\n            onClick={() => {\n              if (value === undefined) setInner(i);\n              onChange?.(i);\n            }}\n            className=\"group/tab relative flex flex-1 flex-col items-center gap-1 rounded-xl py-1.5 outline-none focus-visible:ring-2 focus-visible:ring-ring/60\"\n          >\n            <span\n              className={cn(\n                \"grid size-10 place-items-center rounded-full transition-all duration-500 ease-[cubic-bezier(.3,1.6,.4,1)] [&>svg]:size-5 motion-reduce:transition-none\",\n                on ? \"-translate-y-1 bg-primary text-primary-foreground shadow-md\" : \"text-muted-foreground group-hover/tab:text-foreground\",\n              )}\n            >\n              {it.icon}\n            </span>\n            <span\n              className={cn(\n                \"text-[11px] font-medium transition-all duration-300\",\n                on ? \"translate-y-0 text-foreground opacity-100\" : \"translate-y-1 text-muted-foreground opacity-70\",\n              )}\n            >\n              {it.label}\n            </span>\n          </button>\n        );\n      })}\n    </nav>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:component"
+}

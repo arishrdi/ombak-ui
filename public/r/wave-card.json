@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wave-card",
+  "title": "Wave Card",
+  "description": "A card with rolling waves along its bottom edge that rise on hover.",
+  "files": [
+    {
+      "path": "registry/ombak/wave-card/wave-card.tsx",
+      "content": "import { type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type WaveCardProps = {\n  children: ReactNode;\n  /** Wave colors from back to front. Default ocean blues */\n  colors?: string[];\n  /** Wave height as a share of the card height, 0–1. Default 0.35 */\n  level?: number;\n  /** Raise the water when hovered. Default true */\n  riseOnHover?: boolean;\n  className?: string;\n};\n\nconst PATH = \"M0 10 Q 25 0 50 10 T 100 10 T 150 10 T 200 10 V 40 H 0 Z\";\n\n/**\n * A card with gently rolling waves along its bottom edge that rise when you hover it.\n * Pure CSS and SVG; still waves for reduced-motion users.\n */\nexport function WaveCard({ children, colors = [\"#1d4ed8\", \"#0ea5e9\", \"#5ef0c8\"], level = 0.35, riseOnHover = true, className }: WaveCardProps) {\n  return (\n    <div className={cn(\"group/wave relative isolate overflow-hidden rounded-2xl border bg-card text-card-foreground\", className)}>\n      <style>{`@keyframes ombak-wave-card{to{transform:translateX(-50%)}}`}</style>\n      <div\n        aria-hidden\n        className={cn(\n          \"pointer-events-none absolute inset-x-0 bottom-0 -z-10 transition-[height] duration-700 ease-out\",\n          riseOnHover && \"group-hover/wave:!h-[calc(var(--level)+12%)]\",\n        )}\n        style={{ height: `${level * 100}%`, [\"--level\" as string]: `${level * 100}%` }}\n      >\n        {colors.map((c, i) => (\n          <svg\n            key={i}\n            viewBox=\"0 0 200 40\"\n            preserveAspectRatio=\"none\"\n            className=\"absolute bottom-0 left-0 h-full w-[200%] motion-reduce:!animate-none\"\n            style={{\n              fill: c,\n              opacity: 0.55 + (i / colors.length) * 0.45,\n              bottom: `${-i * 6}%`,\n              animation: `ombak-wave-card ${9 - i * 2.2}s linear infinite`,\n              animationDirection: i % 2 ? \"reverse\" : \"normal\",\n            }}\n          >\n            <path d={PATH} />\n          </svg>\n        ))}\n      </div>\n      <div className=\"relative\">{children}</div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "cards"
+  ],
+  "type": "registry:component"
+}

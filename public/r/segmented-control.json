@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "segmented-control",
+  "title": "Segmented Control",
+  "description": "An iOS-style switcher with a sliding thumb. A real radio group.",
+  "files": [
+    {
+      "path": "registry/ombak/segmented-control/segmented-control.tsx",
+      "content": "\"use client\";\n\nimport { useLayoutEffect, useRef, useState, type KeyboardEvent } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type SegmentedControlProps = {\n  /** The options. */\n  options: string[];\n  /** Selected option (controlled). */\n  value?: string;\n  /** Selected option when uncontrolled. Defaults to the first option */\n  defaultValue?: string;\n  /** Called with the newly selected option. */\n  onChange?: (value: string) => void;\n  /** Accessible name for the group. */\n  label: string;\n  className?: string;\n};\n\n/**\n * An iOS-style segmented control: a thumb slides under the selected option.\n * A real radio group for assistive tech; arrow keys move the selection.\n */\nexport function SegmentedControl({ options, value, defaultValue, onChange, label, className }: SegmentedControlProps) {\n  const [inner, setInner] = useState(defaultValue ?? options[0]);\n  const selected = value ?? inner;\n  const idx = Math.max(0, options.indexOf(selected));\n  const refs = useRef<(HTMLButtonElement | null)[]>([]);\n  const [thumb, setThumb] = useState({ left: 0, width: 0 });\n\n  useLayoutEffect(() => {\n    const el = refs.current[idx];\n    if (el) setThumb({ left: el.offsetLeft, width: el.offsetWidth });\n  }, [idx, options.length]);\n\n  const choose = (i: number) => {\n    const v = options[i];\n    if (value === undefined) setInner(v);\n    onChange?.(v);\n    refs.current[i]?.focus();\n  };\n  const onKey = (e: KeyboardEvent) => {\n    const n = options.length;\n    const next = { ArrowRight: (idx + 1) % n, ArrowDown: (idx + 1) % n, ArrowLeft: (idx - 1 + n) % n, ArrowUp: (idx - 1 + n) % n }[e.key];\n    if (next === undefined) return;\n    e.preventDefault();\n    choose(next);\n  };\n\n  return (\n    <div role=\"radiogroup\" aria-label={label} onKeyDown={onKey} className={cn(\"relative inline-flex rounded-xl bg-muted p-1\", className)}>\n      <span\n        aria-hidden\n        className=\"absolute inset-y-1 rounded-lg bg-background shadow-sm transition-[left,width] duration-300 ease-[cubic-bezier(.3,.7,.2,1)] motion-reduce:transition-none\"\n        style={{ left: thumb.left, width: thumb.width }}\n      />\n      {options.map((o, i) => (\n        <button\n          key={o}\n          ref={(el) => {\n            refs.current[i] = el;\n          }}\n          type=\"button\"\n          role=\"radio\"\n          aria-checked={i === idx}\n          tabIndex={i === idx ? 0 : -1}\n          onClick={() => choose(i)}\n          className={cn(\n            \"relative z-10 min-w-20 rounded-lg px-4 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring/60\",\n            i === idx ? \"text-foreground\" : \"text-muted-foreground hover:text-foreground\",\n          )}\n        >\n          {o}\n        </button>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:component"
+}

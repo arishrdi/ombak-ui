@@ -6,13 +6,15 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (22)
+## Components (92)
 
 | Component | Category | Dependencies |
 |---|---|---|
 | Wave Background | Backgrounds | none |
 | Ripple Grid | Backgrounds | none |
 | Bubbles | Backgrounds | none |
+| Caustics | Backgrounds | none |
+| Current Lines | Backgrounds | none |
 | Text Reveal | Text | gsap, @gsap/react |
 | Scramble Text | Text | gsap |
 | Rolling Text | Text | none |
@@ -20,18 +22,86 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Wave Text | Text | none |
 | Typewriter | Text | none |
 | Highlight Text | Text | gsap, @gsap/react |
+| Split Flap | Text | none |
+| Odometer | Text | none |
+| Gradient Text | Text | none |
+| Shimmer Text | Text | none |
+| Morphing Text | Text | none |
+| Scroll Words | Text | gsap |
+| Glitch Text | Text | none |
+| Assemble Text | Text | none |
+| Swell Text | Text | none |
+| Orbit Text | Text | none |
+| Wave Underline | Text | none |
+| Rotating Words | Text | none |
+| Tide Text | Text | none |
+| Curved Marquee | Text | none |
 | Marquee | Scroll | gsap |
 | Stack Cards | Scroll | gsap, @gsap/react |
 | Image Reveal | Scroll | gsap, @gsap/react |
 | Velocity Skew | Scroll | gsap |
 | Horizontal Scroll | Scroll | gsap, @gsap/react |
 | Parallax Image | Scroll | gsap, @gsap/react |
-| Magnetic Button | Interaction | gsap |
+| Magnetic Button | Buttons | gsap |
+| Ripple Button | Buttons | none |
+| Splash Button | Buttons | none |
+| Shiny Button | Buttons | none |
+| Border Beam | Buttons | none |
+| Hold Button | Buttons | none |
+| Copy Button | Buttons | none |
+| Like Button | Buttons | none |
+| Slide Button | Buttons | none |
+| Arrow Button | Buttons | none |
+| Sonar Button | Buttons | none |
+| Fill Button | Buttons | none |
+| Status Button | Buttons | none |
+| Flip Card | Cards | none |
+| Expand Card | Cards | none |
+| Depth Grid | Cards | none |
+| Fan Cards | Cards | none |
+| Book 3D | Cards | none |
+| Depth Card | Cards | none |
+| Caption Card | Cards | none |
+| Wave Card | Cards | none |
+| Scratch Card | Cards | none |
+| Scatter Photos | Cards | none |
+| Wave Loader | Loaders | none |
+| Skeleton | Loaders | none |
+| Progress Ring | Loaders | none |
+| Typing Dots | Loaders | none |
+| Tide Progress | Loaders | none |
+| Orbit Spinner | Loaders | none |
+| Status Dot | Loaders | none |
+| Liquid Loader | Loaders | none |
+| Steps | Loaders | none |
+| Countdown | Loaders | none |
+| Animated Tabs | Navigation | none |
+| Floating Nav | Navigation | none |
+| Morph Menu | Navigation | none |
+| Segmented Control | Navigation | none |
+| Scroll Spy | Navigation | none |
+| Hover Nav | Navigation | none |
+| Bottom Bar | Navigation | none |
+| Accordion | Navigation | none |
+| Pagination | Navigation | none |
+| Dropdown Menu | Navigation | none |
+| Floating Input | Forms | none |
+| OTP Input | Forms | none |
+| Password Input | Forms | none |
+| Toggle Switch | Forms | none |
+| Range Slider | Forms | none |
+| File Dropzone | Forms | none |
+| Tag Input | Forms | none |
+| Star Rating | Forms | none |
+| Number Stepper | Forms | none |
+| Expand Search | Forms | none |
 | Tilt Card | Interaction | gsap |
 | Glow Card | Interaction | none |
-| Ripple Button | Interaction | none |
 | Hover Preview | Interaction | gsap |
 | Custom Cursor | Interaction | gsap |
+| Magnify Dock | Interaction | none |
+| Torch Reveal | Interaction | none |
+| Swipe Stack | Interaction | none |
 
 ## Project structure
 
