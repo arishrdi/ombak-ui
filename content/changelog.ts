@@ -19,6 +19,19 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    id: "copy-for-ai",
+    date: "2026-11-19",
+    title: "Copy for AI",
+    summary: "Hand any component, block or template to ChatGPT, Claude, Cursor or v0 with everything it needs to know.",
+    href: "/docs/components/magnetic-button",
+    changes: [
+      { type: "new", text: "A Copy for AI menu on every component, block and template page." },
+      { type: "new", text: "Copy prompt: description, install command, dependencies, usage and the props table as Markdown." },
+      { type: "new", text: "Copy prompt + source adds the full code, for edits and refactors." },
+      { type: "new", text: "Open in v0 starts a v0 chat with the registry item." },
+    ],
+  },
+  {
     id: "theme-builder",
     date: "2026-11-19",
     title: "Theme Builder",

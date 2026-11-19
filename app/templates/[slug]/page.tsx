@@ -6,6 +6,8 @@ import { BlockPreview } from "@/components/site/block-preview";
 import { CodeBlock } from "@/components/site/code-block";
 import { PropsTable } from "@/components/site/props-table";
 import { KitButton } from "@/components/site/kit-button";
+import { AiMenu } from "@/components/site/ai-menu";
+import { buildPrompt, openInV0Url } from "@/lib/ai-prompt";
 import { getBlock, getItem, getTemplate, getTemplateSource, templateParts, templates } from "@/lib/registry";
 import { registryUrl } from "@/lib/site";
 
@@ -66,6 +68,18 @@ export default function Page() {
   return <${doc.exportName} />;
 }`;
 
+  const promptInput = {
+    kind: "template" as const,
+    name: slug,
+    title: t.title,
+    description: t.description,
+    path: `/templates/${slug}`,
+    includes: [...parts.blocks.map((b) => getBlock(b)?.title ?? b), ...parts.components.map((c) => getItem(c)?.title ?? c)],
+    usage,
+    props: templateProps(source),
+    source,
+  };
+
   return (
     <article className="prose-ombak space-y-14">
       <header>
@@ -76,7 +90,10 @@ export default function Page() {
         </nav>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h1 className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{t.title}</h1>
-          <KitButton name={t.name} title={t.title} />
+          <div className="flex items-center gap-2">
+            <AiMenu prompt={buildPrompt(promptInput, false)} promptWithSource={buildPrompt(promptInput, true)} v0Url={openInV0Url(slug)} />
+            <KitButton name={t.name} title={t.title} />
+          </div>
         </div>
         <p className="mt-3 max-w-2xl text-[17px] leading-relaxed text-muted-foreground">{t.description}</p>
       </header>
