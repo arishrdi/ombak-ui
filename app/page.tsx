@@ -13,6 +13,7 @@ import { BlockThumb } from "@/components/site/block-frame";
 import { cardItems } from "@/lib/nav";
 import { blocks, templateParts, templates } from "@/lib/registry";
 import { templateDocs } from "@/content/templates";
+import { releases } from "@/content/changelog";
 import { registryUrl, site } from "@/lib/site";
 
 const HERO_WAVES = ["#0f2a66", "#0b5e91", "#138fa3", "#3fd1b0"];
@@ -49,11 +50,11 @@ export default function Home() {
         />
         <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col items-center px-4 pt-[14vh] pb-[26vh] text-center md:px-6">
           <Link
-            href="/templates"
+            href={`/changelog#${releases[0].id}`}
             className="group inline-flex w-fit items-center gap-2.5 rounded-full bg-white/[0.04] py-1 pr-3.5 pl-1 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.1)] backdrop-blur-md transition hover:bg-white/[0.07] hover:text-white"
           >
             <span className="rounded-full bg-gradient-to-b from-[#7ff5d6] to-[#3fd1b0] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-[#04201a] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,.5)]">New</span>
-            Templates: whole landing pages in one command
+            {releases[0].title} is here: see what&apos;s new
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </Link>
 
@@ -327,6 +328,8 @@ export default function Home() {
             <p className="font-mono text-[10.5px] tracking-[0.16em] text-muted-foreground/70 uppercase">Resources</p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               <li><a href={site.github} className="hover:text-foreground">GitHub</a></li>
+              <li><Link href="/changelog" className="hover:text-foreground">Changelog</Link></li>
+              <li><a href="/changelog/rss.xml" className="hover:text-foreground">RSS</a></li>
               <li><a href="/llms.txt" className="hover:text-foreground">llms.txt</a></li>
               <li><a href="/r/registry.json" className="hover:text-foreground">Registry index</a></li>
             </ul>
