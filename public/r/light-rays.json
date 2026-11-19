@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "light-rays",
+  "title": "Light Rays",
+  "description": "Shafts of sunlight slanting down through the water, each swaying on its own rhythm. Pure CSS.",
+  "files": [
+    {
+      "path": "registry/ombak/light-rays/light-rays.tsx",
+      "content": "import type { CSSProperties, ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type LightRaysProps = {\n  /** Content rendered on top. */\n  children?: ReactNode;\n  /** Color of the rays. Default \"#bff7ff\" */\n  color?: string;\n  /** Number of rays, 4–14. Default 9 */\n  count?: number;\n  /** Brightness of the rays, 0–1. Default 0.5 */\n  intensity?: number;\n  /** Seconds for one sway; lower is faster. Default 9 */\n  duration?: number;\n  className?: string;\n};\n\n/**\n * Shafts of sunlight slanting down through the water, each one swaying and breathing on its own\n * rhythm. Pure CSS gradients and a mask, so it is cheap and works in Server Components; the rays\n * hold still for reduced-motion users.\n */\nexport function LightRays({ children, color = \"#bff7ff\", count = 9, intensity = 0.5, duration = 9, className }: LightRaysProps) {\n  const n = Math.max(4, Math.min(14, Math.round(count)));\n  // deterministic pseudo-random so server and client render the same rays\n  const rand = (i: number, s: number) => {\n    const x = Math.sin(i * 12.9898 + s * 78.233) * 43758.5453;\n    return x - Math.floor(x);\n  };\n\n  return (\n    <div className={cn(\"relative isolate overflow-hidden\", className)}>\n      <style>{`\n@keyframes ombak-ray-sway{0%,100%{transform:rotate(var(--r)) scaleX(1)}50%{transform:rotate(calc(var(--r) + 4deg)) scaleX(1.25)}}\n@keyframes ombak-ray-breathe{0%,100%{opacity:var(--o)}50%{opacity:calc(var(--o) * .35)}}`}</style>\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0 -z-10 mix-blend-screen\"\n        style={{ maskImage: \"linear-gradient(to bottom, black 0%, black 35%, transparent 90%)\", WebkitMaskImage: \"linear-gradient(to bottom, black 0%, black 35%, transparent 90%)\" }}\n      >\n        {Array.from({ length: n }, (_, i) => {\n          const left = 5 + (i / (n - 1)) * 90 + (rand(i, 1) - 0.5) * 8;\n          const width = 3 + rand(i, 2) * 9;\n          const rot = -18 + rand(i, 3) * 14;\n          const o = (0.35 + rand(i, 4) * 0.65) * intensity;\n          return (\n            <span\n              key={i}\n              className=\"absolute -top-[10%] h-[130%] origin-top blur-md motion-reduce:!animate-none\"\n              style={\n                {\n                  left: `${left}%`,\n                  width: `${width}%`,\n                  background: `linear-gradient(to bottom, ${color}, transparent 85%)`,\n                  \"--r\": `${rot}deg`,\n                  \"--o\": o,\n                  opacity: o,\n                  transform: `rotate(${rot}deg)`,\n                  animation: `ombak-ray-sway ${duration * (0.8 + rand(i, 5) * 0.6)}s ease-in-out ${-rand(i, 6) * duration}s infinite, ombak-ray-breathe ${duration * (0.6 + rand(i, 7) * 0.8)}s ease-in-out ${-rand(i, 8) * duration}s infinite`,\n                } as CSSProperties\n              }\n            />\n          );\n        })}\n      </div>\n      {children}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "background"
+  ],
+  "type": "registry:component"
+}

@@ -92,6 +92,16 @@ import { TagInput } from "@/registry/ombak/tag-input/tag-input";
 import { StarRating } from "@/registry/ombak/star-rating/star-rating";
 import { NumberStepper } from "@/registry/ombak/number-stepper/number-stepper";
 import { ExpandSearch } from "@/registry/ombak/expand-search/expand-search";
+import { Toaster, toast } from "@/registry/ombak/toast-stack/toast-stack";
+import { RippleDialog } from "@/registry/ombak/ripple-dialog/ripple-dialog";
+import { DriftTooltip } from "@/registry/ombak/drift-tooltip/drift-tooltip";
+import { TideDrawer } from "@/registry/ombak/tide-drawer/tide-drawer";
+import { BloomPopover } from "@/registry/ombak/bloom-popover/bloom-popover";
+import { Aurora } from "@/registry/ombak/aurora/aurora";
+import { LightRays } from "@/registry/ombak/light-rays/light-rays";
+import { Plankton } from "@/registry/ombak/plankton/plankton";
+import { RainRipples } from "@/registry/ombak/rain-ripples/rain-ripples";
+import { DotSwell } from "@/registry/ombak/dot-swell/dot-swell";
 import { useEffect, useRef, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
@@ -1341,6 +1351,170 @@ export function ExpandSearchDemo() {
         <ExpandSearch onSearch={setQ} />
       </div>
       <p className="text-sm text-muted-foreground">{q ? "Searching for “" + q + "”" : "Click the icon or press /"}</p>
+    </div>
+  );
+}
+
+/* ---------- backgrounds ---------- */
+
+export function AuroraDemo() {
+  return (
+    <Aurora className="flex h-[440px] w-full items-center justify-center rounded-xl bg-[#050c16]">
+      <div className="pointer-events-none text-center text-white">
+        <p className="font-display text-5xl font-bold tracking-tight md:text-6xl">After the sunset.</p>
+        <p className="mt-3 text-sm text-white/70">Pure CSS. Works in Server Components.</p>
+      </div>
+    </Aurora>
+  );
+}
+
+export function LightRaysDemo() {
+  return (
+    <LightRays className="flex h-[440px] w-full items-center justify-center rounded-xl bg-gradient-to-b from-[#0b4a6e] to-[#031421]">
+      <p className="pointer-events-none font-display text-5xl font-bold tracking-tight text-white md:text-6xl">Into the blue.</p>
+    </LightRays>
+  );
+}
+
+export function PlanktonDemo() {
+  return (
+    <Plankton className="flex h-[440px] w-full items-center justify-center rounded-xl">
+      <div className="pointer-events-none text-center text-white">
+        <p className="font-display text-5xl font-bold tracking-tight md:text-6xl">Move to light it up.</p>
+        <p className="mt-3 text-sm text-white/60">Drag your cursor (or a finger) through the water.</p>
+      </div>
+    </Plankton>
+  );
+}
+
+export function RainRipplesDemo() {
+  return (
+    <RainRipples className="flex h-[440px] w-full cursor-pointer items-center justify-center rounded-xl bg-gradient-to-b from-[#0c2533] to-[#071822]">
+      <div className="pointer-events-none text-center text-white">
+        <p className="font-display text-5xl font-bold tracking-tight md:text-6xl">Hujan di laut.</p>
+        <p className="mt-3 text-sm text-white/60">Click anywhere to drop a stone.</p>
+      </div>
+    </RainRipples>
+  );
+}
+
+export function DotSwellDemo() {
+  return (
+    <DotSwell className="flex h-[440px] w-full items-start justify-center rounded-xl bg-[#050c16] pt-16">
+      <p className="pointer-events-none font-display text-5xl font-bold tracking-tight text-white md:text-6xl">Open water.</p>
+    </DotSwell>
+  );
+}
+
+/* ---------- overlays ---------- */
+
+export function ToastStackDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      <button type="button" className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground outline-none transition active:scale-[0.98] focus-visible:ring-4 focus-visible:ring-ring/40" onClick={() => toast("Changes saved", { description: "Your profile is up to date." })}>
+        Show toast
+      </button>
+      <button type="button" className="inline-flex h-10 items-center rounded-full border bg-background px-5 text-sm font-medium outline-none transition hover:bg-muted focus-visible:ring-4 focus-visible:ring-ring/40" onClick={() => toast.success("Payment received", { description: "Rp 250.000 from Wayan." })}>
+        Success
+      </button>
+      <button type="button" className="inline-flex h-10 items-center rounded-full border bg-background px-5 text-sm font-medium outline-none transition hover:bg-muted focus-visible:ring-4 focus-visible:ring-ring/40" onClick={() => toast.error("Upload failed", { description: "The file is larger than 10 MB." })}>
+        Error
+      </button>
+      <Toaster />
+    </div>
+  );
+}
+
+export function RippleDialogDemo() {
+  return (
+    <RippleDialog
+      trigger={
+        <button type="button" className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground outline-none transition active:scale-[0.98] focus-visible:ring-4 focus-visible:ring-ring/40">
+          Delete project
+        </button>
+      }
+      title="Delete this project?"
+      description="This removes the project and its 12 deployments. You can't undo this."
+    >
+      <div className="flex justify-end gap-2">
+        <form method="dialog">
+          <button className="inline-flex h-10 items-center rounded-full border bg-background px-5 text-sm font-medium outline-none transition hover:bg-muted focus-visible:ring-4 focus-visible:ring-ring/40">Cancel</button>
+        </form>
+        <form method="dialog">
+          <button className="inline-flex h-10 items-center rounded-full bg-red-500 px-5 text-sm font-medium text-white">Delete</button>
+        </form>
+      </div>
+    </RippleDialog>
+  );
+}
+
+export function DriftTooltipDemo() {
+  const icons: Array<[string, string]> = [
+    ["Bold", "M7 5h6a3.5 3.5 0 0 1 0 7H7zM7 12h7a3.5 3.5 0 0 1 0 7H7z"],
+    ["Italic", "M10 5h8M6 19h8M14 5l-4 14"],
+    ["Add a link", "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"],
+    ["Insert image", "M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4"],
+  ];
+  return (
+    <div className="flex flex-col items-center gap-10">
+      <div className="flex gap-1 rounded-2xl border bg-card p-1.5 shadow-sm">
+        {icons.map(([label, d]) => (
+          <DriftTooltip key={label} content={label}>
+            <button type="button" aria-label={label} className="grid size-10 place-items-center rounded-xl text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50">
+              <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>
+            </button>
+          </DriftTooltip>
+        ))}
+      </div>
+      <DriftTooltip content="Drifts after your cursor across the whole button" side="bottom">
+        <button type="button" className="inline-flex h-10 items-center rounded-full border bg-background px-5 text-sm font-medium outline-none transition hover:bg-muted focus-visible:ring-4 focus-visible:ring-ring/40 px-10">
+          Hover along me
+        </button>
+      </DriftTooltip>
+    </div>
+  );
+}
+
+export function TideDrawerDemo() {
+  return (
+    <TideDrawer
+      trigger={
+        <button type="button" className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground outline-none transition active:scale-[0.98] focus-visible:ring-4 focus-visible:ring-ring/40">
+          Open drawer
+        </button>
+      }
+      title="Share this page"
+      description="Drag the handle down, press Escape or tap outside to close."
+    >
+      <div className="grid grid-cols-4 gap-3 text-center text-xs">
+        {["WhatsApp", "Telegram", "Email", "Copy link"].map((s) => (
+          <button key={s} type="button" className="flex flex-col items-center gap-2 rounded-2xl border p-4 hover:bg-muted">
+            <span className="size-10 rounded-full bg-primary/15" />
+            {s}
+          </button>
+        ))}
+      </div>
+    </TideDrawer>
+  );
+}
+
+export function BloomPopoverDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-6">
+      <BloomPopover trigger="Notifications" label="Notification settings">
+        <p className="text-sm font-medium">Notify me about</p>
+        <div className="mt-3 space-y-2 text-sm">
+          {["Comments", "Mentions", "New followers"].map((x, i) => (
+            <label key={x} className="flex items-center justify-between gap-3">
+              {x}
+              <input type="checkbox" defaultChecked={i < 2} className="size-4 accent-[var(--primary)]" />
+            </label>
+          ))}
+        </div>
+      </BloomPopover>
+      <BloomPopover trigger="Open above" side="top" align="end" label="About">
+        <p className="text-sm text-muted-foreground">Opens above, aligned to the trigger&apos;s end.</p>
+      </BloomPopover>
     </div>
   );
 }
