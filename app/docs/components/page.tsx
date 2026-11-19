@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { ComponentsGrid } from "@/components/site/components-grid";
 import { cardItems } from "@/lib/nav";
 
-export const metadata: Metadata = { title: "Components", description: "Every Ombak UI component with a live preview." };
+export const metadata: Metadata = {
+  title: "Components",
+  description: "Every Ombak UI component with a live preview.",
+  openGraph: { title: "Components · Ombak UI", description: "Every Ombak UI component with a live preview.", url: "/docs/components", siteName: "Ombak UI" },
+};
 
 export default function ComponentsIndex() {
   const list = cardItems();

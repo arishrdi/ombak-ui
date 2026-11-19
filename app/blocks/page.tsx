@@ -6,6 +6,12 @@ import { BLOCK_CATEGORY_LABELS, blockComponents, blocks, getItem } from "@/lib/r
 export const metadata: Metadata = {
   title: "Blocks",
   description: "Ready-made page sections built from Ombak UI components. Install a whole hero, pricing table or FAQ with one command.",
+  openGraph: {
+    title: "Blocks · Ombak UI",
+    description: "Ready-made page sections built from Ombak UI components. Install a whole hero, pricing table or FAQ with one command.",
+    url: "/blocks",
+    siteName: "Ombak UI",
+  },
 };
 
 export default function BlocksIndex() {

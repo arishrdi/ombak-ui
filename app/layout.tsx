@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: "Ombak UI: Motion components for React", template: "%s · Ombak UI" },
   description: site.description,
-  openGraph: { title: "Ombak UI", description: site.description, url: site.url, siteName: "Ombak UI" },
+  openGraph: { title: "Ombak UI", description: site.description, url: site.url, siteName: "Ombak UI", type: "website" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

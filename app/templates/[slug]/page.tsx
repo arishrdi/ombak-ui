@@ -16,7 +16,12 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const t = getTemplate((await params).slug);
-  return t ? { title: `${t.title} template`, description: t.description } : {};
+  if (!t) return {};
+  return {
+    title: `${t.title} template`,
+    description: t.description,
+    openGraph: { title: `${t.title} template · Ombak UI`, description: t.description, url: `/templates/${t.name}`, siteName: "Ombak UI" },
+  };
 }
 
 /** Parses the template's own props type (they are few, so a light parse is enough). */
