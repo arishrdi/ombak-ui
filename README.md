@@ -6,7 +6,7 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (82)
+## Components (92)
 
 | Component | Category | Dependencies |
 |---|---|---|
@@ -85,6 +85,16 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Accordion | Navigation | none |
 | Pagination | Navigation | none |
 | Dropdown Menu | Navigation | none |
+| Floating Input | Forms | none |
+| OTP Input | Forms | none |
+| Password Input | Forms | none |
+| Toggle Switch | Forms | none |
+| Range Slider | Forms | none |
+| File Dropzone | Forms | none |
+| Tag Input | Forms | none |
+| Star Rating | Forms | none |
+| Number Stepper | Forms | none |
+| Expand Search | Forms | none |
 | Tilt Card | Interaction | gsap |
 | Glow Card | Interaction | none |
 | Hover Preview | Interaction | gsap |

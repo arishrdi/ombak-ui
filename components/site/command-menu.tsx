@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import type { NavGroup } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 
-/** ⌘K / Ctrl+K / "/" search over docs pages and components. */
+/** ⌘K / Ctrl+K search over docs pages and components. */
 export function CommandMenu({ groups }: { groups: NavGroup[] }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -22,8 +22,8 @@ export function CommandMenu({ groups }: { groups: NavGroup[] }) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const typing = e.target instanceof HTMLElement && ["INPUT", "TEXTAREA"].includes(e.target.tagName);
-      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !typing)) {
+      // ⌘K / Ctrl+K only: "/" is left free for components demoed on the page (e.g. Expand Search)
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((o) => !o);
       }

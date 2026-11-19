@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-switch",
+  "title": "Toggle Switch",
+  "description": "A switch whose knob springs across. role=switch, keyboard friendly.",
+  "files": [
+    {
+      "path": "registry/ombak/toggle-switch/toggle-switch.tsx",
+      "content": "\"use client\";\n\nimport { useState, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type ToggleSwitchProps = {\n  /** On/off (controlled). */\n  checked?: boolean;\n  /** Starting state when uncontrolled. Default false */\n  defaultChecked?: boolean;\n  /** Called with the new state. */\n  onChange?: (checked: boolean) => void;\n  /** Visible label next to the switch. */\n  children?: ReactNode;\n  /** Accessible name when there's no visible label. */\n  label?: string;\n  /** Switch size. Default \"md\" */\n  size?: \"sm\" | \"md\" | \"lg\";\n  disabled?: boolean;\n  className?: string;\n};\n\nconst SIZES = { sm: [36, 20], md: [46, 26], lg: [58, 32] } as const;\n\n/**\n * A switch whose knob springs across with a little overshoot, with role=\"switch\" and aria-checked.\n * Space and Enter toggle it; the whole label is clickable.\n */\nexport function ToggleSwitch({ checked, defaultChecked = false, onChange, children, label, size = \"md\", disabled, className }: ToggleSwitchProps) {\n  const [inner, setInner] = useState(defaultChecked);\n  const on = checked ?? inner;\n  const [w, h] = SIZES[size];\n  const knob = h - 6;\n  const toggle = () => {\n    if (disabled) return;\n    if (checked === undefined) setInner(!on);\n    onChange?.(!on);\n  };\n  return (\n    <label className={cn(\"inline-flex cursor-pointer items-center gap-3 text-sm select-none\", disabled && \"cursor-not-allowed opacity-50\", className)}>\n      <button\n        type=\"button\"\n        role=\"switch\"\n        aria-checked={on}\n        aria-label={children ? undefined : label}\n        disabled={disabled}\n        onClick={toggle}\n        className={cn(\n          \"group/sw relative shrink-0 rounded-full outline-none transition-colors duration-300 focus-visible:ring-4 focus-visible:ring-ring/40\",\n          on ? \"bg-primary\" : \"bg-muted-foreground/30\",\n        )}\n        style={{ width: w, height: h }}\n      >\n        <span\n          aria-hidden\n          className=\"absolute top-[3px] left-[3px] rounded-full bg-white shadow-md transition-[transform,width] duration-300 ease-[cubic-bezier(.3,1.5,.5,1)] motion-reduce:transition-none\"\n          style={{\n            width: knob,\n            height: knob,\n            transform: `translateX(${on ? w - knob - 6 : 0}px)`,\n          }}\n        />\n      </button>\n      {children}\n    </label>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "forms"
+  ],
+  "type": "registry:component"
+}

@@ -1171,6 +1171,156 @@
       ]
     },
     {
+      "name": "floating-input",
+      "type": "registry:component",
+      "title": "Floating Input",
+      "description": "A text field whose label rests inside and floats up when you focus or type.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/floating-input/floating-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "otp-input",
+      "type": "registry:component",
+      "title": "OTP Input",
+      "description": "One-time-code boxes with auto-advance, Backspace, arrow keys and paste.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/otp-input/otp-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "password-input",
+      "type": "registry:component",
+      "title": "Password Input",
+      "description": "A show/hide toggle and a strength meter that fills as rules are met.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/password-input/password-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "toggle-switch",
+      "type": "registry:component",
+      "title": "Toggle Switch",
+      "description": "A switch whose knob springs across. role=switch, keyboard friendly.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/toggle-switch/toggle-switch.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "range-slider",
+      "type": "registry:component",
+      "title": "Range Slider",
+      "description": "A real range input with a filled track and a value bubble.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/range-slider/range-slider.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "file-dropzone",
+      "type": "registry:component",
+      "title": "File Dropzone",
+      "description": "Drag-and-drop file area with ripples, type and size checks, and a file list.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/file-dropzone/file-dropzone.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:component",
+      "title": "Tag Input",
+      "description": "Type and press Enter to add tags; paste a comma list to add many.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/tag-input/tag-input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "star-rating",
+      "type": "registry:component",
+      "title": "Star Rating",
+      "description": "Hover to preview, click to rate. A radio group with arrow-key support.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/star-rating/star-rating.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "number-stepper",
+      "type": "registry:component",
+      "title": "Number Stepper",
+      "description": "Minus and plus buttons with a number that rolls as it changes.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/number-stepper/number-stepper.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "expand-search",
+      "type": "registry:component",
+      "title": "Expand Search",
+      "description": "A search icon that grows into a field. Opens with the / key.",
+      "categories": [
+        "forms"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/expand-search/expand-search.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "tilt-card",
       "type": "registry:component",
       "title": "Tilt Card",

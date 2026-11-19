@@ -82,6 +82,16 @@ import { WaveUnderline } from "@/registry/ombak/wave-underline/wave-underline";
 import { RotatingWords } from "@/registry/ombak/rotating-words/rotating-words";
 import { TideText } from "@/registry/ombak/tide-text/tide-text";
 import { CurvedMarquee } from "@/registry/ombak/curved-marquee/curved-marquee";
+import { FloatingInput } from "@/registry/ombak/floating-input/floating-input";
+import { OtpInput } from "@/registry/ombak/otp-input/otp-input";
+import { PasswordInput } from "@/registry/ombak/password-input/password-input";
+import { ToggleSwitch } from "@/registry/ombak/toggle-switch/toggle-switch";
+import { RangeSlider } from "@/registry/ombak/range-slider/range-slider";
+import { FileDropzone } from "@/registry/ombak/file-dropzone/file-dropzone";
+import { TagInput } from "@/registry/ombak/tag-input/tag-input";
+import { StarRating } from "@/registry/ombak/star-rating/star-rating";
+import { NumberStepper } from "@/registry/ombak/number-stepper/number-stepper";
+import { ExpandSearch } from "@/registry/ombak/expand-search/expand-search";
 import { useEffect, useRef, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
@@ -1245,6 +1255,92 @@ export function CurvedMarqueeDemo() {
     <div className="w-full space-y-2">
       <CurvedMarquee text="Make waves ✦ Ride the swell ✦ " />
       <CurvedMarquee text="Free components ✦ MIT licensed ✦ " reverse curve={25} fontSize={34} className="text-surf" />
+    </div>
+  );
+}
+
+export function FloatingInputDemo() {
+  return (
+    <div className="w-full max-w-sm space-y-4 px-6">
+      <FloatingInput label="Full name" />
+      <FloatingInput label="Email" type="email" defaultValue="aris@" error hint="Please enter a complete email address." />
+    </div>
+  );
+}
+
+export function OtpInputDemo() {
+  const [done, setDone] = useState("");
+  return (
+    <div className="space-y-4 text-center">
+      <OtpInput onComplete={setDone} />
+      <p className="text-sm text-muted-foreground">{done ? `Verifying ${done}…` : "Type or paste a 6-digit code."}</p>
+    </div>
+  );
+}
+
+export function PasswordInputDemo() {
+  return <PasswordInput className="px-6" placeholder="Try Ombak-2026!" />;
+}
+
+export function ToggleSwitchDemo() {
+  return (
+    <div className="grid gap-5 rounded-2xl border bg-card p-6">
+      <ToggleSwitch defaultChecked>Email notifications</ToggleSwitch>
+      <ToggleSwitch>Dark mode</ToggleSwitch>
+      <ToggleSwitch size="sm">Compact (small)</ToggleSwitch>
+      <ToggleSwitch size="lg" defaultChecked>Big switch</ToggleSwitch>
+      <ToggleSwitch disabled>Disabled</ToggleSwitch>
+    </div>
+  );
+}
+
+export function RangeSliderDemo() {
+  return (
+    <div className="w-full max-w-sm space-y-10 px-6 pt-6">
+      <RangeSlider label="Budget" min={500} max={10000} step={100} defaultValue={3500} format={(v) => "$" + v.toLocaleString()} />
+      <RangeSlider label="Volume" defaultValue={60} format={(v) => v + "%"} />
+    </div>
+  );
+}
+
+export function FileDropzoneDemo() {
+  return <FileDropzone className="px-6" accept="image/*,.pdf" maxSize={5 * 1024 * 1024} />;
+}
+
+export function TagInputDemo() {
+  return <TagInput className="px-6" label="Skills" defaultValue={["React", "GSAP"]} max={6} />;
+}
+
+export function StarRatingDemo() {
+  const [v, setV] = useState(4);
+  return (
+    <div className="space-y-6 text-center">
+      <StarRating label="Rate Ombak UI" value={v} onChange={setV} size={36} />
+      <p className="text-sm text-muted-foreground">You rated {v} of 5.</p>
+      <div className="flex items-center justify-center gap-2 text-sm">
+        <StarRating label="Average rating" value={3} readOnly size={18} /> <span className="text-muted-foreground">read-only</span>
+      </div>
+    </div>
+  );
+}
+
+export function NumberStepperDemo() {
+  return (
+    <div className="flex flex-wrap items-end gap-8">
+      <NumberStepper label="Quantity" />
+      <NumberStepper label="Guests" defaultValue={2} min={1} max={8} />
+    </div>
+  );
+}
+
+export function ExpandSearchDemo() {
+  const [q, setQ] = useState("");
+  return (
+    <div className="space-y-4 text-center">
+      <div className="flex h-12 justify-center">
+        <ExpandSearch onSearch={setQ} />
+      </div>
+      <p className="text-sm text-muted-foreground">{q ? "Searching for “" + q + "”" : "Click the icon or press /"}</p>
     </div>
   );
 }

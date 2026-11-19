@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "floating-input",
+  "title": "Floating Input",
+  "description": "A text field whose label rests inside and floats up when you focus or type.",
+  "files": [
+    {
+      "path": "registry/ombak/floating-input/floating-input.tsx",
+      "content": "\"use client\";\n\nimport { useId, type InputHTMLAttributes } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type FloatingInputProps = {\n  /** The label. It sits inside the field and floats up when focused or filled. */\n  label: string;\n  /** Helper or error text under the field. */\n  hint?: string;\n  /** Show the hint as an error and mark the field invalid. Default false */\n  error?: boolean;\n  className?: string;\n} & Omit<InputHTMLAttributes<HTMLInputElement>, \"className\" | \"placeholder\">;\n\n/**\n * A text field whose label rests inside it and floats up when you focus or type. Pure CSS\n * (peer-placeholder-shown), with a real label, aria-invalid and aria-describedby wiring.\n */\nexport function FloatingInput({ label, hint, error = false, className, id, ...rest }: FloatingInputProps) {\n  const auto = useId();\n  const inputId = id ?? auto;\n  const hintId = hint ? `${inputId}-hint` : undefined;\n  return (\n    <div className={cn(\"w-full\", className)}>\n      <div className=\"relative\">\n        <input\n          id={inputId}\n          placeholder=\" \"\n          aria-invalid={error || undefined}\n          aria-describedby={hintId}\n          className={cn(\n            \"peer h-14 w-full rounded-xl border bg-background px-4 pt-5 pb-1.5 text-sm outline-none transition-colors\",\n            \"focus:border-primary focus:ring-4 focus:ring-primary/15\",\n            error && \"border-red-500 focus:border-red-500 focus:ring-red-500/15\",\n          )}\n          {...rest}\n        />\n        <label\n          htmlFor={inputId}\n          className={cn(\n            \"pointer-events-none absolute top-1/2 left-4 origin-left -translate-y-1/2 text-sm text-muted-foreground transition-all duration-200\",\n            \"peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-xs\",\n            \"peer-focus:text-primary\",\n            error && \"peer-focus:text-red-500\",\n          )}\n        >\n          {label}\n        </label>\n      </div>\n      {hint && (\n        <p id={hintId} className={cn(\"mt-1.5 px-1 text-xs\", error ? \"text-red-500\" : \"text-muted-foreground\")}>\n          {hint}\n        </p>\n      )}\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "forms"
+  ],
+  "type": "registry:component"
+}

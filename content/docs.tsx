@@ -668,4 +668,66 @@ import { CustomCursor } from "@/components/custom-cursor";
 
 <CurvedMarquee text="Make waves ✦ Ride the swell ✦ " />`,
   },
+  "floating-input": {
+    Demo: D.FloatingInputDemo,
+    usage: `import { FloatingInput } from "@/components/floating-input";
+
+<FloatingInput label="Email" type="email" name="email" required />
+<FloatingInput label="Email" error hint="Please enter a complete email address." />`,
+  },
+  "otp-input": {
+    Demo: D.OtpInputDemo,
+    usage: `import { OtpInput } from "@/components/otp-input";
+
+<OtpInput length={6} onComplete={(code) => verify(code)} />`,
+  },
+  "password-input": {
+    Demo: D.PasswordInputDemo,
+    usage: `import { PasswordInput } from "@/components/password-input";
+
+<PasswordInput name="password" autoComplete="new-password" />`,
+  },
+  "toggle-switch": {
+    Demo: D.ToggleSwitchDemo,
+    usage: `import { ToggleSwitch } from "@/components/toggle-switch";
+
+<ToggleSwitch checked={enabled} onChange={setEnabled}>Email notifications</ToggleSwitch>`,
+  },
+  "range-slider": {
+    Demo: D.RangeSliderDemo,
+    usage: `import { RangeSlider } from "@/components/range-slider";
+
+<RangeSlider label="Budget" min={500} max={10000} step={100} format={(v) => "$" + v} />`,
+  },
+  "file-dropzone": {
+    Demo: D.FileDropzoneDemo,
+    usage: `import { FileDropzone } from "@/components/file-dropzone";
+
+<FileDropzone accept="image/*,.pdf" maxSize={5 * 1024 * 1024} onFiles={upload} />`,
+  },
+  "tag-input": {
+    Demo: D.TagInputDemo,
+    usage: `import { TagInput } from "@/components/tag-input";
+
+<TagInput label="Skills" value={skills} onChange={setSkills} max={6} />`,
+  },
+  "star-rating": {
+    Demo: D.StarRatingDemo,
+    usage: `import { StarRating } from "@/components/star-rating";
+
+<StarRating label="Rate this product" value={rating} onChange={setRating} />
+<StarRating label="Average rating" value={4} readOnly />`,
+  },
+  "number-stepper": {
+    Demo: D.NumberStepperDemo,
+    usage: `import { NumberStepper } from "@/components/number-stepper";
+
+<NumberStepper label="Quantity" min={1} max={10} value={qty} onChange={setQty} />`,
+  },
+  "expand-search": {
+    Demo: D.ExpandSearchDemo,
+    usage: `import { ExpandSearch } from "@/components/expand-search";
+
+<ExpandSearch onSearch={setQuery} onSubmit={runSearch} />`,
+  },
 };

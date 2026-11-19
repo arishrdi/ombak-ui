@@ -75,6 +75,16 @@ import { WaveUnderline } from "@/registry/ombak/wave-underline/wave-underline";
 import { RotatingWords } from "@/registry/ombak/rotating-words/rotating-words";
 import { TideText } from "@/registry/ombak/tide-text/tide-text";
 import { CurvedMarquee } from "@/registry/ombak/curved-marquee/curved-marquee";
+import { FloatingInput } from "@/registry/ombak/floating-input/floating-input";
+import { OtpInput } from "@/registry/ombak/otp-input/otp-input";
+import { PasswordInput } from "@/registry/ombak/password-input/password-input";
+import { ToggleSwitch } from "@/registry/ombak/toggle-switch/toggle-switch";
+import { RangeSlider } from "@/registry/ombak/range-slider/range-slider";
+import { FileDropzone } from "@/registry/ombak/file-dropzone/file-dropzone";
+import { TagInput } from "@/registry/ombak/tag-input/tag-input";
+import { StarRating } from "@/registry/ombak/star-rating/star-rating";
+import { NumberStepper } from "@/registry/ombak/number-stepper/number-stepper";
+import { ExpandSearch } from "@/registry/ombak/expand-search/expand-search";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -636,6 +646,41 @@ function CurvedThumb() {
   return <CurvedMarquee text="Make waves ✦ " fontSize={60} curve={30} className="w-full" />;
 }
 
+function FloatingInputThumb() {
+  return <FloatingInput label="Email address" className="w-56" />;
+}
+function OtpThumb() {
+  return <OtpInput length={4} />;
+}
+function PasswordThumb() {
+  return <PasswordInput className="w-56" defaultValue="Ombak2026" />;
+}
+function ToggleThumb() {
+  return (
+    <ToggleSwitch defaultChecked size="lg">
+      Notifications
+    </ToggleSwitch>
+  );
+}
+function RangeThumb() {
+  return <RangeSlider label="Volume" defaultValue={65} className="w-52" format={(v) => v + "%"} />;
+}
+function DropzoneThumb() {
+  return <FileDropzone className="w-56 [&_label]:py-5" prompt="Drop files here" />;
+}
+function TagThumb() {
+  return <TagInput label="Skills" defaultValue={["React", "GSAP"]} className="w-56" />;
+}
+function StarThumb() {
+  return <StarRating label="Rating" defaultValue={4} size={30} />;
+}
+function StepperThumb() {
+  return <NumberStepper label="Quantity" defaultValue={2} />;
+}
+function SearchThumb() {
+  return <ExpandSearch hotkey={false} width="13rem" />;
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -719,4 +764,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   "rotating-words": { Thumb: RotatingThumb },
   "tide-text": { Thumb: TideTextThumb },
   "curved-marquee": { Thumb: CurvedThumb, bleed: true },
+  "floating-input": { Thumb: FloatingInputThumb },
+  "otp-input": { Thumb: OtpThumb },
+  "password-input": { Thumb: PasswordThumb },
+  "toggle-switch": { Thumb: ToggleThumb },
+  "range-slider": { Thumb: RangeThumb },
+  "file-dropzone": { Thumb: DropzoneThumb },
+  "tag-input": { Thumb: TagThumb },
+  "star-rating": { Thumb: StarThumb },
+  "number-stepper": { Thumb: StepperThumb },
+  "expand-search": { Thumb: SearchThumb },
 };
