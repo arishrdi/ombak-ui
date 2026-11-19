@@ -598,4 +598,74 @@ import { CustomCursor } from "@/components/custom-cursor";
   ]}
 />`,
   },
+  "morphing-text": {
+    Demo: D.MorphingTextDemo,
+    usage: `import { MorphingText } from "@/components/morphing-text";
+
+<h1 className="text-7xl font-bold">
+  <MorphingText words={["Ombak", "Waves", "Motion"]} />
+</h1>`,
+  },
+  "scroll-words": {
+    Demo: D.ScrollWordsDemo,
+    stage: "p-0 md:p-0",
+    usage: `import { ScrollWords } from "@/components/scroll-words";
+
+<ScrollWords className="text-4xl font-semibold" text="Good motion doesn't shout. It guides the eye…" />`,
+  },
+  "glitch-text": {
+    Demo: D.GlitchTextDemo,
+    usage: `import { GlitchText } from "@/components/glitch-text";
+
+<GlitchText text="SYSTEM ERROR" className="font-mono text-6xl font-bold" />
+<GlitchText text="hover me" trigger="hover" />`,
+  },
+  "assemble-text": {
+    Demo: D.AssembleTextDemo,
+    usage: `import { AssembleText } from "@/components/assemble-text";
+
+<AssembleText text="Coming together" className="text-6xl font-bold" />`,
+  },
+  "swell-text": {
+    Demo: D.SwellTextDemo,
+    usage: `import { SwellText } from "@/components/swell-text";
+
+// best with a variable font that has a weight axis
+<SwellText text="Ride the swell" className="text-7xl" />`,
+  },
+  "orbit-text": {
+    Demo: D.OrbitTextDemo,
+    usage: `import { OrbitText } from "@/components/orbit-text";
+
+<OrbitText text="Scroll down • Scroll down • ">
+  <ArrowDown />
+</OrbitText>`,
+  },
+  "wave-underline": {
+    Demo: D.WaveUnderlineDemo,
+    usage: `import { WaveUnderline } from "@/components/wave-underline";
+
+<WaveUnderline href="/docs">documentation</WaveUnderline>`,
+  },
+  "rotating-words": {
+    Demo: D.RotatingWordsDemo,
+    usage: `import { RotatingWords } from "@/components/rotating-words";
+
+<h1>
+  Build <RotatingWords words={["landing pages", "portfolios", "dashboards"]} />
+</h1>`,
+  },
+  "tide-text": {
+    Demo: D.TideTextDemo,
+    usage: `import { TideText } from "@/components/tide-text";
+
+<TideText text="OMBAK" level={55} className="text-9xl" />`,
+  },
+  "curved-marquee": {
+    Demo: D.CurvedMarqueeDemo,
+    stage: "px-0 md:px-0",
+    usage: `import { CurvedMarquee } from "@/components/curved-marquee";
+
+<CurvedMarquee text="Make waves ✦ Ride the swell ✦ " />`,
+  },
 };

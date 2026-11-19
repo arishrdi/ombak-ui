@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-words",
+  "title": "Scroll Words",
+  "description": "A paragraph that lights up word by word as you scroll through it.",
+  "dependencies": [
+    "gsap"
+  ],
+  "files": [
+    {
+      "path": "registry/ombak/scroll-words/scroll-words.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, type ElementType } from \"react\";\nimport { gsap } from \"gsap\";\nimport { ScrollTrigger } from \"gsap/ScrollTrigger\";\nimport { cn } from \"@/lib/utils\";\n\nif (typeof window !== \"undefined\") gsap.registerPlugin(ScrollTrigger);\n\nexport type ScrollWordsProps = {\n  /** The paragraph. Plain text. */\n  text: string;\n  /** HTML tag to render. Default \"p\" */\n  as?: ElementType;\n  /** Opacity of words that haven't been \"read\" yet. Default 0.18 */\n  dim?: number;\n  /** ScrollTrigger start. Default \"top 80%\" */\n  start?: string;\n  /** ScrollTrigger end. Default \"bottom 40%\" */\n  end?: string;\n  /** Use a scrollable element instead of the window, e.g. for demos. */\n  scroller?: React.RefObject<HTMLElement | null>;\n  className?: string;\n};\n\n/**\n * A paragraph that lights up word by word as you scroll through it, like reading along.\n * Tied to the scroll position, so scrolling back dims it again. Fully lit for reduced motion.\n */\nexport function ScrollWords({ text, as: Tag = \"p\", dim = 0.18, start = \"top 80%\", end = \"bottom 40%\", scroller, className }: ScrollWordsProps) {\n  const ref = useRef<HTMLElement>(null);\n\n  // useEffect (not a layout effect) so a scroller ref owned by a parent is already attached\n  useEffect(() => {\n    const el = ref.current;\n    if (!el || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const ctx = gsap.context(() => {\n      gsap.fromTo(\n        el.querySelectorAll(\"[data-word]\"),\n        { opacity: dim },\n        {\n          opacity: 1,\n          ease: \"none\",\n          stagger: 0.1,\n          scrollTrigger: { trigger: el, start, end, scrub: true, scroller: scroller?.current ?? undefined },\n        },\n      );\n    }, el);\n    return () => ctx.revert();\n  }, [text, dim, start, end, scroller]);\n\n  return (\n    <Tag ref={ref} className={cn(className)}>\n      <span className=\"sr-only\">{text}</span>\n      <span aria-hidden>\n        {text.split(/(\\s+)/).map((w, i) => (/\\s+/.test(w) ? w : <span key={i} data-word>{w}</span>))}\n      </span>\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}

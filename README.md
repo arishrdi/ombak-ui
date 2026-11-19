@@ -6,7 +6,7 @@ Motion components for React: scroll, GSAP and canvas effects you can paste into 
 npx shadcn@latest add https://ombakui.com/r/wave-background.json
 ```
 
-## Components (72)
+## Components (82)
 
 | Component | Category | Dependencies |
 |---|---|---|
@@ -26,6 +26,16 @@ npx shadcn@latest add https://ombakui.com/r/wave-background.json
 | Odometer | Text | none |
 | Gradient Text | Text | none |
 | Shimmer Text | Text | none |
+| Morphing Text | Text | none |
+| Scroll Words | Text | gsap |
+| Glitch Text | Text | none |
+| Assemble Text | Text | none |
+| Swell Text | Text | none |
+| Orbit Text | Text | none |
+| Wave Underline | Text | none |
+| Rotating Words | Text | none |
+| Tide Text | Text | none |
+| Curved Marquee | Text | none |
 | Marquee | Scroll | gsap |
 | Stack Cards | Scroll | gsap, @gsap/react |
 | Image Reveal | Scroll | gsap, @gsap/react |

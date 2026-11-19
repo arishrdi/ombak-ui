@@ -258,6 +258,159 @@
       ]
     },
     {
+      "name": "morphing-text",
+      "type": "registry:component",
+      "title": "Morphing Text",
+      "description": "Words melt into one another like ink in water.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/morphing-text/morphing-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "scroll-words",
+      "type": "registry:component",
+      "title": "Scroll Words",
+      "description": "A paragraph that lights up word by word as you scroll through it.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/scroll-words/scroll-words.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "gsap"
+      ]
+    },
+    {
+      "name": "glitch-text",
+      "type": "registry:component",
+      "title": "Glitch Text",
+      "description": "Color channels split and the text tears into slices, then snaps back.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/glitch-text/glitch-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "assemble-text",
+      "type": "registry:component",
+      "title": "Assemble Text",
+      "description": "Letters fly in from random spots and snap together into the word.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/assemble-text/assemble-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "swell-text",
+      "type": "registry:component",
+      "title": "Swell Text",
+      "description": "Letters swell and thicken like a wave rising under the cursor.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/swell-text/swell-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "orbit-text",
+      "type": "registry:component",
+      "title": "Orbit Text",
+      "description": "Text around a slowly turning circle, the classic badge.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/orbit-text/orbit-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "wave-underline",
+      "type": "registry:component",
+      "title": "Wave Underline",
+      "description": "A link underline that turns into a rolling wave on hover.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/wave-underline/wave-underline.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "rotating-words",
+      "type": "registry:component",
+      "title": "Rotating Words",
+      "description": "One word slot that rolls to the next word, resizing to fit.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/rotating-words/rotating-words.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "tide-text",
+      "type": "registry:component",
+      "title": "Tide Text",
+      "description": "Outlined display text with water inside that rises on hover.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/tide-text/tide-text.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "curved-marquee",
+      "type": "registry:component",
+      "title": "Curved Marquee",
+      "description": "Text flowing endlessly along a wave-shaped line.",
+      "categories": [
+        "text"
+      ],
+      "files": [
+        {
+          "path": "registry/ombak/curved-marquee/curved-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "marquee",
       "type": "registry:component",
       "title": "Marquee",

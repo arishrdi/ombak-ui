@@ -65,6 +65,16 @@ import { BottomBar } from "@/registry/ombak/bottom-bar/bottom-bar";
 import { Accordion } from "@/registry/ombak/accordion/accordion";
 import { Pagination } from "@/registry/ombak/pagination/pagination";
 import { DropdownMenu } from "@/registry/ombak/dropdown-menu/dropdown-menu";
+import { MorphingText } from "@/registry/ombak/morphing-text/morphing-text";
+import { ScrollWords } from "@/registry/ombak/scroll-words/scroll-words";
+import { GlitchText } from "@/registry/ombak/glitch-text/glitch-text";
+import { AssembleText } from "@/registry/ombak/assemble-text/assemble-text";
+import { SwellText } from "@/registry/ombak/swell-text/swell-text";
+import { OrbitText } from "@/registry/ombak/orbit-text/orbit-text";
+import { WaveUnderline } from "@/registry/ombak/wave-underline/wave-underline";
+import { RotatingWords } from "@/registry/ombak/rotating-words/rotating-words";
+import { TideText } from "@/registry/ombak/tide-text/tide-text";
+import { CurvedMarquee } from "@/registry/ombak/curved-marquee/curved-marquee";
 
 /* Small live previews used on cards (landing bento + components index). */
 
@@ -581,6 +591,51 @@ function DropdownThumb() {
   return <DropdownMenu trigger="Options" items={[{ label: "Edit" }, { label: "Share" }, { label: "Delete", danger: true }]} />;
 }
 
+function MorphingThumb() {
+  return <MorphingText words={["Ombak", "Waves", "Flow"]} className="font-display text-5xl font-bold tracking-tight" />;
+}
+function ScrollWordsThumb() {
+  // illustration: words lighting up left to right on hover
+  const words = "Good motion guides the eye then gets out of the way".split(" ");
+  return (
+    <p className="w-56 text-lg leading-snug font-semibold">
+      {words.map((w, i) => (
+        <span key={i} className="opacity-25 transition-opacity duration-300 group-hover:opacity-100" style={{ transitionDelay: `${i * 70}ms` }}>
+          {w}{" "}
+        </span>
+      ))}
+    </p>
+  );
+}
+function GlitchThumb() {
+  return <GlitchText text="ERROR" className="font-mono text-4xl font-bold" />;
+}
+function AssembleThumb() {
+  return <AssembleText text="Assemble" trigger="hover" scatter={70} className="font-display text-4xl font-bold" />;
+}
+function SwellThumb() {
+  return <SwellText text="Swell" radius={90} className="font-display text-5xl" />;
+}
+function OrbitTextThumb() {
+  return <OrbitText text="Scroll down • Scroll down • " size={120}>↓</OrbitText>;
+}
+function WaveUnderlineThumb() {
+  return <WaveUnderline href="#" className="text-xl">Hover this link</WaveUnderline>;
+}
+function RotatingThumb() {
+  return (
+    <p className="font-display text-3xl font-bold">
+      Build <RotatingWords words={["sites", "apps", "magic"]} className="text-surf" />
+    </p>
+  );
+}
+function TideTextThumb() {
+  return <TideText text="WAVE" className="font-display text-6xl" />;
+}
+function CurvedThumb() {
+  return <CurvedMarquee text="Make waves ✦ " fontSize={60} curve={30} className="w-full" />;
+}
+
 export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> = {
   "wave-background": { Thumb: WaveThumb, bleed: true },
   "text-reveal": { Thumb: TextRevealThumb },
@@ -654,4 +709,14 @@ export const thumbs: Record<string, { Thumb: ComponentType; bleed?: boolean }> =
   accordion: { Thumb: AccordionThumb },
   pagination: { Thumb: PaginationThumb },
   "dropdown-menu": { Thumb: DropdownThumb },
+  "morphing-text": { Thumb: MorphingThumb },
+  "scroll-words": { Thumb: ScrollWordsThumb },
+  "glitch-text": { Thumb: GlitchThumb },
+  "assemble-text": { Thumb: AssembleThumb },
+  "swell-text": { Thumb: SwellThumb },
+  "orbit-text": { Thumb: OrbitTextThumb },
+  "wave-underline": { Thumb: WaveUnderlineThumb },
+  "rotating-words": { Thumb: RotatingThumb },
+  "tide-text": { Thumb: TideTextThumb },
+  "curved-marquee": { Thumb: CurvedThumb, bleed: true },
 };

@@ -72,6 +72,16 @@ import { BottomBar } from "@/registry/ombak/bottom-bar/bottom-bar";
 import { Accordion } from "@/registry/ombak/accordion/accordion";
 import { Pagination } from "@/registry/ombak/pagination/pagination";
 import { DropdownMenu } from "@/registry/ombak/dropdown-menu/dropdown-menu";
+import { MorphingText } from "@/registry/ombak/morphing-text/morphing-text";
+import { ScrollWords } from "@/registry/ombak/scroll-words/scroll-words";
+import { GlitchText } from "@/registry/ombak/glitch-text/glitch-text";
+import { AssembleText } from "@/registry/ombak/assemble-text/assemble-text";
+import { SwellText } from "@/registry/ombak/swell-text/swell-text";
+import { OrbitText } from "@/registry/ombak/orbit-text/orbit-text";
+import { WaveUnderline } from "@/registry/ombak/wave-underline/wave-underline";
+import { RotatingWords } from "@/registry/ombak/rotating-words/rotating-words";
+import { TideText } from "@/registry/ombak/tide-text/tide-text";
+import { CurvedMarquee } from "@/registry/ombak/curved-marquee/curved-marquee";
 import { useEffect, useRef, useState } from "react";
 
 /* Live demos shown in the docs. Each one is also what the "Usage" snippet describes. */
@@ -1133,6 +1143,108 @@ export function DropdownMenuDemo() {
           { label: "Delete", icon: navIcon("M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"), danger: true },
         ]}
       />
+    </div>
+  );
+}
+
+export function MorphingTextDemo() {
+  return (
+    <p className="font-display text-6xl font-bold tracking-tight md:text-7xl">
+      <MorphingText words={["Ombak", "Waves", "Motion", "Flow"]} />
+    </p>
+  );
+}
+
+export function ScrollWordsDemo() {
+  const ref = useRef<HTMLDivElement>(null);
+  return (
+    <div ref={ref} className="h-[400px] w-full max-w-2xl overflow-y-auto rounded-xl border bg-card px-8">
+      <p className="pt-10 text-sm text-muted-foreground">Scroll inside this box ↓</p>
+      <div className="h-48" />
+      <ScrollWords
+        scroller={ref}
+        start="top 85%"
+        end="bottom 60%"
+        className="font-display text-3xl leading-snug font-semibold tracking-tight"
+        text="Good motion doesn't shout. It guides the eye, explains what changed, and then gets out of the way, like a wave that carries you to shore."
+      />
+      <div className="h-80" />
+    </div>
+  );
+}
+
+export function GlitchTextDemo() {
+  return (
+    <div className="space-y-6 text-center">
+      <GlitchText text="SYSTEM ERROR" className="font-mono text-5xl font-bold md:text-6xl" />
+      <p className="text-muted-foreground">
+        Or only on hover: <GlitchText text="hover me" trigger="hover" className="font-semibold text-foreground" />
+      </p>
+    </div>
+  );
+}
+
+export function AssembleTextDemo() {
+  return (
+    <div className="space-y-6 text-center">
+      <AssembleText text="Coming together" className="font-display text-5xl font-bold tracking-tight md:text-6xl" />
+      <p className="text-muted-foreground">
+        Hover to scatter again: <AssembleText text="once more" trigger="hover" scatter={80} className="font-semibold text-foreground" />
+      </p>
+    </div>
+  );
+}
+
+export function SwellTextDemo() {
+  return <SwellText text="Ride the swell" className="font-display text-6xl tracking-tight md:text-7xl" />;
+}
+
+export function OrbitTextDemo() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-12">
+      <OrbitText text="Scroll down • Scroll down • ">
+        <svg viewBox="0 0 24 24" className="size-8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 5v14M6 13l6 6 6-6" /></svg>
+      </OrbitText>
+      <OrbitText text="Available for work ✦ Available for work ✦ " size={180} duration={-18} className="text-surf">
+        <span className="size-3 rounded-full bg-emerald-500" />
+      </OrbitText>
+    </div>
+  );
+}
+
+export function WaveUnderlineDemo() {
+  return (
+    <p className="max-w-md text-center text-xl leading-relaxed text-muted-foreground">
+      Read the <WaveUnderline href="#" className="text-foreground">documentation</WaveUnderline>, browse the{" "}
+      <WaveUnderline href="#" className="text-foreground" color="#f97362">components</WaveUnderline>, or say hi on{" "}
+      <WaveUnderline href="#" className="text-foreground" color="#38bdf8">GitHub</WaveUnderline>.
+    </p>
+  );
+}
+
+export function RotatingWordsDemo() {
+  return (
+    <p className="font-display text-4xl font-bold tracking-tight md:text-6xl">
+      Build{" "}
+      <RotatingWords words={["landing pages", "portfolios", "dashboards", "magic"]} className="text-surf" />
+    </p>
+  );
+}
+
+export function TideTextDemo() {
+  return (
+    <div className="space-y-2 text-center">
+      <TideText text="OMBAK" className="font-display text-8xl tracking-tight md:text-9xl" />
+      <p className="text-sm text-muted-foreground">Hover to fill it up.</p>
+    </div>
+  );
+}
+
+export function CurvedMarqueeDemo() {
+  return (
+    <div className="w-full space-y-2">
+      <CurvedMarquee text="Make waves ✦ Ride the swell ✦ " />
+      <CurvedMarquee text="Free components ✦ MIT licensed ✦ " reverse curve={25} fontSize={34} className="text-surf" />
     </div>
   );
 }

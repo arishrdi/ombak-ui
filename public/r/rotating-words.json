@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rotating-words",
+  "title": "Rotating Words",
+  "description": "One word slot that rolls to the next word, resizing to fit.",
+  "files": [
+    {
+      "path": "registry/ombak/rotating-words/rotating-words.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef, useState, type ElementType } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type RotatingWordsProps = {\n  /** Words to cycle through. */\n  words: string[];\n  /** HTML tag to render. Default \"span\" */\n  as?: ElementType;\n  /** Milliseconds each word stays. Default 2200 */\n  interval?: number;\n  className?: string;\n};\n\n/**\n * One word slot that rolls to the next word: the old word slides up and out while the new one\n * rises in. The slot resizes to fit each word. Screen readers get the full list once.\n */\nexport function RotatingWords({ words, as: Tag = \"span\", interval = 2200, className }: RotatingWordsProps) {\n  const [i, setI] = useState(0);\n  const [prev, setPrev] = useState<number | null>(null);\n  const current = useRef(0);\n\n  useEffect(() => {\n    if (words.length < 2 || window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches) return;\n    const id = window.setInterval(() => {\n      const cur = current.current;\n      const next = (cur + 1) % words.length;\n      current.current = next;\n      setPrev(cur);\n      setI(next);\n    }, interval);\n    return () => window.clearInterval(id);\n  }, [words.length, interval]);\n\n  return (\n    <Tag className={cn(\"relative inline-grid overflow-hidden align-bottom\", className)}>\n      <span className=\"sr-only\">{words.join(\", \")}</span>\n      <style>{`@keyframes ombak-rw-in{from{transform:translateY(100%);opacity:0}}@keyframes ombak-rw-out{to{transform:translateY(-100%);opacity:0}}`}</style>\n      {/* invisible sizer keeps the slot as wide as the current word */}\n      <span aria-hidden className=\"invisible col-start-1 row-start-1 whitespace-nowrap\">\n        {words[i]}\n      </span>\n      {prev !== null && (\n        <span\n          key={`out-${prev}-${i}`}\n          aria-hidden\n          className=\"col-start-1 row-start-1 whitespace-nowrap [animation:ombak-rw-out_.5s_cubic-bezier(.6,0,.4,1)_forwards]\"\n        >\n          {words[prev]}\n        </span>\n      )}\n      <span\n        key={`in-${i}`}\n        aria-hidden\n        className={cn(\"col-start-1 row-start-1 whitespace-nowrap\", prev !== null && \"[animation:ombak-rw-in_.5s_cubic-bezier(.2,.8,.2,1)]\")}\n      >\n        {words[i]}\n      </span>\n    </Tag>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "text"
+  ],
+  "type": "registry:component"
+}
