@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navbar-floating",
+  "title": "Navbar Floating",
+  "description": "A header that shrinks into a floating glass pill on scroll, with a morphing mobile menu.",
+  "registryDependencies": [
+    "https://ombakui.com/r/floating-nav.json",
+    "https://ombakui.com/r/hover-nav.json",
+    "https://ombakui.com/r/magnetic-button.json",
+    "https://ombakui.com/r/morph-menu.json"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/navbar-floating/navbar-floating.tsx",
+      "content": "\"use client\";\n\nimport type { ReactNode } from \"react\";\nimport { FloatingNav } from \"@/components/floating-nav\";\nimport { HoverNav } from \"@/components/hover-nav\";\nimport { MorphMenu } from \"@/components/morph-menu\";\nimport { MagneticButton } from \"@/components/magnetic-button\";\nimport { cn } from \"@/lib/utils\";\n\nexport type NavbarFloatingProps = {\n  /** Logo or brand name, linked to home. */\n  brand?: ReactNode;\n  /** Main links. Shown inline on desktop and in a morphing menu on small screens. */\n  links?: { label: string; href: string }[];\n  /** Highlighted link (matches a link's href). */\n  current?: string;\n  /** Call to action on the right. */\n  cta?: { label: string; href: string };\n  /** Use a scrollable element instead of the window. */\n  scrollContainer?: React.RefObject<HTMLElement | null>;\n  className?: string;\n};\n\nconst DEFAULT_LINKS = [\n  { label: \"Product\", href: \"#product\" },\n  { label: \"Pricing\", href: \"#pricing\" },\n  { label: \"Customers\", href: \"#customers\" },\n  { label: \"Blog\", href: \"#blog\" },\n];\n\n/**\n * A site header that sits flat at the top, then shrinks into a floating glass pill on scroll.\n * Links get a sliding hover highlight; on small screens they move into a morphing menu.\n */\nexport function NavbarFloating({\n  brand = <DefaultBrand />,\n  links = DEFAULT_LINKS,\n  current,\n  cta = { label: \"Get started\", href: \"#\" },\n  scrollContainer,\n  className,\n}: NavbarFloatingProps) {\n  return (\n    <FloatingNav scrollContainer={scrollContainer} className={className}>\n      <a href=\"/\" className=\"shrink-0 rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-ring/40\">\n        {brand}\n      </a>\n      <HoverNav links={links} current={current} className=\"hidden md:flex\" />\n      <div className=\"flex items-center gap-2\">\n        <MagneticButton as=\"a\" href={cta.href} className=\"hidden px-5 py-2.5 sm:inline-flex\">\n          {cta.label}\n        </MagneticButton>\n        <MorphMenu links={[...links, cta]} align=\"right\" className=\"md:hidden\" />\n      </div>\n    </FloatingNav>\n  );\n}\n\nfunction DefaultBrand() {\n  return (\n    <span className=\"flex items-center gap-2 text-[15px] font-semibold tracking-[-0.02em]\">\n      <svg viewBox=\"0 0 24 24\" className=\"size-6 text-primary\" fill=\"currentColor\" aria-hidden>\n        <path d=\"M2 15c3 0 3-6 6-6s3 6 6 6 3-6 6-6v11H2z\" />\n      </svg>\n      Lautan\n    </span>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:block"
+}

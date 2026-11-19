@@ -60,7 +60,7 @@ export default function Page() {
         </div>
       </header>
 
-      <BlockPreview slug={slug} title={block.title} code={<CodeBlock code={source} title={`components/${slug}.tsx`} />} />
+      <BlockPreview slug={slug} title={block.title} frameHeight={doc.frameHeight} code={<CodeBlock code={source} title={`components/${slug}.tsx`} />} />
 
       <section className="space-y-4">
         <h2 className="font-display text-xl font-semibold tracking-[-0.02em]">Installation</h2>

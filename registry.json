@@ -1435,6 +1435,27 @@
       ]
     },
     {
+      "name": "navbar-floating",
+      "type": "registry:block",
+      "title": "Navbar Floating",
+      "description": "A header that shrinks into a floating glass pill on scroll, with a morphing mobile menu.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/floating-nav.json",
+        "https://ombakui.com/r/hover-nav.json",
+        "https://ombakui.com/r/magnetic-button.json",
+        "https://ombakui.com/r/morph-menu.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-floating/navbar-floating.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "hero-wave",
       "type": "registry:block",
       "title": "Hero Wave",
@@ -1582,6 +1603,48 @@
       "files": [
         {
           "path": "registry/blocks/cta-caustics/cta-caustics.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "Contact Form",
+      "description": "A two-column contact section with floating labels, a budget switch and a progress button.",
+      "categories": [
+        "contact"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/floating-input.json",
+        "https://ombakui.com/r/segmented-control.json",
+        "https://ombakui.com/r/status-button.json",
+        "https://ombakui.com/r/status-dot.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-form/contact-form.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "footer-wave",
+      "type": "registry:block",
+      "title": "Footer Wave",
+      "description": "A full footer with newsletter signup, wave-underline links, a status line and a big wordmark.",
+      "categories": [
+        "footer"
+      ],
+      "registryDependencies": [
+        "https://ombakui.com/r/floating-input.json",
+        "https://ombakui.com/r/status-button.json",
+        "https://ombakui.com/r/status-dot.json",
+        "https://ombakui.com/r/wave-underline.json"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-wave/footer-wave.tsx",
           "type": "registry:component"
         }
       ]

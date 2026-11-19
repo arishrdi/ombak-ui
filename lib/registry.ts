@@ -42,6 +42,9 @@ export const BLOCK_CATEGORY_LABELS: Record<string, string> = {
   pricing: "Pricing",
   faq: "FAQ",
   cta: "Call to action",
+  navigation: "Navigation",
+  contact: "Contact",
+  footer: "Footer",
 };
 
 export function getItem(slug: string) {

@@ -7,9 +7,24 @@ import { PricingTiers } from "@/registry/blocks/pricing-tiers/pricing-tiers";
 import { TestimonialWall } from "@/registry/blocks/testimonial-wall/testimonial-wall";
 import { FaqSplit } from "@/registry/blocks/faq-split/faq-split";
 import { CtaCaustics } from "@/registry/blocks/cta-caustics/cta-caustics";
+import { NavbarFloating } from "@/registry/blocks/navbar-floating/navbar-floating";
+import { FooterWave } from "@/registry/blocks/footer-wave/footer-wave";
+import { ContactForm } from "@/registry/blocks/contact-form/contact-form";
+import { NavbarPreview } from "@/components/site/block-previews";
 
-/** Block slug → component (rendered with its defaults) and its exported name for the usage snippet. */
-export const blockDocs: Record<string, { Block: ComponentType; exportName: string }> = {
+type BlockDoc = {
+  /** The block, rendered with its defaults. */
+  Block: ComponentType;
+  /** Exported name, for the usage snippet. */
+  exportName: string;
+  /** Rendered on /view instead of the bare block, e.g. with page content to scroll past. */
+  Preview?: ComponentType;
+  /** Fixed preview height in px. The frame scrolls instead of growing to fit. */
+  frameHeight?: number;
+};
+
+export const blockDocs: Record<string, BlockDoc> = {
+  "navbar-floating": { Block: NavbarFloating, exportName: "NavbarFloating", Preview: NavbarPreview, frameHeight: 560 },
   "hero-wave": { Block: HeroWave, exportName: "HeroWave" },
   "logo-marquee": { Block: LogoMarquee, exportName: "LogoMarquee" },
   "stats-band": { Block: StatsBand, exportName: "StatsBand" },
@@ -18,4 +33,6 @@ export const blockDocs: Record<string, { Block: ComponentType; exportName: strin
   "testimonial-wall": { Block: TestimonialWall, exportName: "TestimonialWall" },
   "faq-split": { Block: FaqSplit, exportName: "FaqSplit" },
   "cta-caustics": { Block: CtaCaustics, exportName: "CtaCaustics" },
+  "contact-form": { Block: ContactForm, exportName: "ContactForm" },
+  "footer-wave": { Block: FooterWave, exportName: "FooterWave" },
 };

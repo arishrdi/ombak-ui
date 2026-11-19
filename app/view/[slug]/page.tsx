@@ -23,7 +23,7 @@ export default async function BlockView({ params }: Params) {
     <>
       <style>{"body{min-height:0}"}</style>
       <div id="block-root">
-        <doc.Block />
+        {doc.Preview ? <doc.Preview /> : <doc.Block />}
       </div>
     </>
   );
