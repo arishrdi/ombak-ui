@@ -9,7 +9,10 @@ import { CodeBlock } from "@/components/site/code-block";
 import { CopyButton } from "@/components/site/copy-button";
 import { ComponentCard } from "@/components/site/component-card";
 import { Logo } from "@/components/site/logo";
+import { BlockThumb } from "@/components/site/block-frame";
 import { cardItems } from "@/lib/nav";
+import { blocks, templateParts, templates } from "@/lib/registry";
+import { templateDocs } from "@/content/templates";
 import { registryUrl, site } from "@/lib/site";
 
 const HERO_WAVES = ["#0f2a66", "#0b5e91", "#138fa3", "#3fd1b0"];
@@ -46,11 +49,11 @@ export default function Home() {
         />
         <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col items-center px-4 pt-[14vh] pb-[26vh] text-center md:px-6">
           <Link
-            href="/docs/components"
+            href="/templates"
             className="group inline-flex w-fit items-center gap-2.5 rounded-full bg-white/[0.04] py-1 pr-3.5 pl-1 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.1)] backdrop-blur-md transition hover:bg-white/[0.07] hover:text-white"
           >
             <span className="rounded-full bg-gradient-to-b from-[#7ff5d6] to-[#3fd1b0] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-[#04201a] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,.5)]">New</span>
-            {cards.length} free components are live
+            Templates: whole landing pages in one command
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </Link>
 
@@ -146,6 +149,81 @@ export default function Home() {
           <ComponentCard item={byName["swipe-stack"]} className="md:col-span-2" tall />
           <ComponentCard item={byName["split-flap"]} className="md:col-span-3" />
           <ComponentCard item={byName["odometer"]} className="md:col-span-3" />
+        </div>
+      </section>
+
+      {/* ---------- blocks & templates ---------- */}
+      <section className="relative border-t border-hairline">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-80 [background:radial-gradient(50%_100%_at_50%_0%,color-mix(in_oklch,var(--surf)_10%,transparent),transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-28 md:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-8">
+            <div className="max-w-2xl">
+              <p className="eyebrow">Blocks & templates</p>
+              <h2 className="mt-4 font-display text-4xl font-semibold tracking-[-0.04em] md:text-6xl">
+                Whole pages, <span className="font-serif font-normal tracking-normal italic">one command.</span>
+              </h2>
+              <p className="mt-5 max-w-lg text-muted-foreground">
+                {blocks.length} ready-made sections and {templates.length} complete landing pages, composed from the
+                components above. Install one and everything it uses comes along.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/templates"
+                className="inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background shadow-soft-md transition-transform duration-300 active:scale-[0.98]"
+              >
+                Browse templates →
+              </Link>
+              <Link href="/blocks" className="surface inline-flex h-11 items-center rounded-full px-6 text-sm font-medium transition hover:shadow-soft-md">
+                See all blocks
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-14 grid gap-4 md:grid-cols-3">
+            {templates.map((t) => {
+              const accent = templateDocs[t.name]?.accent;
+              return (
+                <Link
+                  key={t.name}
+                  href={`/templates/${t.name}`}
+                  className="surface glow-border group block overflow-hidden rounded-[24px] outline-none transition-[transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-soft-lg focus-visible:ring-4 focus-visible:ring-ring/40 motion-reduce:hover:translate-y-0"
+                >
+                  <div className="m-1.5 mb-0 aspect-[4/5] overflow-hidden rounded-[18px] shadow-[inset_0_0_0_1px_var(--hairline)]">
+                    <BlockThumb slug={t.name} title={t.title} fill />
+                  </div>
+                  <div className="flex items-center justify-between gap-4 px-5 pt-4 pb-5">
+                    <div>
+                      <h3 className="flex items-center gap-2 font-display text-[15px] font-semibold tracking-[-0.01em]">
+                        <span className="size-2 rounded-full" style={{ background: accent, boxShadow: `0 0 10px ${accent}` }} />
+                        {t.title}
+                      </h3>
+                      <p className="mt-1 font-mono text-[10.5px] tracking-[0.12em] text-muted-foreground uppercase">
+                        {templateParts(t.name).blocks.length} blocks
+                      </p>
+                    </div>
+                    <span className="text-muted-foreground transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            <span className="mr-2 font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Blocks</span>
+            {blocks.map((b) => (
+              <Link
+                key={b.name}
+                href={`/blocks/${b.name}`}
+                className="rounded-full bg-muted/50 px-3 py-1 text-[13px] text-muted-foreground shadow-[inset_0_0_0_1px_var(--hairline)] transition hover:bg-muted hover:text-foreground"
+              >
+                {b.title}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -131,6 +131,7 @@ export function BlockThumb({
           src={`/view/${slug}`}
           title={title}
           tabIndex={-1}
+          loading="lazy"
           className={cn(
             "pointer-events-none absolute left-0 origin-top-left transition-opacity duration-700",
             blockHeight ? "opacity-100" : "opacity-0",

@@ -7,6 +7,12 @@ import { getBlock, templateParts, templates } from "@/lib/registry";
 export const metadata: Metadata = {
   title: "Templates",
   description: "Complete landing pages built from Ombak UI blocks. Install a whole page with one command and make it yours.",
+  openGraph: {
+    title: "Templates · Ombak UI",
+    description: "Complete landing pages built from Ombak UI blocks. Install a whole page with one command and make it yours.",
+    url: "/templates",
+    siteName: "Ombak UI",
+  },
 };
 
 export default function TemplatesIndex() {

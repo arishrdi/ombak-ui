@@ -16,7 +16,12 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const block = getBlock((await params).slug);
-  return block ? { title: `${block.title} block`, description: block.description } : {};
+  if (!block) return {};
+  return {
+    title: `${block.title} block`,
+    description: block.description,
+    openGraph: { title: `${block.title} block · Ombak UI`, description: block.description, url: `/blocks/${block.name}`, siteName: "Ombak UI" },
+  };
 }
 
 export default async function BlockPage({ params }: Params) {
