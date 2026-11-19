@@ -121,6 +121,7 @@ registry.json                     ← registry index: title, description, deps, 
 public/r/*.json                   ← built registry files (npm run registry:build)
 components/demos/index.tsx        ← live demos shown in the docs
 content/docs.tsx                  ← per-component usage snippet + demo mapping
+content/playground-fixtures.tsx   ← sample props/children for the Playground tab
 components/thumbs/index.tsx       ← small live previews for component cards
 components/site/*                 ← docs site UI (header, ⌘K search, theme toggle, mobile nav, previews)
 app/                              ← landing, /docs, /docs/components/[slug], /llms.txt
@@ -146,6 +147,11 @@ npm run build            # registry + production build
    - Register GSAP plugins at the top of the file (`if (typeof window !== "undefined") gsap.registerPlugin(...)`).
 2. Add an entry to `registry.json` (name, title, description, dependencies, categories, files).
 3. Add a demo to `components/demos/index.tsx`, a usage snippet to `content/docs.tsx`, and a small preview to `components/thumbs/index.tsx`. Add it to the landing bento in `app/page.tsx` if it deserves a spot.
+   The **Playground** tab is generated from the props table: numbers become sliders, booleans toggles,
+   string unions buttons, hex colors color pickers. If a required prop is a list or an element (or
+   `children` needs a specific shape), add sample values to `content/playground-fixtures.tsx`; tune
+   slider ranges or starting values in `lib/playground.ts`. `npm run registry:build` regenerates
+   `components/site/playground-map.tsx`.
 4. `npm run build`, then check the page at `/docs/components/<name>`.
 
 ## Going live
