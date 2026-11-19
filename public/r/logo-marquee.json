@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "logo-marquee",
+  "title": "Logo Marquee",
+  "description": "A \"trusted by\" strip of logos drifting past with faded edges.",
+  "registryDependencies": [
+    "https://ombakui.com/r/marquee.json"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/logo-marquee/logo-marquee.tsx",
+      "content": "\"use client\";\n\nimport { Marquee } from \"@/components/marquee\";\nimport { cn } from \"@/lib/utils\";\n\nexport type LogoMarqueeProps = {\n  /** Line above the logos. */\n  title?: string;\n  /** Brand names (or swap the spans for your own <img> logos). */\n  logos?: string[];\n  /** Scroll speed in pixels per second. */\n  speed?: number;\n  className?: string;\n};\n\nconst DEFAULT_LOGOS = [\"Arus\", \"Karang\", \"Pasang\", \"Samudra\", \"Teluk\", \"Lagoon\", \"Tanjung\", \"Selat\", \"Muara\", \"Riak\"];\n\n/** A \"trusted by\" strip: brand names drift past with faded edges and slow down on hover. */\nexport function LogoMarquee({\n  title = \"Trusted by teams who ship fast\",\n  logos = DEFAULT_LOGOS,\n  speed = 40,\n  className,\n}: LogoMarqueeProps) {\n  return (\n    <section className={cn(\"border-y bg-background py-12\", className)}>\n      <p className=\"mb-8 text-center text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase\">{title}</p>\n      <Marquee speed={speed} fade pauseOnHover gap=\"4rem\">\n        {logos.map((name, i) => (\n          <span key={name} className=\"flex items-center gap-2.5 text-xl font-semibold tracking-[-0.03em] text-muted-foreground/80 md:text-2xl\">\n            <LogoMark index={i} />\n            {name}\n          </span>\n        ))}\n      </Marquee>\n    </section>\n  );\n}\n\n/** Placeholder marks so the strip looks like real logos out of the box. */\nfunction LogoMark({ index }: { index: number }) {\n  const shapes = [\n    <circle key=\"c\" cx=\"12\" cy=\"12\" r=\"9\" />,\n    <rect key=\"r\" x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"5\" />,\n    <path key=\"t\" d=\"M12 3 21 20H3z\" />,\n    <path key=\"w\" d=\"M2 15c3 0 3-6 6-6s3 6 6 6 3-6 6-6\" fill=\"none\" strokeWidth=\"3\" />,\n    <path key=\"d\" d=\"M12 2 22 12 12 22 2 12z\" />,\n  ];\n  return (\n    <svg viewBox=\"0 0 24 24\" className=\"size-6 fill-current stroke-current\" aria-hidden>\n      {shapes[index % shapes.length]}\n    </svg>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "social-proof"
+  ],
+  "type": "registry:block"
+}

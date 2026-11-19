@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-band",
+  "title": "Stats Band",
+  "description": "Headline numbers that count up on scroll, split by hairline dividers.",
+  "registryDependencies": [
+    "https://ombakui.com/r/count-up.json"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/stats-band/stats-band.tsx",
+      "content": "\"use client\";\n\nimport { CountUp } from \"@/components/count-up\";\nimport { cn } from \"@/lib/utils\";\n\nexport type Stat = { value: number; label: string; prefix?: string; suffix?: string; decimals?: number };\n\nexport type StatsBandProps = {\n  /** Small label above the title. */\n  eyebrow?: string;\n  /** Section title. */\n  title?: string;\n  /** Up to four numbers. They count up when scrolled into view. */\n  stats?: Stat[];\n  className?: string;\n};\n\nconst DEFAULT_STATS: Stat[] = [\n  { value: 12480, suffix: \"+\", label: \"sites riding the wave\" },\n  { value: 99.98, decimals: 2, suffix: \"%\", label: \"uptime over the last year\" },\n  { value: 48, suffix: \"ms\", label: \"median response time\" },\n  { value: 4.9, decimals: 1, prefix: \"★ \", label: \"average rating from teams\" },\n];\n\n/** A row of headline numbers that count up on scroll, split by hairline dividers. */\nexport function StatsBand({\n  eyebrow = \"By the numbers\",\n  title = \"Small details, measurable results.\",\n  stats = DEFAULT_STATS,\n  className,\n}: StatsBandProps) {\n  return (\n    <section className={cn(\"bg-background px-6 py-20 md:py-28\", className)}>\n      <div className=\"mx-auto max-w-6xl\">\n        <div className=\"mx-auto max-w-2xl text-center\">\n          <p className=\"text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase\">{eyebrow}</p>\n          <h2 className=\"mt-4 text-3xl font-semibold tracking-[-0.04em] md:text-5xl\">{title}</h2>\n        </div>\n        <dl className=\"mt-14 grid grid-cols-2 gap-y-10 md:grid-cols-4\">\n          {stats.map((s) => (\n            <div key={s.label} className=\"flex flex-col-reverse items-center px-4 text-center md:border-l md:first:border-l-0\">\n              <dt className=\"mt-3 max-w-[18ch] text-sm leading-snug text-muted-foreground\">{s.label}</dt>\n              <dd>\n                <CountUp\n                  value={s.value}\n                  prefix={s.prefix}\n                  suffix={s.suffix}\n                  decimals={s.decimals}\n                  className=\"text-4xl font-semibold tracking-[-0.04em] tabular-nums md:text-6xl\"\n                />\n              </dd>\n            </div>\n          ))}\n        </dl>\n      </div>\n    </section>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "social-proof"
+  ],
+  "type": "registry:block"
+}

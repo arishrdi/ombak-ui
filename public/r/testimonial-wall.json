@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonial-wall",
+  "title": "Testimonial Wall",
+  "description": "Two rows of review cards drifting in opposite directions.",
+  "registryDependencies": [
+    "https://ombakui.com/r/marquee.json",
+    "https://ombakui.com/r/star-rating.json"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/testimonial-wall/testimonial-wall.tsx",
+      "content": "\"use client\";\n\nimport { Marquee } from \"@/components/marquee\";\nimport { StarRating } from \"@/components/star-rating\";\nimport { cn } from \"@/lib/utils\";\n\nexport type Testimonial = { quote: string; name: string; role: string; rating?: number };\n\nexport type TestimonialWallProps = {\n  eyebrow?: string;\n  title?: string;\n  /** Split across two rows that drift in opposite directions. */\n  testimonials?: Testimonial[];\n  className?: string;\n};\n\nconst DEFAULT_TESTIMONIALS: Testimonial[] = [\n  { quote: \"We swapped our hero for the wave background and time on page went up the same week.\", name: \"Dewi Lestari\", role: \"Design lead, Arus\" },\n  { quote: \"The code is small enough to read in one sitting. We changed three lines and it matched our brand.\", name: \"Rafi Pratama\", role: \"Frontend engineer\" },\n  { quote: \"Finally, motion components that respect reduced-motion without me asking.\", name: \"Maya Chen\", role: \"Accessibility consultant\" },\n  { quote: \"Clients ask how we made it feel so smooth. I just send them the docs.\", name: \"Bima Saputra\", role: \"Founder, Studio Teluk\" },\n  { quote: \"Installed with one command, themed by our tokens, shipped before lunch.\", name: \"Laura Gómez\", role: \"Product engineer\" },\n  { quote: \"The magnetic button alone doubled clicks on our signup CTA.\", name: \"Ardi Nugroho\", role: \"Growth, Karang\" },\n];\n\n/** Two rows of review cards drifting in opposite directions; hover to pause and read. */\nexport function TestimonialWall({\n  eyebrow = \"Loved by builders\",\n  title = \"Don't take our word for it.\",\n  testimonials = DEFAULT_TESTIMONIALS,\n  className,\n}: TestimonialWallProps) {\n  const half = Math.ceil(testimonials.length / 2);\n  const rows = [testimonials.slice(0, half), testimonials.slice(half)];\n\n  return (\n    <section className={cn(\"overflow-hidden bg-background py-20 md:py-28\", className)}>\n      <div className=\"mx-auto max-w-2xl px-6 text-center\">\n        <p className=\"text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase\">{eyebrow}</p>\n        <h2 className=\"mt-4 text-3xl font-semibold tracking-[-0.04em] md:text-5xl\">{title}</h2>\n      </div>\n      <div className=\"mt-14 space-y-4\">\n        {rows.map((row, r) => (\n          <Marquee key={r} speed={28} direction={r % 2 ? \"right\" : \"left\"} pauseOnHover fade gap=\"1rem\">\n            {row.map((t) => (\n              <figure key={t.name} className=\"w-[320px] shrink-0 rounded-2xl border bg-card p-6 text-card-foreground shadow-sm md:w-[380px]\">\n                <StarRating label={`${t.rating ?? 5} out of 5 stars`} value={t.rating ?? 5} readOnly size={14} />\n                <blockquote className=\"mt-4 text-[15px] leading-relaxed\">“{t.quote}”</blockquote>\n                <figcaption className=\"mt-5 flex items-center gap-3\">\n                  <span className=\"grid size-9 place-items-center rounded-full bg-gradient-to-br from-primary/30 to-primary/5 text-xs font-semibold\">\n                    {t.name\n                      .split(\" \")\n                      .map((p) => p[0])\n                      .join(\"\")\n                      .slice(0, 2)}\n                  </span>\n                  <span>\n                    <span className=\"block text-sm font-medium\">{t.name}</span>\n                    <span className=\"block text-xs text-muted-foreground\">{t.role}</span>\n                  </span>\n                </figcaption>\n              </figure>\n            ))}\n          </Marquee>\n        ))}\n      </div>\n    </section>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "categories": [
+    "social-proof"
+  ],
+  "type": "registry:block"
+}

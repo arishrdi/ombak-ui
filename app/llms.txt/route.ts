@@ -1,4 +1,4 @@
-import { items } from "@/lib/registry";
+import { blocks, items } from "@/lib/registry";
 import { registryUrl, site } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -16,6 +16,15 @@ export function GET() {
     ...items.map(
       (i) =>
         `- [${i.title}](${site.url}/docs/components/${i.name}): ${i.description} Install: \`npx shadcn@latest add ${registryUrl(i.name)}\``,
+    ),
+    "",
+    "## Blocks",
+    "",
+    "Page sections composed from the components above. Installing a block also installs the components it uses.",
+    "",
+    ...blocks.map(
+      (b) =>
+        `- [${b.title}](${site.url}/blocks/${b.name}): ${b.description} Install: \`npx shadcn@latest add ${registryUrl(b.name)}\``,
     ),
     "",
   ];

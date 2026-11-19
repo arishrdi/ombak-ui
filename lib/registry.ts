@@ -4,10 +4,12 @@ import registry from "@/registry.json";
 
 export type RegistryItem = {
   name: string;
+  type: string;
   title: string;
   description: string;
   dependencies?: string[];
   categories?: string[];
+  registryDependencies?: string[];
   files: { path: string }[];
 };
 
@@ -25,7 +27,22 @@ export const CATEGORY_LABELS: Record<string, string> = {
   forms: "Forms",
 };
 
-export const items = registry.items as RegistryItem[];
+const all = registry.items as RegistryItem[];
+
+/** Single components (registry:component). */
+export const items = all.filter((i) => i.type !== "registry:block");
+
+/** Page sections composed from components (registry:block). */
+export const blocks = all.filter((i) => i.type === "registry:block");
+
+export const BLOCK_CATEGORY_LABELS: Record<string, string> = {
+  hero: "Hero",
+  "social-proof": "Social proof",
+  features: "Features",
+  pricing: "Pricing",
+  faq: "FAQ",
+  cta: "Call to action",
+};
 
 export function getItem(slug: string) {
   return items.find((i) => i.name === slug);
@@ -48,9 +65,35 @@ export function getSource(slug: string) {
   return fs.readFileSync(path.join(process.cwd(), "registry", "ombak", item.name, `${item.name}.tsx`), "utf8");
 }
 
-/** Reads `export type XProps = { … }` from the component source, using the JSDoc above each prop. */
+export function getBlock(slug: string) {
+  return blocks.find((b) => b.name === slug);
+}
+
+/** Block source as the user receives it: component imports point at "@/components/<name>". */
+export function getBlockSource(slug: string) {
+  const block = getBlock(slug);
+  if (!block) return "";
+  const src = fs.readFileSync(path.join(process.cwd(), "registry", "blocks", block.name, `${block.name}.tsx`), "utf8");
+  return src.replace(/@\/registry\/ombak\/([\w-]+)\/\1/g, "@/components/$1");
+}
+
+/** Names of the Ombak components a block is built from. */
+export function blockComponents(slug: string) {
+  return (getBlock(slug)?.registryDependencies ?? [])
+    .map((d) => d.match(/\/r\/([\w-]+)\.json$/)?.[1])
+    .filter((n): n is string => !!n && !!getItem(n));
+}
+
 export function getProps(slug: string): PropDoc[] {
-  const src = getSource(slug);
+  return parseProps(getSource(slug));
+}
+
+export function getBlockProps(slug: string): PropDoc[] {
+  return parseProps(getBlockSource(slug));
+}
+
+/** Reads `export type XProps = { … }` from a source file, using the JSDoc above each prop. */
+function parseProps(src: string): PropDoc[] {
   const block = src.match(/export type \w+Props(?:<[^>]*>)? = \{([\s\S]*?)\n\}/);
   if (!block) return [];
   const props: PropDoc[] = [];
