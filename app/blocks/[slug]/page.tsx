@@ -6,6 +6,8 @@ import { BlockPreview } from "@/components/site/block-preview";
 import { CodeBlock } from "@/components/site/code-block";
 import { PropsTable } from "@/components/site/props-table";
 import { KitButton } from "@/components/site/kit-button";
+import { AiMenu } from "@/components/site/ai-menu";
+import { buildPrompt, openInV0Url } from "@/lib/ai-prompt";
 import { BLOCK_CATEGORY_LABELS, blockComponents, blocks, getBlock, getBlockProps, getBlockSource, getItem } from "@/lib/registry";
 import { registryUrl } from "@/lib/site";
 
@@ -42,6 +44,18 @@ export default function Page() {
   return <${doc.exportName} />;
 }`;
 
+  const promptInput = {
+    kind: "block" as const,
+    name: slug,
+    title: block.title,
+    description: block.description,
+    path: `/blocks/${slug}`,
+    includes: used.map((n) => getItem(n)?.title ?? n),
+    usage,
+    props: getBlockProps(slug),
+    source,
+  };
+
   return (
     <article className="prose-ombak space-y-14">
       <header>
@@ -63,7 +77,10 @@ export default function Page() {
               {getItem(n)?.title}
             </Link>
           ))}
-          <KitButton name={block.name} title={block.title} className="ml-auto" />
+          <div className="ml-auto flex items-center gap-2">
+            <AiMenu prompt={buildPrompt(promptInput, false)} promptWithSource={buildPrompt(promptInput, true)} v0Url={openInV0Url(slug)} />
+            <KitButton name={block.name} title={block.title} />
+          </div>
         </div>
       </header>
 

@@ -6,6 +6,8 @@ import { PreviewTabs } from "@/components/site/preview-tabs";
 import { InstallTabs } from "@/components/site/install-tabs";
 import { PropsTable } from "@/components/site/props-table";
 import { KitButton } from "@/components/site/kit-button";
+import { AiMenu } from "@/components/site/ai-menu";
+import { buildPrompt, openInV0Url } from "@/lib/ai-prompt";
 import { PropsPlayground } from "@/components/site/props-playground";
 import { playgroundSpec } from "@/lib/playground";
 import { CATEGORY_LABELS, getItem, getProps, getSource, items } from "@/lib/registry";
@@ -37,6 +39,17 @@ export default async function ComponentPage({ params }: Params) {
   const source = getSource(slug);
   const spec = playgroundSpec(slug);
   const deps = item.dependencies ?? [];
+  const promptInput = {
+    kind: "component" as const,
+    name: slug,
+    title: item.title,
+    description: item.description,
+    path: `/docs/components/${slug}`,
+    dependencies: deps,
+    usage: doc.usage,
+    props: getProps(slug),
+    source,
+  };
   const index = items.findIndex((i) => i.name === slug);
   const prev = items[index - 1];
   const next = items[index + 1];
@@ -58,7 +71,10 @@ export default async function ComponentPage({ params }: Params) {
             </span>
           ))}
           <span className="rounded-full bg-surf/10 px-3 py-1 font-mono text-[11px] text-surf shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--surf)_30%,transparent)]">MIT · free</span>
-          <KitButton name={item.name} title={item.title} className="ml-auto" />
+          <div className="ml-auto flex items-center gap-2">
+            <AiMenu prompt={buildPrompt(promptInput, false)} promptWithSource={buildPrompt(promptInput, true)} v0Url={openInV0Url(slug)} />
+            <KitButton name={item.name} title={item.title} />
+          </div>
         </div>
       </header>
 
