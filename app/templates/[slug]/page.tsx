@@ -5,6 +5,7 @@ import { templateDocs } from "@/content/templates";
 import { BlockPreview } from "@/components/site/block-preview";
 import { CodeBlock } from "@/components/site/code-block";
 import { PropsTable } from "@/components/site/props-table";
+import { KitButton } from "@/components/site/kit-button";
 import { getBlock, getItem, getTemplate, getTemplateSource, templateParts, templates } from "@/lib/registry";
 import { registryUrl } from "@/lib/site";
 
@@ -73,7 +74,10 @@ export default function Page() {
           <span className="opacity-40">/</span>
           <span>{t.title}</span>
         </nav>
-        <h1 className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{t.title}</h1>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h1 className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{t.title}</h1>
+          <KitButton name={t.name} title={t.title} />
+        </div>
         <p className="mt-3 max-w-2xl text-[17px] leading-relaxed text-muted-foreground">{t.description}</p>
       </header>
 

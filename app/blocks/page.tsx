@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BlockThumb } from "@/components/site/block-frame";
+import { KitButton } from "@/components/site/kit-button";
 import { BLOCK_CATEGORY_LABELS, blockComponents, blocks, getItem } from "@/lib/registry";
 
 export const metadata: Metadata = {
@@ -32,8 +33,8 @@ export default function BlocksIndex() {
         {blocks.map((b, i) => {
           const used = blockComponents(b.name);
           return (
+            <div key={b.name} className="group/kit relative">
             <Link
-              key={b.name}
               href={`/blocks/${b.name}`}
               className="surface glow-border group block overflow-hidden rounded-[24px] outline-none transition-[transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-soft-lg focus-visible:ring-4 focus-visible:ring-ring/40 motion-reduce:hover:translate-y-0"
             >
@@ -60,6 +61,8 @@ export default function BlocksIndex() {
                 ))}
               </div>
             </Link>
+            <KitButton name={b.name} title={b.title} variant="icon" className="absolute top-4 right-4 z-10" />
+            </div>
           );
         })}
       </div>

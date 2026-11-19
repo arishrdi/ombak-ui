@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/site/code-block";
 import { PreviewTabs } from "@/components/site/preview-tabs";
 import { InstallTabs } from "@/components/site/install-tabs";
 import { PropsTable } from "@/components/site/props-table";
+import { KitButton } from "@/components/site/kit-button";
 import { PropsPlayground } from "@/components/site/props-playground";
 import { playgroundSpec } from "@/lib/playground";
 import { CATEGORY_LABELS, getItem, getProps, getSource, items } from "@/lib/registry";
@@ -57,6 +58,7 @@ export default async function ComponentPage({ params }: Params) {
             </span>
           ))}
           <span className="rounded-full bg-surf/10 px-3 py-1 font-mono text-[11px] text-surf shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--surf)_30%,transparent)]">MIT · free</span>
+          <KitButton name={item.name} title={item.title} className="ml-auto" />
         </div>
       </header>
 

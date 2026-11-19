@@ -5,6 +5,7 @@ import { blockDocs } from "@/content/blocks";
 import { BlockPreview } from "@/components/site/block-preview";
 import { CodeBlock } from "@/components/site/code-block";
 import { PropsTable } from "@/components/site/props-table";
+import { KitButton } from "@/components/site/kit-button";
 import { BLOCK_CATEGORY_LABELS, blockComponents, blocks, getBlock, getBlockProps, getBlockSource, getItem } from "@/lib/registry";
 import { registryUrl } from "@/lib/site";
 
@@ -62,6 +63,7 @@ export default function Page() {
               {getItem(n)?.title}
             </Link>
           ))}
+          <KitButton name={block.name} title={block.title} className="ml-auto" />
         </div>
       </header>
 

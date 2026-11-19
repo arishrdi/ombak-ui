@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { BlockThumb } from "@/components/site/block-frame";
+import { KitButton } from "@/components/site/kit-button";
 import { templateDocs } from "@/content/templates";
 import { getBlock, templateParts, templates } from "@/lib/registry";
 
@@ -33,8 +34,8 @@ export default function TemplatesIndex() {
           const parts = templateParts(t.name);
           const accent = templateDocs[t.name]?.accent;
           return (
+            <div key={t.name} className="relative">
             <Link
-              key={t.name}
               href={`/templates/${t.name}`}
               className="surface glow-border group grid overflow-hidden rounded-[28px] outline-none transition-[transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-soft-lg focus-visible:ring-4 focus-visible:ring-ring/40 motion-reduce:hover:translate-y-0 lg:grid-cols-[1.7fr_1fr]"
             >
@@ -68,6 +69,8 @@ export default function TemplatesIndex() {
                 </span>
               </div>
             </Link>
+            <KitButton name={t.name} title={t.title} variant="full" className="absolute top-5 right-5 z-10 lg:top-7 lg:right-7" />
+            </div>
           );
         })}
       </div>
