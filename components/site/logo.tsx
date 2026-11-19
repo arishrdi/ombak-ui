@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 /** Ombak mark: a cresting wave inside a rounded square. */
 export function Logo({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5 font-display text-[15px] font-semibold tracking-[-0.02em]", className)}>
+    <span className={cn("inline-flex items-center gap-2.5 font-display text-[15px] font-semibold tracking-[-0.02em] whitespace-nowrap", className)}>
       <svg viewBox="0 0 32 32" className="size-7 drop-shadow-[0_2px_8px_color-mix(in_oklch,var(--surf)_35%,transparent)]" aria-hidden>
         <defs>
           <linearGradient id="ombak-logo" x1="0" y1="0" x2="1" y2="1">

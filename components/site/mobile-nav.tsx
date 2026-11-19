@@ -24,13 +24,13 @@ export function MobileNav({ groups }: { groups: NavGroup[] }) {
         aria-label="Open menu"
         aria-expanded={open}
         onClick={() => setOpen(true)}
-        className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
+        className="grid size-9 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground lg:hidden"
       >
         <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
       {open &&
         createPortal(
-        <div className="fixed inset-0 z-[90] md:hidden">
+        <div className="fixed inset-0 z-[90] lg:hidden">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-72 overflow-y-auto border-r border-hairline bg-background/95 p-5 shadow-soft-lg backdrop-blur-xl">
             <div className="mb-6 flex justify-end">
