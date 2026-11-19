@@ -186,7 +186,7 @@ export function StudioLanding({ accent = "#f97362", className }: StudioLandingPr
       <FooterWave
         brand="Karang"
         tagline="Independent design studio in Bali, working worldwide."
-        copyright={`© ${new Date().getFullYear()} Karang Studio`}
+        copyright="© Karang Studio. All rights reserved."
         status="Booking from next month"
         columns={[
           { title: "Studio", links: [{ label: "Work", href: "#work" }, { label: "Services", href: "#services" }, { label: "Contact", href: "#contact" }] },

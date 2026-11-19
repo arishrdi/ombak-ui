@@ -142,7 +142,7 @@ export function AppLaunch({
       <FooterWave
         brand="Riak"
         tagline="Notes that drift into place."
-        copyright={`© ${new Date().getFullYear()} Riak Labs`}
+        copyright="© Riak Labs. All rights reserved."
         status={null}
         columns={[
           { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Waitlist", href: "#waitlist" }, { label: "FAQ", href: "#faq" }] },
