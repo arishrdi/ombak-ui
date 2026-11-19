@@ -3,15 +3,16 @@
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Preview / Code switcher with a replay button that remounts the demo. */
-export function PreviewTabs({ preview, code, stage }: { preview: ReactNode; code: ReactNode; stage?: string }) {
-  const [tab, setTab] = useState<"preview" | "code">("preview");
+/** Preview / Code (/ Playground) switcher with a replay button that remounts the demo. */
+export function PreviewTabs({ preview, code, stage, playground }: { preview: ReactNode; code: ReactNode; stage?: string; playground?: ReactNode }) {
+  const [tab, setTab] = useState<"preview" | "code" | "playground">("preview");
+  const tabs = playground ? (["preview", "code", "playground"] as const) : (["preview", "code"] as const);
   const [run, setRun] = useState(0);
   return (
     <div>
       <div className="mb-3 flex items-center justify-between">
         <div className="surface inline-flex gap-1 rounded-full p-1">
-          {(["preview", "code"] as const).map((t) => (
+          {tabs.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -52,6 +53,8 @@ export function PreviewTabs({ preview, code, stage }: { preview: ReactNode; code
         </div>
       </div>
       <div className={cn(tab !== "code" && "hidden")}>{code}</div>
+      {/* mounted only while open, so its live components don't run in the background */}
+      {playground && tab === "playground" && <div>{playground}</div>}
     </div>
   );
 }

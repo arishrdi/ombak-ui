@@ -5,6 +5,8 @@ import { CodeBlock } from "@/components/site/code-block";
 import { PreviewTabs } from "@/components/site/preview-tabs";
 import { InstallTabs } from "@/components/site/install-tabs";
 import { PropsTable } from "@/components/site/props-table";
+import { PropsPlayground } from "@/components/site/props-playground";
+import { playgroundSpec } from "@/lib/playground";
 import { CATEGORY_LABELS, getItem, getProps, getSource, items } from "@/lib/registry";
 import { registryUrl } from "@/lib/site";
 
@@ -32,6 +34,7 @@ export default async function ComponentPage({ params }: Params) {
   if (!item || !doc) notFound();
 
   const source = getSource(slug);
+  const spec = playgroundSpec(slug);
   const deps = item.dependencies ?? [];
   const index = items.findIndex((i) => i.name === slug);
   const prev = items[index - 1];
@@ -61,6 +64,7 @@ export default async function ComponentPage({ params }: Params) {
         stage={doc.stage}
         preview={<doc.Demo />}
         code={<CodeBlock code={doc.usage} title="Usage" />}
+        playground={spec ? <PropsPlayground slug={slug} spec={spec} stage={doc.stage} /> : undefined}
       />
 
       <section className="space-y-4">
