@@ -19,8 +19,9 @@ export function Header() {
           <nav className="hidden items-center gap-1 text-[13px] font-medium text-muted-foreground md:flex">
             <Link href="/docs" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Docs</Link>
             <Link href="/docs/components" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Components</Link>
-            <Link href="/blocks" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">
-              Blocks
+            <Link href="/blocks" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Blocks</Link>
+            <Link href="/templates" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">
+              Templates
               <span className="rounded-full bg-surf/15 px-1.5 py-px font-mono text-[9px] tracking-wider text-surf uppercase">New</span>
             </Link>
             <Link href="/docs/installation" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Installation</Link>

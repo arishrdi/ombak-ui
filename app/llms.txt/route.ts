@@ -1,4 +1,4 @@
-import { blocks, items } from "@/lib/registry";
+import { blocks, items, templates } from "@/lib/registry";
 import { registryUrl, site } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -25,6 +25,15 @@ export function GET() {
     ...blocks.map(
       (b) =>
         `- [${b.title}](${site.url}/blocks/${b.name}): ${b.description} Install: \`npx shadcn@latest add ${registryUrl(b.name)}\``,
+    ),
+    "",
+    "## Templates",
+    "",
+    "Complete landing pages composed from the blocks above. Installing a template installs every block and component it uses.",
+    "",
+    ...templates.map(
+      (t) =>
+        `- [${t.title}](${site.url}/templates/${t.name}): ${t.description} Install: \`npx shadcn@latest add ${registryUrl(t.name)}\``,
     ),
     "",
   ];

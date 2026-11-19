@@ -89,19 +89,33 @@ export function BlockFrame({
  * A static thumbnail: the block rendered at desktop width, scaled down to fit the card
  * and centered vertically. Not interactive; the card around it is the link.
  */
-export function BlockThumb({ slug, title, maxHeight = 340, renderWidth = 1280 }: { slug: string; title: string; maxHeight?: number; renderWidth?: number }) {
+export function BlockThumb({
+  slug,
+  title,
+  maxHeight = 340,
+  renderWidth = 1280,
+  fill = false,
+}: {
+  slug: string;
+  title: string;
+  maxHeight?: number;
+  renderWidth?: number;
+  /** Fill the parent's height instead of using a 16:9-ish box. */
+  fill?: boolean;
+}) {
   const wrap = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
-  const [width, setWidth] = useState(0);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+  const width = size.width;
   const scale = width / renderWidth;
   // roughly 16:9, capped so wide cards don't get too tall
-  const height = width ? Math.min(maxHeight, Math.round(width * 0.56)) : maxHeight;
+  const height = fill && size.height ? size.height : width ? Math.min(maxHeight, Math.round(width * 0.56)) : maxHeight;
   const blockHeight = useBlockHeight(frame, [scale > 0]);
 
   useEffect(() => {
     const el = wrap.current;
     if (!el) return;
-    const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
+    const ro = new ResizeObserver(([e]) => setSize({ width: e.contentRect.width, height: e.contentRect.height }));
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
@@ -110,7 +124,7 @@ export function BlockThumb({ slug, title, maxHeight = 340, renderWidth = 1280 }:
   const top = blockHeight && scale ? Math.max(0, (height - blockHeight * scale) / 2) : 0;
 
   return (
-    <div ref={wrap} className="relative w-full overflow-hidden bg-background" style={{ height }} aria-hidden>
+    <div ref={wrap} className={cn("relative w-full overflow-hidden bg-background", fill && "h-full min-h-[280px]")} style={fill ? undefined : { height }} aria-hidden>
       {scale > 0 && (
         <iframe
           ref={frame}

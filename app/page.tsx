@@ -241,6 +241,7 @@ export default function Home() {
               <li><Link href="/docs/installation" className="hover:text-foreground">Installation</Link></li>
               <li><Link href="/docs/components" className="hover:text-foreground">Components</Link></li>
               <li><Link href="/blocks" className="hover:text-foreground">Blocks</Link></li>
+              <li><Link href="/templates" className="hover:text-foreground">Templates</Link></li>
             </ul>
           </div>
           <div>
