@@ -9,15 +9,15 @@ export function PreviewTabs({ preview, code, stage }: { preview: ReactNode; code
   const [run, setRun] = useState(0);
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between border-b">
-        <div className="flex gap-1">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="surface inline-flex gap-1 rounded-full p-1">
           {(["preview", "code"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
               className={cn(
-                "-mb-px border-b-2 px-4 py-2 text-sm font-medium capitalize transition",
-                tab === t ? "border-surf text-foreground" : "border-transparent text-muted-foreground hover:text-foreground",
+                "rounded-full px-4 py-1.5 text-[13px] font-medium capitalize transition duration-300",
+                tab === t ? "bg-foreground text-background shadow-soft-sm" : "text-muted-foreground hover:text-foreground",
               )}
             >
               {t}
@@ -28,7 +28,7 @@ export function PreviewTabs({ preview, code, stage }: { preview: ReactNode; code
           <button
             type="button"
             onClick={() => setRun((r) => r + 1)}
-            className="mb-1.5 inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground active:scale-95"
           >
             <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
             Replay
@@ -38,13 +38,13 @@ export function PreviewTabs({ preview, code, stage }: { preview: ReactNode; code
       <div className={cn(tab !== "preview" && "hidden")}>
         <div
           className={cn(
-            "relative flex min-h-[400px] w-full items-center justify-center overflow-hidden rounded-2xl border bg-card/40 p-6 md:p-10",
+            "surface relative flex min-h-[420px] w-full items-center justify-center overflow-hidden rounded-3xl p-6 md:p-10",
             stage,
           )}
         >
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:18px_18px]"
+            className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
           />
           <div key={run} className="relative flex w-full items-center justify-center">
             {preview}

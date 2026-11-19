@@ -12,7 +12,7 @@ import { Logo } from "@/components/site/logo";
 import { cardItems } from "@/lib/nav";
 import { registryUrl, site } from "@/lib/site";
 
-const HERO_WAVES = ["#173a8a", "#0e7fbf", "#19b5c4", "#5ef0c8"];
+const HERO_WAVES = ["#0f2a66", "#0b5e91", "#138fa3", "#3fd1b0"];
 
 const FEATURES: Array<[string, string, string]> = [
   ["M4 7h16M4 12h10M4 17h7", "Built for shadcn", "Install with the shadcn CLI. Components land in your codebase and use your theme tokens."],
@@ -30,7 +30,7 @@ export default function Home() {
     <main className="overflow-x-clip">
       {/* ---------- hero ---------- */}
       <WaveBackground
-        className="bg-[#06121f] text-white"
+        className="grain bg-[#050c16] text-white"
         colors={HERO_WAVES}
         baseline={0.9}
         amplitude={0.06}
@@ -38,15 +38,20 @@ export default function Home() {
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(60%_50%_at_70%_10%,rgba(94,240,200,.16),transparent_70%),radial-gradient(50%_60%_at_0%_30%,rgba(23,58,138,.45),transparent_70%)]"
+          className="pointer-events-none absolute inset-0 -z-10 [background-image:linear-gradient(to_right,rgba(255,255,255,.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.035)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]"
         />
-        <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col px-4 pt-[12vh] pb-[24vh] md:px-6">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(50%_40%_at_50%_0%,rgba(94,240,200,.14),transparent_70%),radial-gradient(40%_50%_at_0%_30%,rgba(23,58,138,.35),transparent_70%),radial-gradient(40%_50%_at_100%_40%,rgba(14,127,191,.18),transparent_70%)]"
+        />
+        <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col items-center px-4 pt-[14vh] pb-[26vh] text-center md:px-6">
           <Link
             href="/docs/components"
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 py-1 pr-3 pl-1 text-xs text-white/80 backdrop-blur transition hover:border-white/30"
+            className="group inline-flex w-fit items-center gap-2.5 rounded-full bg-white/[0.04] py-1 pr-3.5 pl-1 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.1)] backdrop-blur-md transition hover:bg-white/[0.07] hover:text-white"
           >
-            <span className="rounded-full bg-surf px-2 py-0.5 font-medium text-[#06121f]">New</span>
-            {cards.length} free components are live →
+            <span className="rounded-full bg-gradient-to-b from-[#7ff5d6] to-[#3fd1b0] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-[#04201a] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,.5)]">New</span>
+            {cards.length} free components are live
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </Link>
 
           <TextReveal
@@ -54,56 +59,56 @@ export default function Home() {
             split="words"
             trigger="load"
             stagger={0.06}
-            className="mt-7 max-w-5xl font-display text-[clamp(3rem,8.5vw,7.5rem)] leading-[0.92] font-bold tracking-[-0.04em]"
+            className="mt-8 max-w-5xl font-display text-[clamp(2.75rem,7.5vw,6.5rem)] leading-[0.95] font-semibold tracking-[-0.045em] text-white [text-shadow:0_2px_40px_rgba(94,240,200,.15)]"
           >
             Make your website move like water.
           </TextReveal>
 
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">
+          <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-white/60">
             Ombak UI is a free library of motion components for React: scroll effects, text animations and interactive
             details. Paste them into any shadcn project.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <MagneticButton as="a" href="/docs/components" className="bg-surf px-8 text-[#06121f]">
-              Browse components →
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <MagneticButton as="a" href="/docs/components" className="btn-primary px-7">
+              Browse components
             </MagneticButton>
-            <Link href="/docs/installation" className="group/roll text-sm font-medium text-white">
+            <Link href="/docs/installation" className="btn-ghost group/roll text-white">
               <RollingText text="Read the docs" />
             </Link>
           </div>
 
-          <div className="mt-12 flex w-full max-w-xl items-center gap-3 rounded-xl border border-white/10 bg-black/30 py-2 pr-2 pl-4 font-mono text-[13px] text-white/80 backdrop-blur">
+          <div className="mt-12 flex w-full max-w-xl items-center gap-3 rounded-2xl bg-black/30 py-2 pr-2 pl-4 text-left font-mono text-[12.5px] text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_0_0_1px_rgba(255,255,255,.08),0_20px_40px_-12px_rgba(0,0,0,.6)] backdrop-blur-xl">
             <span className="text-surf">$</span>
             <span className="min-w-0 flex-1 truncate">{installCmd}</span>
-            <CopyButton value={installCmd} className="border-white/15 bg-white/5 text-white/70 hover:text-white" />
+            <CopyButton value={installCmd} className="border-white/10 bg-white/[0.04] text-white/60 hover:text-white" />
           </div>
         </div>
       </WaveBackground>
 
       {/* ---------- marquee band ---------- */}
-      <div className="border-b bg-background py-5">
+      <div className="relative border-b border-hairline bg-background py-6 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
         <Marquee speed={45}>
           {cards.map((c) => (
-            <span key={c.name} className="flex items-center gap-12 font-display text-2xl font-semibold tracking-tight text-muted-foreground md:text-3xl">
+            <span key={c.name} className="flex items-center gap-12 font-serif text-3xl text-muted-foreground/70 italic md:text-4xl">
               {c.title}
-              <span className="text-surf">✦</span>
+              <span className="font-sans text-base text-surf/70 not-italic">✦</span>
             </span>
           ))}
         </Marquee>
       </div>
 
       {/* ---------- stats ---------- */}
-      <section className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-20 md:grid-cols-4 md:px-6">
+      <section className="mx-auto grid max-w-7xl grid-cols-2 px-4 py-24 md:grid-cols-4 md:px-6">
         {[
           { value: cards.length, label: "free components, more every week" },
           { value: 1, label: "command to install any of them" },
           { value: 100, suffix: "%", label: "of the source in your repo" },
           { value: 0, prefix: "$", label: "to use, even commercially" },
         ].map((s) => (
-          <div key={s.label} className="border-t pt-5">
-            <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} duration={1.6} className="font-display text-5xl font-bold tracking-tight" />
-            <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
+          <div key={s.label} className="border-hairline px-2 py-6 text-center md:border-l md:first:border-l-0">
+            <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} duration={1.6} className="font-display text-5xl font-semibold tracking-[-0.04em] tabular-nums md:text-6xl" />
+            <p className="mx-auto mt-3 max-w-[16ch] text-[13px] leading-snug text-muted-foreground">{s.label}</p>
           </div>
         ))}
       </section>
@@ -112,16 +117,16 @@ export default function Home() {
       <section id="components" className="mx-auto max-w-7xl px-4 pb-28 md:px-6">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-sm font-medium text-surf">The first wave</p>
-            <TextReveal as="h2" className="mt-3 max-w-2xl font-display text-4xl font-bold tracking-tight md:text-6xl">
+            <p className="eyebrow">The first wave</p>
+            <TextReveal as="h2" className="mt-4 max-w-2xl font-display text-4xl font-semibold tracking-[-0.04em] md:text-6xl">
               Hover anything. It all moves.
             </TextReveal>
           </div>
-          <Link href="/docs/components" className="group/roll text-sm font-medium">
+          <Link href="/docs/components" className="group/roll surface rounded-full px-4 py-2 text-[13px] font-medium">
             <RollingText text="See all components →" />
           </Link>
         </div>
-        <div className="grid gap-5 md:grid-cols-6">
+        <div className="grid gap-4 md:grid-cols-6">
           <ComponentCard item={byName["wave-background"]} className="md:col-span-4" tall />
           <ComponentCard item={byName["magnetic-button"]} className="md:col-span-2" tall />
           <ComponentCard item={byName["text-reveal"]} className="md:col-span-2" />
@@ -145,11 +150,13 @@ export default function Home() {
       </section>
 
       {/* ---------- how it works ---------- */}
-      <section className="border-y bg-muted/20">
+      <section className="relative border-y border-hairline bg-muted/25">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-24 md:grid-cols-[1fr_1.4fr] md:px-6 [&>*]:min-w-0">
           <div>
-            <p className="text-sm font-medium text-surf">How it works</p>
-            <h2 className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">Copy, paste, ride.</h2>
+            <p className="eyebrow">How it works</p>
+            <h2 className="mt-4 font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">
+              Copy, paste, <span className="font-serif font-normal tracking-normal italic">ride.</span>
+            </h2>
             <p className="mt-5 max-w-md text-muted-foreground">
               Ombak isn&apos;t an npm package you depend on. The CLI copies the component into your project, so it&apos;s
               your code from the first second.
@@ -162,9 +169,9 @@ export default function Home() {
               ["Use it", "Import it like any other component and make it yours.", `import { Marquee } from "@/components/marquee";`],
             ].map(([t, d, code], i) => (
               <li key={t} className="flex gap-5">
-                <span className="grid size-8 shrink-0 place-items-center rounded-full border font-mono text-sm">{i + 1}</span>
+                <span className="surface grid size-8 shrink-0 place-items-center rounded-full font-mono text-xs text-muted-foreground">0{i + 1}</span>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold">{t}</h3>
+                  <h3 className="font-medium tracking-[-0.01em]">{t}</h3>
                   <p className="mt-1 mb-3 text-sm text-muted-foreground">{d}</p>
                   <CodeBlock lang={i === 2 ? "tsx" : "bash"} code={code} />
                 </div>
@@ -176,18 +183,19 @@ export default function Home() {
 
       {/* ---------- features ---------- */}
       <section className="mx-auto max-w-7xl px-4 py-28 md:px-6">
-        <TextReveal as="h2" className="max-w-3xl font-display text-4xl font-bold tracking-tight md:text-5xl">
+        <p className="eyebrow">Craft</p>
+        <TextReveal as="h2" className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">
           Pretty on the surface, careful underneath.
         </TextReveal>
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map(([icon, title, desc]) => (
-            <div key={title} className="rounded-2xl border bg-card p-6">
-              <span className="grid size-10 place-items-center rounded-xl bg-surf/15 text-surf">
-                <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <div key={title} className="surface glow-border rounded-[20px] p-6 transition-shadow duration-500 hover:shadow-soft-lg">
+              <span className="grid size-10 place-items-center rounded-xl bg-gradient-to-b from-surf/25 to-surf/5 text-surf shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(--surf)_30%,transparent)]">
+                <svg viewBox="0 0 24 24" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <path d={icon} />
                 </svg>
               </span>
-              <h3 className="mt-5 font-semibold">{title}</h3>
+              <h3 className="mt-6 font-medium tracking-[-0.01em]">{title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
             </div>
           ))}
@@ -197,19 +205,21 @@ export default function Home() {
       {/* ---------- final CTA ---------- */}
       <section className="px-4 pb-24 md:px-6">
         <WaveBackground
-          className="mx-auto max-w-7xl rounded-3xl bg-[#06121f] text-white"
+          className="grain mx-auto max-w-7xl overflow-hidden rounded-[32px] bg-[#050c16] text-white shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.06),var(--shadow-lg)]"
           colors={HERO_WAVES}
           baseline={0.92}
           amplitude={0.08}
         >
           <div className="flex flex-col items-center px-6 pt-20 pb-36 text-center">
-            <h2 className="max-w-3xl font-display text-4xl font-bold tracking-tight md:text-6xl">Make your next site move.</h2>
-            <p className="mt-5 max-w-lg text-white/70">Free, open source, and one command away.</p>
+            <h2 className="max-w-3xl font-display text-4xl font-semibold tracking-[-0.045em] md:text-6xl">
+              Make your next site <span className="font-serif font-normal tracking-normal italic">move.</span>
+            </h2>
+            <p className="mt-5 max-w-lg text-white/60">Free, open source, and one command away.</p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
-              <MagneticButton as="a" href="/docs/installation" className="bg-white text-[#06121f]">
+              <MagneticButton as="a" href="/docs/installation" className="btn-primary px-7">
                 Get started
               </MagneticButton>
-              <MagneticButton as="a" href={site.github} className="border border-white/25 bg-transparent text-white">
+              <MagneticButton as="a" href={site.github} className="btn-ghost px-7 text-white">
                 Star on GitHub
               </MagneticButton>
             </div>
@@ -218,14 +228,14 @@ export default function Home() {
       </section>
 
       {/* ---------- footer ---------- */}
-      <footer className="border-t">
+      <footer className="relative overflow-hidden border-t border-hairline">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 md:grid-cols-4 md:px-6">
           <div className="md:col-span-2">
             <Logo />
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">Motion components for React. Made in Indonesia.</p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">Motion components for React. <span className="font-serif text-base italic">Made in Indonesia.</span></p>
           </div>
           <div>
-            <p className="text-sm font-medium">Docs</p>
+            <p className="font-mono text-[10.5px] tracking-[0.16em] text-muted-foreground/70 uppercase">Docs</p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               <li><Link href="/docs" className="hover:text-foreground">Introduction</Link></li>
               <li><Link href="/docs/installation" className="hover:text-foreground">Installation</Link></li>
@@ -233,7 +243,7 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <p className="text-sm font-medium">Resources</p>
+            <p className="font-mono text-[10.5px] tracking-[0.16em] text-muted-foreground/70 uppercase">Resources</p>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               <li><a href={site.github} className="hover:text-foreground">GitHub</a></li>
               <li><a href="/llms.txt" className="hover:text-foreground">llms.txt</a></li>
@@ -241,7 +251,13 @@ export default function Home() {
             </ul>
           </div>
         </div>
-        <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-4 border-t px-4 py-6 text-xs text-muted-foreground md:px-6">
+        <p
+          aria-hidden
+          className="pointer-events-none mx-auto max-w-7xl -mb-[0.22em] bg-gradient-to-b from-foreground/[0.07] to-transparent bg-clip-text px-4 text-center font-display text-[22vw] leading-none font-semibold tracking-[-0.06em] text-transparent select-none md:px-6 xl:text-[17rem]"
+        >
+          ombak
+        </p>
+        <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-4 border-t border-hairline px-4 py-6 text-xs text-muted-foreground md:px-6">
           <span>© 2026 Ombak UI</span>
           <span>Free components are MIT licensed.</span>
         </div>

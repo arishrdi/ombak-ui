@@ -19,11 +19,11 @@ export function CopyButton({ value, className }: { value: string; className?: st
         }
       }}
       className={cn(
-        "rounded-md border bg-background/80 px-2.5 py-1 text-xs font-medium text-muted-foreground backdrop-blur transition hover:text-foreground",
+        "rounded-lg border bg-background/80 px-2.5 py-1 font-mono text-[11px] font-medium text-muted-foreground backdrop-blur transition hover:text-foreground active:scale-95",
         className,
       )}
     >
-      {copied ? "Copied" : "Copy"}
+      {copied ? "Copied ✓" : "Copy"}
     </button>
   );
 }
