@@ -20,7 +20,7 @@ export type Release = {
 export const releases: Release[] = [
   {
     id: "faster-pages",
-    date: "2026-11-19",
+    date: "2026-11-20",
     title: "Faster pages, smoother waves",
     summary: "Most pages now load about a third less JavaScript, and the homepage waves run at a steady frame rate.",
     changes: [
