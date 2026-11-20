@@ -1,4 +1,4 @@
-import { templateDocs } from "@/content/templates";
+import { templateMeta } from "@/content/meta";
 import { installLine, ogImage, ogSize } from "@/lib/og";
 import { getTemplate, templateParts, templates } from "@/lib/registry";
 
@@ -17,7 +17,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     kind: `Template · ${templateParts(slug).blocks.length} blocks`,
     title: t?.title ?? "Ombak UI",
     description: t?.description,
-    accent: templateDocs[slug]?.accent,
+    accent: templateMeta[slug]?.accent,
     footer: t ? installLine(t.name) : undefined,
   });
 }

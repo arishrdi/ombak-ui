@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { thumbs } from "@/components/thumbs";
+import { BLEED } from "@/components/thumbs/bleed";
+import { LazyThumb } from "./lazy-thumb";
 import { KitButton } from "./kit-button";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +14,7 @@ export type CardItem = { name: string; title: string; description: string; categ
  * contain real buttons and links (no interactive elements nested inside an <a>).
  */
 export function ComponentCard({ item, className, tall }: { item: CardItem; className?: string; tall?: boolean }) {
-  const t = thumbs[item.name];
+  const bleed = BLEED.has(item.name);
   return (
     <div
       className={cn(
@@ -26,7 +27,7 @@ export function ComponentCard({ item, className, tall }: { item: CardItem; class
         className={cn(
           "relative z-[2] m-1.5 mb-0 flex items-center justify-center overflow-hidden rounded-[14px] bg-muted/40 shadow-[inset_0_0_0_1px_var(--hairline)]",
           tall ? "h-72" : "h-48",
-          !t?.bleed && "p-6",
+          !bleed && "p-6",
         )}
       >
         {/* subtle grid backdrop */}
@@ -34,7 +35,7 @@ export function ComponentCard({ item, className, tall }: { item: CardItem; class
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.5] [background-image:linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
         />
-        <div className={cn("relative flex items-center justify-center", t?.bleed ? "size-full" : "")}>{t && <t.Thumb />}</div>
+        <LazyThumb name={item.name} bleed={bleed} />
         {/* shown on hover/focus, always once added, and always on touch screens */}
         <span className="absolute top-2.5 right-2.5 z-[3] opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-within:opacity-100 has-[[aria-pressed=true]]:opacity-100 [@media(hover:none)]:opacity-100">
           <KitButton name={item.name} title={item.title} variant="icon" />

@@ -128,7 +128,7 @@ export function BlockThumb({
       {scale > 0 && (
         <iframe
           ref={frame}
-          src={`/view/${slug}`}
+          src={`/view/${slug}?still`}
           title={title}
           tabIndex={-1}
           loading="lazy"

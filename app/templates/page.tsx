@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { BlockThumb } from "@/components/site/block-frame";
 import { KitButton } from "@/components/site/kit-button";
-import { templateDocs } from "@/content/templates";
+import { templateMeta } from "@/content/meta";
 import { getBlock, templateParts, templates } from "@/lib/registry";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function TemplatesIndex() {
       <div className="mt-16 space-y-6">
         {templates.map((t, i) => {
           const parts = templateParts(t.name);
-          const accent = templateDocs[t.name]?.accent;
+          const accent = templateMeta[t.name]?.accent;
           return (
             <div key={t.name} className="relative">
             <Link
