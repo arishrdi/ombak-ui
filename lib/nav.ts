@@ -14,6 +14,7 @@ export function navGroups(): NavGroup[] {
         { href: "/blocks", title: "Blocks" },
         { href: "/templates", title: "Templates" },
         { href: "/themes", title: "Themes" },
+        { href: "/generate", title: "Generate (beta)" },
         { href: "/changelog", title: "Changelog" },
         { href: "/kit", title: "Your kit" },
       ],

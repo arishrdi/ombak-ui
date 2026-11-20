@@ -25,6 +25,10 @@ export function Header() {
               Themes
               <span className="rounded-full bg-surf/15 px-1.5 py-px font-mono text-[9px] tracking-wider text-surf uppercase">New</span>
             </Link>
+            <Link href="/generate" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">
+              Generate
+              <span className="rounded-full bg-surf/15 px-1.5 py-px font-mono text-[9px] tracking-wider text-surf uppercase">Beta</span>
+            </Link>
             <Link href="/docs/installation" className="rounded-full px-3 py-1.5 transition hover:bg-muted/60 hover:text-foreground">Installation</Link>
           </nav>
         </div>
