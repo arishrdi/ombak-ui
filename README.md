@@ -155,6 +155,27 @@ npm run build            # registry + production build
    `components/site/playground-map.tsx`.
 4. `npm run build`, then check the page at `/docs/components/<name>`.
 
+## Tests & CI
+
+Every pull request and push to `main` runs `.github/workflows/ci.yml`:
+
+1. `npm run build`: registry, playground map and site.
+2. Generated files must be committed: if `public/r` or `components/site/playground-map.tsx` changed during the build, run `npm run registry:build` and commit them.
+3. `npm run check:registry`: built JSON is valid, the index has no inlined `content`, block/template imports were rewritten, and dependencies resolve.
+4. `npm run check:bundle`: each key page's initial JavaScript (gzip) stays within its budget in `scripts/check-bundle.mjs`.
+5. `npm run test:e2e`: Playwright smoke tests in `tests/`, failing on any page or console error. There is one test per component page (generated from `registry.json`), plus block/template pages, the gallery, Kit, Themes, Copy for AI and the RSS feed.
+
+Run them locally:
+
+```bash
+npm run build
+npm run check:registry
+npx next start -p 3123 &   # in another terminal, or let Playwright start it
+npm run check:bundle
+npx playwright install chromium   # once
+npm run test:e2e
+```
+
 ## Going live
 
 1. Set the domain in `lib/site.ts` (or the `NEXT_PUBLIC_SITE_URL` env var) and in `registry.json` → `homepage`.

@@ -36,6 +36,7 @@ export function KitTray() {
     >
       <Link
         href="/kit"
+        data-kit-tray
         tabIndex={hidden ? -1 : 0}
         className={cn(
           "flex h-12 items-center gap-3 rounded-full bg-foreground pr-5 pl-2 text-sm font-medium text-background shadow-soft-lg outline-none transition-transform duration-300 focus-visible:ring-4 focus-visible:ring-ring/40",
