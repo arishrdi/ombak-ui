@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "npm run registry:build && next build",
     "start": "next start",
-    "registry:build": "shadcn build && node scripts/rewrite-block-imports.mjs && node scripts/gen-playground-map.mjs"
+    "registry:build": "shadcn build && node scripts/rewrite-block-imports.mjs && node scripts/gen-playground-map.mjs",
+    "check:registry": "node scripts/check-registry.mjs",
+    "check:bundle": "node scripts/check-bundle.mjs http://localhost:3123",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -19,6 +22,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
