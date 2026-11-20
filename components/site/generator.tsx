@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { addBadge } from "@/lib/generate/badge";
 import type { ExportItem, GenerateEvent } from "@/lib/generate/events";
 import type { Plan } from "@/lib/generate/plan";
 import { cn } from "@/lib/utils";
@@ -29,6 +31,9 @@ function cleanHtml(raw: string) {
   return html.replace(/```\s*$/, "").trim();
 }
 
+/** What the free plan previews, copies and downloads: the cleaned page with the Ombak badge. */
+const finalize = (raw: string) => addBadge(cleanHtml(raw));
+
 function slugify(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "ombak-site";
 }
@@ -41,6 +46,7 @@ export function Generator() {
   const [preview, setPreview] = useState("");
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [limited, setLimited] = useState(false);
   const [busy, setBusy] = useState(false);
   const [tab, setTab] = useState<"preview" | "code" | "export">("preview");
   const [viewport, setViewport] = useState<Viewport>("desktop");
@@ -57,7 +63,7 @@ export function Generator() {
         setPlan(saved.plan);
         setExports(saved.exports);
         setRaw(saved.html);
-        setPreview(saved.html);
+        setPreview(finalize(saved.html));
       }
     } catch {
       /* storage unavailable */
@@ -67,11 +73,11 @@ export function Generator() {
   // While streaming, refresh the preview every few seconds so the page visibly builds up.
   useEffect(() => {
     if (!busy) return;
-    const t = setInterval(() => setPreview(cleanHtml(rawRef.current)), 3000);
+    const t = setInterval(() => setPreview(finalize(rawRef.current)), 3000);
     return () => clearInterval(t);
   }, [busy]);
 
-  const html = useMemo(() => cleanHtml(raw), [raw]);
+  const html = useMemo(() => finalize(raw), [raw]);
   const done = useMemo(() => {
     const ids = new Set<string>();
     for (const m of raw.matchAll(/data-section="([^"]+)"/g)) ids.add(m[1]);
@@ -87,14 +93,8 @@ export function Generator() {
 
     setBusy(true);
     setError(null);
-    setPlan(null);
-    setExports([]);
-    setRaw("");
-    rawRef.current = "";
-    setPreview("");
-    setMeta(null);
+    setLimited(false);
     setStatus("Starting…");
-    setTab("preview");
 
     let finalPlan: Plan | null = null;
     let finalExports: ExportItem[] = [];
@@ -107,8 +107,18 @@ export function Generator() {
       });
       if (!res.ok || !res.body) {
         const body = await res.json().catch(() => null);
+        if (res.status === 429) setLimited(true);
         throw new Error(body?.error ?? `Request failed (${res.status})`);
       }
+
+      // Clear the previous page only once the new one is on its way, so a refused request keeps it.
+      setPlan(null);
+      setExports([]);
+      setRaw("");
+      rawRef.current = "";
+      setPreview("");
+      setMeta(null);
+      setTab("preview");
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -145,7 +155,7 @@ export function Generator() {
         }
       }
 
-      const page = cleanHtml(rawRef.current);
+      const page = finalize(rawRef.current);
       setPreview(page);
       setStatus(null);
       try {
@@ -157,7 +167,7 @@ export function Generator() {
     } catch (err) {
       if (ac.signal.aborted) {
         setStatus("Stopped.");
-        setPreview(cleanHtml(rawRef.current));
+        setPreview(finalize(rawRef.current));
       } else {
         setError(err instanceof Error ? err.message : "Something went wrong.");
         setStatus(null);
@@ -279,10 +289,25 @@ export function Generator() {
         {(status || error || meta) && (
           <div className="mt-auto space-y-1 text-[12px]">
             {status && <p className="text-muted-foreground">{status}</p>}
-            {error && <p className="text-red-400">{error}</p>}
+            {error && (
+              <p className="text-red-400">
+                {error}
+                {limited && (
+                  <>
+                    {" "}
+                    <Link href="/pricing?from=limit" className="font-medium text-surf underline-offset-2 hover:underline">
+                      Want more? Join Pro
+                    </Link>
+                  </>
+                )}
+              </p>
+            )}
             {meta && (
               <p className="font-mono text-muted-foreground">
-                ~${meta.costUsd.toFixed(4)} · {meta.remaining} free left today
+                ~${meta.costUsd.toFixed(4)} · {meta.remaining} free left today ·{" "}
+                <Link href="/pricing?from=generator" className="text-surf underline-offset-2 hover:underline">
+                  Upgrade
+                </Link>
               </p>
             )}
           </div>
@@ -323,6 +348,14 @@ export function Generator() {
                   {v}
                 </button>
               ))}
+            {hasPage && !busy && (
+              <Link
+                href="/pricing?from=badge"
+                className="ml-1 hidden rounded-full px-2.5 py-1 text-[12px] text-muted-foreground transition hover:text-foreground md:inline-block"
+              >
+                Remove badge <span className="font-mono text-[10px] text-surf uppercase">Pro</span>
+              </Link>
+            )}
             <button
               onClick={download}
               disabled={!hasPage || busy}

@@ -169,3 +169,9 @@ Free components: MIT, see LICENSE.
 `/generate` turns a prompt into a single-file static website built from Ombak effects. It plans the page with a structured call, streams the HTML into a sandboxed preview, and lists the `npx shadcn add` commands to rebuild it in Next.js.
 
 Set `ANTHROPIC_API_KEY` to enable it (see `.env.example`). Each IP gets 10 free generations a day and the site stops generating once the day's estimated spend reaches $1; both limits live in server memory for now.
+
+Generated pages carry a small "Made with Ombak" badge (`lib/generate/badge.ts`).
+
+## Pricing (waitlist)
+
+`/pricing` shows Free vs a planned Pro tier and collects a waitlist; nothing is sold yet. Edit the offer in `lib/pro.ts`. Visits that come from an upgrade prompt (`?from=badge|limit|generator`) and signups are logged by `/api/pro-interest` and, if `PRO_INTEREST_WEBHOOK_URL` is set, POSTed to that webhook.
