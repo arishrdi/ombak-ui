@@ -16,6 +16,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return item ? { title: `${item.title} preview`, robots: { index: false } } : {};
 }
 
+/**
+ * `?still` (used by gallery thumbnails): before React hydrates, report prefers-reduced-motion to
+ * every component (they all render a single still frame then) and finish CSS animations at once.
+ * Thumbnails stay pictures instead of running whole animated pages in the background.
+ */
+const STILL_SCRIPT = `(function(){if(!/[?&]still(=|&|$)/.test(location.search))return;var mm=window.matchMedia.bind(window);window.matchMedia=function(q){if(/prefers-reduced-motion:\\s*reduce/.test(q)){return{matches:true,media:q,onchange:null,addListener:function(){},removeListener:function(){},addEventListener:function(){},removeEventListener:function(){},dispatchEvent:function(){return false}}}return mm(q)};document.documentElement.classList.add("still")})();`;
+const STILL_CSS = `html.still *,html.still *::before,html.still *::after{animation-duration:1ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:0s!important;scroll-behavior:auto!important}`;
+
 /** A block or template on its own, with no site chrome. Loaded in the iframes on /blocks and /templates. */
 export default async function View({ params }: Params) {
   const { slug } = await params;
@@ -24,7 +32,8 @@ export default async function View({ params }: Params) {
   if (!block && !template) notFound();
   return (
     <>
-      <style>{"body{min-height:0}"}</style>
+      <script dangerouslySetInnerHTML={{ __html: STILL_SCRIPT }} />
+      <style>{"body{min-height:0}" + STILL_CSS}</style>
       <div id="block-root">
         {block ? block.Preview ? <block.Preview /> : <block.Block /> : template ? <template.Page /> : null}
       </div>

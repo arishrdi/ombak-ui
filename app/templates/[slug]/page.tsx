@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { templateDocs } from "@/content/templates";
+import { templateMeta } from "@/content/meta";
 import { BlockPreview } from "@/components/site/block-preview";
 import { CodeBlock } from "@/components/site/code-block";
 import { PropsTable } from "@/components/site/props-table";
@@ -53,7 +53,7 @@ function templateProps(src: string) {
 export default async function TemplatePage({ params }: Params) {
   const { slug } = await params;
   const t = getTemplate(slug);
-  const doc = templateDocs[slug];
+  const doc = templateMeta[slug];
   if (!t || !doc) notFound();
 
   const source = getTemplateSource(slug);

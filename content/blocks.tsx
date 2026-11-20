@@ -12,27 +12,24 @@ import { FooterWave } from "@/registry/blocks/footer-wave/footer-wave";
 import { ContactForm } from "@/registry/blocks/contact-form/contact-form";
 import { NavbarPreview } from "@/components/site/block-previews";
 
+/** Block slug → component for /view. Names and frame heights live in content/meta.ts. */
 type BlockDoc = {
   /** The block, rendered with its defaults. */
   Block: ComponentType;
-  /** Exported name, for the usage snippet. */
-  exportName: string;
   /** Rendered on /view instead of the bare block, e.g. with page content to scroll past. */
   Preview?: ComponentType;
-  /** Fixed preview height in px. The frame scrolls instead of growing to fit. */
-  frameHeight?: number;
 };
 
 export const blockDocs: Record<string, BlockDoc> = {
-  "navbar-floating": { Block: NavbarFloating, exportName: "NavbarFloating", Preview: NavbarPreview, frameHeight: 560 },
-  "hero-wave": { Block: HeroWave, exportName: "HeroWave" },
-  "logo-marquee": { Block: LogoMarquee, exportName: "LogoMarquee" },
-  "stats-band": { Block: StatsBand, exportName: "StatsBand" },
-  "feature-bento": { Block: FeatureBento, exportName: "FeatureBento" },
-  "pricing-tiers": { Block: PricingTiers, exportName: "PricingTiers" },
-  "testimonial-wall": { Block: TestimonialWall, exportName: "TestimonialWall" },
-  "faq-split": { Block: FaqSplit, exportName: "FaqSplit" },
-  "cta-caustics": { Block: CtaCaustics, exportName: "CtaCaustics" },
-  "contact-form": { Block: ContactForm, exportName: "ContactForm" },
-  "footer-wave": { Block: FooterWave, exportName: "FooterWave" },
+  "navbar-floating": { Block: NavbarFloating, Preview: NavbarPreview },
+  "hero-wave": { Block: HeroWave },
+  "logo-marquee": { Block: LogoMarquee },
+  "stats-band": { Block: StatsBand },
+  "feature-bento": { Block: FeatureBento },
+  "pricing-tiers": { Block: PricingTiers },
+  "testimonial-wall": { Block: TestimonialWall },
+  "faq-split": { Block: FaqSplit },
+  "cta-caustics": { Block: CtaCaustics },
+  "contact-form": { Block: ContactForm },
+  "footer-wave": { Block: FooterWave },
 };

@@ -12,7 +12,7 @@ import { Logo } from "@/components/site/logo";
 import { BlockThumb } from "@/components/site/block-frame";
 import { cardItems } from "@/lib/nav";
 import { blocks, templateParts, templates } from "@/lib/registry";
-import { templateDocs } from "@/content/templates";
+import { templateMeta } from "@/content/meta";
 import { releases } from "@/content/changelog";
 import { registryUrl, site } from "@/lib/site";
 
@@ -51,7 +51,7 @@ export default function Home() {
         <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col items-center px-4 pt-[14vh] pb-[26vh] text-center md:px-6">
           <Link
             href={`/changelog#${releases[0].id}`}
-            className="group inline-flex w-fit items-center gap-2.5 rounded-full bg-white/[0.04] py-1 pr-3.5 pl-1 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.1)] backdrop-blur-md transition hover:bg-white/[0.07] hover:text-white"
+            className="group inline-flex w-fit items-center gap-2.5 rounded-full bg-[#0b1726]/80 py-1 pr-3.5 pl-1 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_0_0_1px_rgba(255,255,255,.1)] transition hover:bg-[#0f1e31]/90 hover:text-white"
           >
             <span className="rounded-full bg-gradient-to-b from-[#7ff5d6] to-[#3fd1b0] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-[#04201a] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,.5)]">New</span>
             {releases[0].title} is here: see what&apos;s new
@@ -82,7 +82,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-12 flex w-full max-w-xl items-center gap-3 rounded-2xl bg-black/30 py-2 pr-2 pl-4 text-left font-mono text-[12.5px] text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_0_0_1px_rgba(255,255,255,.08),0_20px_40px_-12px_rgba(0,0,0,.6)] backdrop-blur-xl">
+          <div className="mt-12 flex w-full max-w-xl items-center gap-3 rounded-2xl bg-[#07111d]/85 py-2 pr-2 pl-4 text-left font-mono text-[12.5px] text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_0_0_1px_rgba(255,255,255,.08),0_20px_40px_-12px_rgba(0,0,0,.6)]">
             <span className="text-surf">$</span>
             <span className="min-w-0 flex-1 truncate">{installCmd}</span>
             <CopyButton value={installCmd} className="border-white/10 bg-white/[0.04] text-white/60 hover:text-white" />
@@ -186,7 +186,7 @@ export default function Home() {
 
           <div className="mt-14 grid gap-4 md:grid-cols-3">
             {templates.map((t) => {
-              const accent = templateDocs[t.name]?.accent;
+              const accent = templateMeta[t.name]?.accent;
               return (
                 <Link
                   key={t.name}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { blockDocs } from "@/content/blocks";
+import { blockMeta } from "@/content/meta";
 import { BlockPreview } from "@/components/site/block-preview";
 import { CodeBlock } from "@/components/site/code-block";
 import { PropsTable } from "@/components/site/props-table";
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function BlockPage({ params }: Params) {
   const { slug } = await params;
   const block = getBlock(slug);
-  const doc = blockDocs[slug];
+  const doc = blockMeta[slug];
   if (!block || !doc) notFound();
 
   const source = getBlockSource(slug);

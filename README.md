@@ -122,7 +122,8 @@ public/r/*.json                   ← built registry files (npm run registry:bui
 components/demos/index.tsx        ← live demos shown in the docs
 content/docs.tsx                  ← per-component usage snippet + demo mapping
 content/playground-fixtures.tsx   ← sample props/children for the Playground tab
-components/thumbs/index.tsx       ← small live previews for component cards
+components/thumbs/index.tsx       ← small live previews for component cards (lazy-loaded)
+components/thumbs/bleed.ts        ← which previews fill the card edge to edge
 components/site/*                 ← docs site UI (header, ⌘K search, theme toggle, mobile nav, previews)
 app/                              ← landing, /docs, /docs/components/[slug], /llms.txt
 lib/site.ts                       ← site URL (change when the domain is live)

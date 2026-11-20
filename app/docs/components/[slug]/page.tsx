@@ -8,7 +8,8 @@ import { PropsTable } from "@/components/site/props-table";
 import { KitButton } from "@/components/site/kit-button";
 import { AiMenu } from "@/components/site/ai-menu";
 import { buildPrompt, openInV0Url } from "@/lib/ai-prompt";
-import { PropsPlayground } from "@/components/site/props-playground";
+import { LazyPlayground } from "@/components/site/lazy-playground";
+import { LazyDemo } from "@/components/site/lazy-demo";
 import { playgroundSpec } from "@/lib/playground";
 import { CATEGORY_LABELS, getItem, getProps, getSource, items } from "@/lib/registry";
 import { registryUrl } from "@/lib/site";
@@ -80,9 +81,9 @@ export default async function ComponentPage({ params }: Params) {
 
       <PreviewTabs
         stage={doc.stage}
-        preview={<doc.Demo />}
+        preview={<LazyDemo name={doc.demo} />}
         code={<CodeBlock code={doc.usage} title="Usage" />}
-        playground={spec ? <PropsPlayground slug={slug} spec={spec} stage={doc.stage} /> : undefined}
+        playground={spec ? <LazyPlayground slug={slug} spec={spec} stage={doc.stage} /> : undefined}
       />
 
       <section className="space-y-4">

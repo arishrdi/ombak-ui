@@ -19,6 +19,17 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    id: "faster-pages",
+    date: "2026-11-20",
+    title: "Faster pages, smoother waves",
+    summary: "Most pages now load about a third less JavaScript, and the homepage waves run at a steady frame rate.",
+    changes: [
+      { type: "improved", text: "Wave Background no longer blurs on every frame: the back waves render at low resolution and upscale softly. Hero frame rate went from about 27 to 60 fps in our tests.", href: "/docs/components/wave-background" },
+      { type: "improved", text: "Component, gallery, block and template pages load about 190 KB of JavaScript instead of up to 300 KB; demos, card previews and the playground load when needed." },
+      { type: "improved", text: "Gallery thumbnails of blocks and templates are still pictures instead of running whole animated pages." },
+    ],
+  },
+  {
     id: "copy-for-ai",
     date: "2026-11-19",
     title: "Copy for AI",
